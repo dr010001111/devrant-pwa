@@ -1,9 +1,12 @@
 import { Location } from '@angular/common';
+import { ModalController } from '@ionic/angular';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router, Scroll } from '@angular/router';
 import { DevRantService } from '@services/devrant.service';
 import { Subscription } from 'rxjs';
 import { RantInFeed } from 'ts-devrant';
+
+import { CommentFormComponent } from '../../components/comment-form/comment-form.component';
 
 @Component({
     templateUrl: './rant-detail.page.html',
@@ -16,6 +19,7 @@ export class RantDetailPageComponent implements OnInit, OnDestroy {
     routeSub: Subscription;
 
     rant: RantInFeed;
+    rantId: number;
     comments: any[];
     highlightComment: string;
 
@@ -26,7 +30,8 @@ export class RantDetailPageComponent implements OnInit, OnDestroy {
         private readonly service: DevRantService,
         private route: ActivatedRoute,
         private router: Router,
-        private _location: Location
+        private _location: Location,
+        private modalController: ModalController
     ) {
         this.router.events.subscribe((ev) => {
             if (ev instanceof Scroll) {
@@ -44,9 +49,9 @@ export class RantDetailPageComponent implements OnInit, OnDestroy {
     async ngOnInit() {
         this.routeSub = this.route.params.subscribe(async (params) => {
             this.isLoading = true;
-            const rantId = params['id'];
+            this.rantId = params['id'];
 
-            await this.fetchRant(rantId);
+            await this.fetchRant(this.rantId);
             this.isLoading = false;
         });
     }
@@ -82,6 +87,20 @@ export class RantDetailPageComponent implements OnInit, OnDestroy {
 
     back() {
         this._location.back();
+    }
+
+    /**
+     * showCommentForm displays the comment modal
+     * it passes the rantId to the modal
+     */
+    async showCommentForm() {
+        const modal = await this.modalController.create({
+            component: CommentFormComponent,
+            componentProps: {
+                rantId: this.rantId,
+            },
+        });
+        return await modal.present();
     }
 
     ngOnDestroy() {

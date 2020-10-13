@@ -25,4 +25,8 @@
     <ion-item *ngFor="let comment of comments">
         <app-rant-comment [comment]="comment"></app-rant-comment>
     </ion-item>
+
+    <ion-item>
+        <ion-button (click)="showCommentForm()">Comment</ion-button>
+    </ion-item>
 </ion-content>

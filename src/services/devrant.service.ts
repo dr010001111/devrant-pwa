@@ -21,39 +21,14 @@ devRant.updateConfig({
     providedIn: 'root',
 })
 export class DevRantService {
-    private _token: devRant.Token = null;
-    private _profile?: devRant.Profile;
-
     worker: ServiceWorker;
 
-    userIdCache: Cache;
-    activeUserIdQueue = {};
+    private _token: devRant.Token = null;
+
+    private _profile?: devRant.Profile;
 
     async getUserIdByName(username) {
-        const hitCache = await this.userIdCache.match(username);
-        const inActiveQueue = this.activeUserIdQueue[username];
-
-        if (inActiveQueue) {
-            return inActiveQueue;
-        }
-
-        if (hitCache) {
-            return hitCache.json();
-        } else {
-            const idPromise = devRant.getIdByUsername(username);
-            this.activeUserIdQueue[username] = idPromise;
-
-            const idResponse = await idPromise;
-
-            delete this.activeUserIdQueue[username];
-
-            const idCachableResponse = new Response(
-                JSON.stringify(idResponse)
-            );
-            this.userIdCache.put(username, idCachableResponse);
-
-            return idResponse;
-        }
+        return devRant.getIdByUsername(username);
     }
 
     async validateNotifications() {
@@ -100,8 +75,8 @@ export class DevRantService {
         }
     }
 
-    get profile(): Partial<Profile> {
-        return this._profile || {};
+    get profile() {
+        return this._profile;
     }
 
     get profileColor() {
@@ -127,10 +102,9 @@ export class DevRantService {
         const token = JSON.parse(localStorage.getItem('token'));
         await this.setupWorker();
 
-        this.userIdCache = await caches.open('username-id-map');
-
         if (token) {
             this.token = token;
+            this.getProfile();
         }
     }
 
@@ -153,7 +127,6 @@ export class DevRantService {
             token: this.token,
         });
 
-        this.getProfile();
         this.validateNotifications();
     }
 
@@ -173,16 +146,12 @@ export class DevRantService {
         if (theme) {
             theme.setAttribute('content', this.profileColor);
         }
-
-        const shades = makeShades(this.profileColor);
-        applyShadesTo(document.body, shades);
     }
 
     async getProfile(userId?: string, content?: string, skip?: number) {
         // we need to have a token AND the SAME userId as in the token OR no id and we use the id in the token.
-        if (!this.token || !userId || userId === String(this.token.user_id)) {
-            const request = this.lazyUpdateLoggedInProfile(content, skip);
-
+        if (this.token && (!userId || userId === String(this.token.user_id))) {
+            const request = this.lazyUpdateProfile(content, skip);
             if (!this.profile) {
                 await request;
             }
@@ -207,19 +176,13 @@ export class DevRantService {
         return response.profile;
     }
 
-    async lazyUpdateLoggedInProfile(content?: string, skip?: number) {
-        if (!this.token) {
-            this._profile = null;
-        } else {
-            this._profile = await this.fetchProfile(
-                String(this.token.user_id),
-                content,
-                skip
-            );
-        }
-
+    async lazyUpdateProfile(content?: string, skip?: number) {
+        this._profile = await this.fetchProfile(
+            String(this.token.user_id),
+            content,
+            skip
+        );
         this.profileUpdated();
-        return this._profile;
     }
 
     async logout() {
@@ -234,6 +197,7 @@ export class DevRantService {
         }
 
         this.token = response.auth_token;
+        this.profileUpdated();
         return response.auth_token;
     }
 
@@ -265,6 +229,16 @@ export class DevRantService {
 
     async getComment(commentId: number) {
         return devRant.comment(commentId, this.token);
+    }
+
+    /**
+     * postComment is a middle way service - no images for now
+     * @param rantId
+     * @param comment
+     * @param token
+     */
+    async postComment(rantId: number, comment: string, token: devRant.Token) {
+        return devRant.postComment(rantId, comment, null, token);
     }
 
     /**
