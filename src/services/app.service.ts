@@ -1,7 +1,8 @@
 import { Injectable } from "@angular/core";
-import { AlertController, IonFab } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 import debug from 'debug';
 import pkg from '../../package.json';
+import { environment } from '../environments/environment';
 
 const log = debug('dr:service:app');
 
@@ -11,7 +12,11 @@ const log = debug('dr:service:app');
 export class AppService {
     constructor(private alert: AlertController) {
         log('init');
-        this.checkForUpdates()
+        if (environment.production) {
+            this.checkForUpdates()
+        } else {
+            log('skip update check due to non-production env')
+        }
     }
 
     async checkForUpdates() {
