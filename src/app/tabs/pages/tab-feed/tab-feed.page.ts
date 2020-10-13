@@ -1,8 +1,8 @@
-import { AfterContentInit, AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { Sort } from 'ts-devrant';
-import { DevRantService } from '../../services/devrant.service';
-import pkg from '../../../package.json';
+import pkg from '@/package.json';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { Platform } from '@ionic/angular';
+import { DevRantService } from '@services/devrant.service';
+import { Sort } from 'ts-devrant';
 
 @Component({
   selector: 'app-feed',

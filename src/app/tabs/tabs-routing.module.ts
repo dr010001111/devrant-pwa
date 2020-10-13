@@ -4,27 +4,26 @@ import { TabsPage } from './tabs.page';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'tab',
     component: TabsPage,
     children: [
       {
         path: 'feed',
-        loadChildren: () => import('../tab-feed/tab-feed.module').then(m => m.TabFeedPageModule)
+        loadChildren: () => import('./pages/tab-feed/tab-feed.module').then(m => m.TabFeedPageModule)
       },
       {
         path: 'notifications',
-        loadChildren: () => import('../tab-notifs/tab-notifs.module').then(m => m.TabNotifsPageModule)
+        loadChildren: () => import('./pages/tab-notifs/tab-notifs.module').then(m => m.TabNotifsPageModule)
       },
       {
         path: 'profile',
-        loadChildren: () => import('../tab-profile/tab-profile.module').then(m => m.TabProfilePageModule)
+        loadChildren: () => import('./pages/tab-profile/tab-profile.module').then(m => m.TabProfilePageModule)
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/feed',
-    pathMatch: 'full'
+    redirectTo: 'tab/feed'
   }
 ];
 

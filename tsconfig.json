@@ -16,7 +16,13 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "es2015",
-    "lib": ["es2018", "dom"]
+    "lib": ["es2018", "dom"],
+    "paths": {
+      "@app/*": ["src/app/*"],
+      "@services/*": ["src/services/*"],
+      "@util/*": ["src/util/*"],
+      "@/*": ["./*"],
+    }
   },
   "exclude": ["node_modules"],
   "angularCompilerOptions": {
