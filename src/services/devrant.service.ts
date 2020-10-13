@@ -208,6 +208,16 @@ export class DevRantService {
   }
 
   /**
+   * postComment is a middle way service - no images for now
+   * @param rantId 
+   * @param comment 
+   * @param token 
+   */
+  async postComment(rantId: number, comment: string, token: devRant.Token) {
+    return devRant.postComment(rantId, comment, null, token);
+  }
+
+  /**
    * Resolve multiple rants from the feed.
    * @
    * @param sort 

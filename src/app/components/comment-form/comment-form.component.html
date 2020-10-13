@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Comment</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()" >
+        <ion-icon name="close-outline"></ion-icon>
+      </ion-button>
+  </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-textarea (input)="getText($event)" placeholder="Add your 2 cents..."></ion-textarea>
+  <ion-button (click)="submit()">Submit Comment</ion-button>
+</ion-content>
+
+
+
+
+
+
