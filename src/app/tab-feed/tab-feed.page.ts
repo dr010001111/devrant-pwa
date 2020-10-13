@@ -5,11 +5,11 @@ import pkg from '../../../package.json';
 import { Platform } from '@ionic/angular';
 
 @Component({
-  selector: 'app-tab1',
-  templateUrl: 'tab1.page.html',
-  styleUrls: ['tab1.page.scss']
+  selector: 'app-feed',
+  templateUrl: 'tab-feed.page.html',
+  styleUrls: ['tab-feed.page.scss']
 })
-export class Tab1Page implements AfterViewInit {
+export class TabFeedPage implements AfterViewInit {
   limit = 20;
   offset = 0;
 

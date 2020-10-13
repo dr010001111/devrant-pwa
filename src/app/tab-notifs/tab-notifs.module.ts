@@ -9,7 +9,7 @@ import { NotifUserLineModule } from '../notif-user-line/notif-user-line.module';
 import { RantCommentModule } from '../rant-comment/rant-comment.module';
 import { RantModule } from '../rant/rant.module';
 import { Tab2PageRoutingModule } from './tab-notifs-routing.module';
-import { Tab2Page } from './tab-notifs.page';
+import { TabNotifsPage } from './tab-notifs.page';
 
 
 @NgModule({
@@ -25,6 +25,6 @@ import { Tab2Page } from './tab-notifs.page';
     InlineProfileModule,
     NotifUserLineModule
   ],
-  declarations: [Tab2Page]
+  declarations: [TabNotifsPage]
 })
-export class Tab2PageModule { }
+export class TabNotifsPageModule { }

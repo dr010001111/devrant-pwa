@@ -3,11 +3,11 @@ import { AlertController, ToastController } from '@ionic/angular';
 import { DevRantService } from '../../services/devrant.service';
 
 @Component({
-  selector: 'app-tab3',
-  templateUrl: 'tab3.page.html',
-  styleUrls: ['tab3.page.scss']
+  selector: 'app-profile',
+  templateUrl: 'tab-profile.page.html',
+  styleUrls: ['tab-profile.page.scss']
 })
-export class Tab3Page {
+export class TabProfilePage {
 
   @ViewChild('username')
   username: HTMLIonInputElement;

@@ -3,11 +3,11 @@ import { NotificationService } from 'src/services/notification.service';
 import { Comment } from 'ts-devrant';
 
 @Component({
-  selector: 'app-tab2',
-  templateUrl: 'tab2.page.html',
-  styleUrls: ['tab2.page.scss']
+  selector: 'app-notifications',
+  templateUrl: 'tab-notifs.page.html',
+  styleUrls: ['tab-notifs.page.scss']
 })
-export class Tab2Page {
+export class TabNotifsPage {
 
   @HostBinding() id = 'notifs';
   hasErrors: boolean;
