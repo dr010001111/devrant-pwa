@@ -62,7 +62,7 @@ If the Issue tracker does not include enough information or you need additional 
 
 ## Getting involved
 
-This project targets a big change and needs extensive support from you guys to make it a reality. devRant has many members from various branch of bussinesses
+This project targets a big change and needs extensive support from you guys to make it a reality.
 
 devRant has many members from different business sectors, which we should use to develop the best possible product.
 
