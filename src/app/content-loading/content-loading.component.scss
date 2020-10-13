@@ -1,0 +1,19 @@
+:host {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-content: center;
+
+  background: var(--ion-background-color);
+  z-index: 2;
+}
+
+:host([animate]) {
+  transition: opacity 80ms 100ms ease-out;
+}
+
+:host(.loaded) {
+  opacity: 0;
+  pointer-events: none;
+}

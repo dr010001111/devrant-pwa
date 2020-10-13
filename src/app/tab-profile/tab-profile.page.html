@@ -1,0 +1,21 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Profile
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<app-profile [userId]="userId" *ngIf="isSignedIn"></app-profile>
+
+<ion-content [fullscreen]="true" *ngIf="!isSignedIn">
+  <ion-card class="center">
+    <ion-card-header>
+      <ion-card-title>Sign in to view your profile.</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-button expand="block" (click)="showSignIn()">Sign In</ion-button>
+      <ion-button expand="block" fill="outline" (click)="showSignUp()">Sign Up</ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

@@ -1,0 +1,52 @@
+<ion-header [translucent]="true" #header>
+  <span class="app-info">
+    {{pkg.version}}#{{pkg.commit.sha}}@{{pkg.commit.date}}
+  </span>
+
+  <ion-toolbar>
+    <ion-title>
+      devRant <span class="unofficial">UNOFFICIAL</span>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-segment #segment (ionChange)="feedFilterChange($event)" value="recent">
+  <ion-segment-button value="algo">
+    <ion-label>Algo</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="recent">
+    <ion-label>Recent</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="top">
+    <ion-label>All Time</ion-label>
+  </ion-segment-button>
+</ion-segment>
+
+<ion-content #content [fullscreen]="true">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <app-center-content failed="true" *ngIf="hasErrors">
+    Unable to fetch feed.
+  </app-center-content>
+
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Rants</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-list *ngIf="feed.length" #list>
+    <ion-virtual-scroll [items]="feed" approxItemHeight="420px" #feedContainer>
+      <ion-item *virtualItem="let rant">
+        <app-rant [showUser]="true" [rant]="rant"></app-rant>
+      </ion-item>
+    </ion-virtual-scroll>
+  </ion-list>
+
+  <ion-infinite-scroll threshold="300px" (ionInfinite)="loadMore($event)">
+    <ion-infinite-scroll-content loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

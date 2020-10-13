@@ -1,0 +1,27 @@
+<app-vote-bar *ngIf="!small" [voteTo]="internalRant" #voter (downvote)="downvote()" (upvote)="upvote()"
+  (clearVote)="clearVote()">
+</app-vote-bar>
+
+<div class="loading-skeleton" *ngIf="!internalRant">
+  <ion-spinner name="dots"></ion-spinner>
+</div>
+
+<main class="rant" [class.rant-cutoff]="!complete" *ngIf="internalRant">
+  <app-inline-profile *ngIf="complete || small || showUser" [profile]="internalRant"></app-inline-profile>
+
+  <app-render-content [content]="internalRant.text" [links]="internalRant.links"></app-render-content>
+
+  <img *ngIf="internalRant.attached_image" src="{{internalRant.attached_image.url}}" />
+
+  <footer>
+    <span class="rant-tags-container">
+      <ion-badge *ngFor="let tag of internalRant.tags">
+        {{tag}}
+      </ion-badge>
+    </span>
+    <aside class="rant-comment-count" *ngIf="!complete">
+      <ion-icon name="chatbubble-outline"></ion-icon>
+      {{internalRant.num_comments}}
+    </aside>
+  </footer>
+</main>

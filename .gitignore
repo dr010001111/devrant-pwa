@@ -59,6 +59,8 @@ __pycache__/
 *.egg-info
 .installed.cfg
 
+sw-devrant.js
+
 # Unit test / coverage reports
 #################
 htmlcov/

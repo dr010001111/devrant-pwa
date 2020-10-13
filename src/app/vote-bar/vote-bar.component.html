@@ -1,0 +1,6 @@
+<span tabindex="0" class="plusplus" [class.voted]="voteTo.vote_state === 1" (click)="onUpvote($event)"></span>
+<div class="score" [class.not-up-to-date]="localStoreBeforeUpdate !== null">
+    {{localStoreBeforeUpdate || voteTo.score}}
+    <ion-spinner name="dots" *ngIf="isLoading"></ion-spinner>
+</div>
+<span tabindex="0" class="minusminus" [class.voted]="voteTo.vote_state === -1" (click)="onDownvote($event)"></span>

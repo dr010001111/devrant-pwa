@@ -1,0 +1,57 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <span>
+      <ion-title>Notifications</ion-title>
+    </span>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-refresher slot="fixed" (ionRefresh)="pushNotificationUpdateRequest($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <app-center-content failed="true" *ngIf="hasErrors">
+    Unable to fetch notifications.
+  </app-center-content>
+
+  <ion-list *ngIf="notifications">
+    <ion-item disabled *ngIf="!notifications">No notifications!</ion-item>
+
+    <ion-item *ngFor="let notif of notifications" [class.is-read]="notif.read" [class.is-unread]="!notif.read"
+      routerLink="/rant/{{notif.rant_id}}" fragment="{{notif.comment_id}}" [ngSwitch]="notif.type">
+      <div>
+        <ng-container *ngSwitchCase="'comment_discuss'">
+          <app-notif-user-line [time]="notif.created_time" [userId]="notif.uid" [user]="user_map[notif.uid]">
+            commentented on a rant you commenting on!
+          </app-notif-user-line>
+          <app-rant [small]="true" [rantId]="notif.rant_id"></app-rant>
+        </ng-container>
+        <ng-container *ngSwitchCase="'comment_content'">
+          <h3>Comment on your Rant</h3>
+          <app-rant-comment [commentId]="notif.comment_id"></app-rant-comment>
+        </ng-container>
+        <ng-container *ngSwitchCase="'comment_mention'">
+          <h3>You have been mentioned!</h3>
+          <app-rant-comment [commentId]="notif.comment_id"></app-rant-comment>
+        </ng-container>
+        <ng-container *ngSwitchCase="'comment_vote'">
+          <h3>Your comment has been upvoted by</h3>
+          <app-inline-profile [profile]="remapToProfile(notif.uid)"></app-inline-profile>
+          <app-rant-comment [commentId]="notif.comment_id"></app-rant-comment>
+        </ng-container>
+        <ng-container *ngSwitchCase="'content_vote'">
+          <h3>Your rant has been upvoted by</h3>
+          <app-inline-profile [profile]="remapToProfile(notif.uid)"></app-inline-profile>
+          <app-rant [small]="true" [rantId]="notif.rant_id"></app-rant>
+        </ng-container>
+        <ng-container *ngSwitchCase="'rant_sub'">
+          <h3>New Rant from your subscripted users!</h3>
+          <app-rant [showUser]="true" [rantId]="notif.rant_id"></app-rant>
+        </ng-container>
+
+        <ion-note>{{notif.created_time * 1000 | date}}</ion-note>
+      </div>
+    </ion-item>
+  </ion-list>
+</ion-content>

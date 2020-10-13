@@ -1,0 +1,29 @@
+<ion-header [translucent]="true">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="/"></ion-back-button>
+        </ion-buttons>
+        <ion-buttons slot="end">
+            <ion-button>
+                <ion-icon slot="icon-only" name="star"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>Rant</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" #content>
+
+    <app-content-loading [loading]="isLoading"></app-content-loading>
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+    <ion-item>
+        <app-rant *ngIf="rant" [complete]="true" [rant]="rant"></app-rant>
+    </ion-item>
+
+    <ion-item *ngFor="let comment of comments">
+        <app-rant-comment [comment]="comment"></app-rant-comment>
+    </ion-item>
+</ion-content>
