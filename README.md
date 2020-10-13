@@ -1,6 +1,8 @@
-# devRant PWA
+# devRant PWA (UNOFFICIAL)
 
-[devRant](https://devrant.com/) as a progressive web application. The primary goal of this project is to provide an alternative, future-proof client to the existing applications. In the course of the implementation, the existing problems of the currently official applications are to be solved and if necessary improved.
+[devRant](https://devrant.com/) as progressive web application. The primary goal of this project is to provide an alternative, future-proof client to the existing applications. In the course of the implementation, the existing problems of the currently official applications are to be solved and if necessary improved.
+
+THIS PROJECT IS MAINTED BY THE COMMUNITY AND **NOT** OFFICIALY SUPPORTED BY DEVRANT.
 
 A few of them are as following:
 - No more random crashes
