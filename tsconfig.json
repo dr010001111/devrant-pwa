@@ -20,7 +20,7 @@
     "paths": {
       "@app/*": ["src/app/*"],
       "@services/*": ["src/services/*"],
-      "@util/*": ["src/util/*"],
+      "@utils/*": ["src/utils/*"],
       "@/*": ["./*"],
     }
   },
