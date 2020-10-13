@@ -1,9 +1,9 @@
 import { Location } from '@angular/common';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router, Scroll } from '@angular/router';
+import { DevRantService } from '@services/devrant.service';
 import { Subscription } from 'rxjs';
 import { RantInFeed } from 'ts-devrant';
-import { DevRantService } from '../../services/devrant.service';
 
 @Component({
   templateUrl: './rant-detail.page.html',

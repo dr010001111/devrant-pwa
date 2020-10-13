@@ -1,10 +1,9 @@
 import { Component, ElementRef, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { DevRantService } from '@services/devrant.service';
+import * as IncrementalDOM from 'incremental-dom';
+import MarkdownIt from 'markdown-it';
+import MarkdownItIncrementalDOM from 'markdown-it-incremental-dom';
 import { LinkDef } from 'ts-devrant';
-import * as IncrementalDOM from 'incremental-dom'
-import MarkdownIt from 'markdown-it'
-import MarkdownItIncrementalDOM from 'markdown-it-incremental-dom'
-import { DevRantService } from '../../services/devrant.service';
-import { textChangeRangeIsUnchanged } from 'typescript';
 
 const md = new MarkdownIt({
   breaks: true,

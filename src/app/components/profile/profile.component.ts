@@ -1,10 +1,8 @@
-import { Component, ElementRef, HostListener, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Scroll } from '@angular/router';
-import { fetchFailedAlert, presentGenericAlert } from 'src/utils/alert-utils';
-import { Profile } from 'ts-devrant';
-import { getImageURL } from 'ts-devrant';
-import { DevRantService } from '../../services/devrant.service';
-import { applyShadesTo, makeShades } from '../../utils/color-utils';
+import { DevRantService } from '@services/devrant.service';
+import { applyShadesTo, makeShades } from '@utils/color-utils';
+import { getImageURL, Profile } from 'ts-devrant';
 
 @Component({
   selector: 'app-profile',

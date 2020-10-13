@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RantModule } from '@app/components/rant/rant.module';
+import { CenterContentModule } from '@app/generic/center-content/center-content.module';
 import { IonicModule } from '@ionic/angular';
-import { CenterContentModule } from '../center-content/center-content.module';
-import { RantModule } from '../rant/rant.module';
-import { Tab1PageRoutingModule } from './tab-feed-routing.module';
+import { TabFeedPageRoutingModule } from './tab-feed-routing.module';
 import { TabFeedPage } from './tab-feed.page';
 
 
@@ -13,7 +13,7 @@ import { TabFeedPage } from './tab-feed.page';
     IonicModule,
     CommonModule,
     FormsModule,
-    Tab1PageRoutingModule,
+    TabFeedPageRoutingModule,
     RantModule,
     CenterContentModule,
   ],

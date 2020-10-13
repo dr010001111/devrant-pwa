@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { CenterContentModule } from '@app/generic/center-content/center-content.module';
+import { ContentLoadingModule } from '@app/generic/content-loading/content-loading.module';
 import { IonicModule } from '@ionic/angular';
-import { CenterContentModule } from '../center-content/center-content.module';
-import { ContentLoadingModule } from '../content-loading/content-loading.module';
 import { RantCommentModule } from '../rant-comment/rant-comment.module';
 import { RantModule } from '../rant/rant.module';
 import { ProfileComponent } from './profile.component';

@@ -1,9 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
 import { AlertController, ToastController } from '@ionic/angular';
-import { DevRantService } from '../../services/devrant.service';
+import { DevRantService } from '@services/devrant.service';
 
 @Component({
-  selector: 'app-profile',
+  selector: 'app-tab-profile',
   templateUrl: 'tab-profile.page.html',
   styleUrls: ['tab-profile.page.scss']
 })

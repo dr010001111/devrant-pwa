@@ -3,7 +3,7 @@ import { NotificationService } from 'src/services/notification.service';
 import { Comment } from 'ts-devrant';
 
 @Component({
-  selector: 'app-notifications',
+  selector: 'app-tab-notifications',
   templateUrl: 'tab-notifs.page.html',
   styleUrls: ['tab-notifs.page.scss']
 })

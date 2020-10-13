@@ -1,8 +1,8 @@
 import { Component, ElementRef, HostBinding, HostListener, Input, OnInit, ViewChild } from '@angular/core';
-import { Comment, VoteState } from 'ts-devrant';
-import { DevRantService } from '../../services/devrant.service';
-import { tapOrDouble } from '../../utils/tap-utils';
-import { isVisible } from '../../utils/viewport-utils';
+import { DevRantService } from '@services/devrant.service';
+import { tapOrDouble } from '@utils/tap-utils';
+import { isVisible } from '@utils/viewport-utils';
+import { VoteState } from 'ts-devrant';
 import { VoteBarComponent } from '../vote-bar/vote-bar.component';
 
 @Component({

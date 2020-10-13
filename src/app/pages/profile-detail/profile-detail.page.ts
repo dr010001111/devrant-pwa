@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { DevRantService } from '../../services/devrant.service';
+import { DevRantService } from '@services/devrant.service';
 
 @Component({
   selector: 'app-profile-detail',

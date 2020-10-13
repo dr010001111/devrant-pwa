@@ -5,7 +5,7 @@ import { DevRantService } from '@services/devrant.service';
 import { Sort } from 'ts-devrant';
 
 @Component({
-  selector: 'app-feed',
+  selector: 'app-tab-feed',
   templateUrl: 'tab-feed.page.html',
   styleUrls: ['tab-feed.page.scss']
 })
