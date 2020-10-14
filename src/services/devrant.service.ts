@@ -23,8 +23,32 @@ devRant.updateConfig({
 export class DevRantService {
   worker: ServiceWorker;
 
+  userIdCache: Cache;
+  activeUserIdQueue = {};
+
   async getUserIdByName(username) {
-    return devRant.getIdByUsername(username)
+    const hitCache = await this.userIdCache.match(username)
+    const inActiveQueue = this.activeUserIdQueue[username]
+
+    if (inActiveQueue) {
+      return inActiveQueue
+    }
+
+    if (hitCache) {
+      return hitCache.json()
+    } else {
+      const idPromise = devRant.getIdByUsername(username);
+      this.activeUserIdQueue[username] = idPromise;
+
+      const idResponse = await idPromise
+
+      delete this.activeUserIdQueue[username]
+
+      const idCachableResponse = new Response(JSON.stringify(idResponse));
+      this.userIdCache.put(username, idCachableResponse)
+
+      return idResponse
+    }
   }
 
   async validateNotifications() {
@@ -99,6 +123,8 @@ export class DevRantService {
   async setupService() {
     const token = JSON.parse(localStorage.getItem('token'))
     await this.setupWorker()
+
+    this.userIdCache = await caches.open('username-id-map');
 
     if (token) {
       this.token = token;
