@@ -17,10 +17,29 @@ window.addEventListener('keydown', (ev) => {
   document.documentElement.classList.remove('using-mouse')
 });
 
+// needed for non-form components like alerts
+const submitSelector = 'button[type="submit"],button[type="button"]';
+window.addEventListener('keypress', (ev) => {
+  if (ev.code === "Enter" && ev.ctrlKey) {
+    const target = ev.target as HTMLElement
+    const parentFocusable: HTMLElement = target.parentElement.closest('[tabindex]')
+
+    if (parentFocusable) {
+      const submitButton: HTMLElement = parentFocusable.querySelector(submitSelector)
+      submitButton.click()
+    } else {
+      const closestSubmit: HTMLElement = target.closest(submitSelector)
+      if (closestSubmit) {
+        closestSubmit.click();
+      }
+    }
+  }
+});
+
 window.addEventListener('mousedown', (ev) => {
   document.documentElement.classList.remove('using-keyboard')
   document.documentElement.classList.add('using-mouse')
-})
+});
 
 window.addEventListener('keyup', (ev) => {
   const target = ev.target as HTMLElement;
