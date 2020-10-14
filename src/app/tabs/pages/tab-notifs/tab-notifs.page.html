@@ -7,7 +7,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-refresher slot="fixed" (ionRefresh)="pushNotificationUpdateRequest($event)">
+  <ion-refresher slot="fixed" (ionRefresh)="pushNotificationUpdateRequest($event)" *ngIf="notifications">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
@@ -17,7 +17,9 @@
 
   <app-center-content *ngIf="!devrant.isSignedIn">
     Sign in to view your notifications.
-    <ion-button routerLink="/tab/profile">Sign in</ion-button>
+    <ion-buttons>
+      <ion-button fill="outline" routerLink="/tab/profile">Go to Profile tab</ion-button>
+    </ion-buttons>
   </app-center-content>
 
   <ion-list *ngIf="notifications">
