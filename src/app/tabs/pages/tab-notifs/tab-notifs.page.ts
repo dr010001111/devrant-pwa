@@ -1,4 +1,5 @@
-import { Component, HostBinding, HostListener, OnInit, Output } from '@angular/core';
+import { Component, HostBinding, HostListener } from '@angular/core';
+import { DevRantService } from '@services/devrant.service';
 import { NotificationService } from 'src/services/notification.service';
 import { Comment } from 'ts-devrant';
 
@@ -11,7 +12,7 @@ export class TabNotifsPage {
 
   @HostBinding() id = 'notifs';
   hasErrors: boolean;
-  constructor(private notifyService: NotificationService) { }
+  constructor(private notifyService: NotificationService, readonly devrant: DevRantService) { }
 
   @HostListener('window:tab-change', ['$event'])
   tabSelected(event: CustomEvent<{ tab: string }>) {

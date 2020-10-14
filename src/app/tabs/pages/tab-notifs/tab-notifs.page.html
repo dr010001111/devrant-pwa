@@ -15,6 +15,11 @@
     Unable to fetch notifications.
   </app-center-content>
 
+  <app-center-content *ngIf="!devrant.isSignedIn">
+    Sign in to view your notifications.
+    <ion-button routerLink="/tab/profile">Sign in</ion-button>
+  </app-center-content>
+
   <ion-list *ngIf="notifications">
     <ion-item disabled *ngIf="!notifications">No notifications!</ion-item>
 
