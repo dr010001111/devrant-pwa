@@ -38,7 +38,7 @@
   </ion-header>
 
   <ion-list *ngIf="feed.length" #list>
-    <ion-virtual-scroll [items]="feed" approxItemHeight="420px" #feedContainer>
+    <ion-virtual-scroll [trackBy]="rantIdentity" [items]="feed" approxItemHeight="420px" #feedContainer>
       <ion-item *virtualItem="let rant">
         <app-rant [showUser]="true" [rant]="rant"></app-rant>
       </ion-item>

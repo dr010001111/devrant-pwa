@@ -2,7 +2,7 @@ import pkg from '@/package.json';
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { Config } from '@ionic/angular';
 import { DevRantService } from '@services/devrant.service';
-import { Sort } from 'ts-devrant';
+import { Sort, RantInFeed } from 'ts-devrant';
 
 @Component({
   selector: 'app-tab-feed',
@@ -43,9 +43,12 @@ export class TabFeedPage implements AfterViewInit {
     this.fetchFeed();
   }
 
+  rantIdentity(_index, rant: RantInFeed) {
+    return rant.id;
+  }
+
   ngAfterViewInit(): void {
     if (this.config.get('mode') !== 'ios') {
-      debugger
       this.headerEl.el.append(this.segmentEl.el)
     }
   }
@@ -53,10 +56,8 @@ export class TabFeedPage implements AfterViewInit {
   async doRefresh(event: CustomEvent) {
     this.resetFeed();
     const target = (event.target as HTMLIonRefresherElement);
-    setTimeout(() => {
-      target.complete()
-      target.disabled = true
-    }, 1e3)
+    await this.fetchFeed()
+    target.complete()
   }
 
   feedFilterChange(ev) {
