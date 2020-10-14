@@ -1,6 +1,6 @@
 import pkg from '@/package.json';
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
-import { Platform } from '@ionic/angular';
+import { Config } from '@ionic/angular';
 import { DevRantService } from '@services/devrant.service';
 import { Sort } from 'ts-devrant';
 
@@ -37,14 +37,15 @@ export class TabFeedPage implements AfterViewInit {
   hasErrors: boolean;
 
   constructor(
-    private readonly platform: Platform,
+    private readonly config: Config,
     private readonly service: DevRantService
   ) {
     this.fetchFeed();
   }
 
   ngAfterViewInit(): void {
-    if (!this.platform.is('ios')) {
+    if (this.config.get('mode') !== 'ios') {
+      debugger
       this.headerEl.el.append(this.segmentEl.el)
     }
   }
