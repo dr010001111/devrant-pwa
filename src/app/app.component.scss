@@ -19,12 +19,16 @@
     height: 15px;
     background: repeating-linear-gradient(
       -45deg,
-      transparent,
-      transparent 15px,
-      #ffff00 15px,
-      #ffff00 30px
+      red,
+      red 15px,
+      yellow 15px,
+      yellow 31px
     );
   }
+}
+
+ion-refresher {
+  z-index: 2;
 }
 
 body {
