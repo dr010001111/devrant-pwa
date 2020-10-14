@@ -16,7 +16,7 @@ export class TabProfilePage {
   password: HTMLIonInputElement;
   loginAlert: HTMLIonAlertElement;
 
-  constructor(private readonly devrant: DevRantService, private readonly toast: ToastController, private readonly alert: AlertController) { }
+  constructor(readonly devrant: DevRantService, private readonly toast: ToastController, private readonly alert: AlertController) { }
 
   get isSignedIn() {
     return this.devrant.isSignedIn;
@@ -24,6 +24,22 @@ export class TabProfilePage {
 
   get userId() {
     return this.devrant.token.user_id;
+  }
+
+  async onLogout(_event: MouseEvent) {
+    const alert = await this.alert.create({
+      header: 'Sign out',
+      message: "Do you really want to sign out?",
+      buttons: [
+        "No",
+        {
+          text: "Sign out",
+          handler: () => this.devrant.logout()
+        }
+      ]
+    })
+
+    alert.present()
   }
 
   async showSignIn() {
