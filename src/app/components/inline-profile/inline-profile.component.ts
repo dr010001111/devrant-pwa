@@ -27,7 +27,6 @@ export class InlineProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('inited')
     if (this.profile.created_time) {
       this.humanReadableTime = dayjs(this.profile.created_time * 1000).fromNow()
         .replace('hours', 'h')
