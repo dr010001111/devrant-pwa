@@ -21,10 +21,10 @@
       "@app/*": ["src/app/*"],
       "@services/*": ["src/services/*"],
       "@utils/*": ["src/utils/*"],
-      "@/*": ["./*"],
+      "@/*": ["./*"]
     }
   },
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules", "src/service-worker"],
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true
