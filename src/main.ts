@@ -12,14 +12,6 @@ import dayjs from 'dayjs';
 
 dayjs.extend(relativeTime)
 
-window.addEventListener('touchstart', (e: any) => {
-  // is not near edge of view, exit
-  if (e.pageX > 10 && e.pageX < window.innerWidth - 10) return;
-
-  // prevent swipe to navigate gesture
-  e.preventDefault();
-});
-
 window.addEventListener('keydown', (ev) => {
   document.documentElement.classList.add('using-keyboard')
   document.documentElement.classList.remove('using-mouse')
