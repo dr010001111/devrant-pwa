@@ -15,7 +15,6 @@ export class InlineProfileComponent implements OnInit {
   profile: Comment
 
   humanReadableTime: string;
-  imageUrl: string;
 
   constructor() { }
 
@@ -23,8 +22,12 @@ export class InlineProfileComponent implements OnInit {
     event.stopImmediatePropagation();
   }
 
+  imageUrl(url) {
+    return getImageURL(url);
+  }
+
   ngOnInit(): void {
-    this.imageUrl = getImageURL(this.profile.user_avatar.i);
+    console.log('inited')
     if (this.profile.created_time) {
       this.humanReadableTime = dayjs(this.profile.created_time * 1000).fromNow()
         .replace('hours', 'h')

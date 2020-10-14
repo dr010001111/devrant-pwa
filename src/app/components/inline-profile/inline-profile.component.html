@@ -1,5 +1,5 @@
 <span class="image" style.--color="#{{profile.user_avatar.b}}">
-    <img src="{{imageUrl}}" onerror="this.className = 'broken'" />
+    <img [src]="imageUrl(profile.user_avatar.i)" (error)="$event.target.className = 'broken'" />
 </span>
 <span class="username" (click)="noBubble($event)"
     routerLink="/user/{{profile.user_id}}">{{profile.user_username}}</span>
