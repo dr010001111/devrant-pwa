@@ -35,6 +35,7 @@ export class DrantHammerConfig extends HammerGestureConfig {
     BrowserModule,
     HammerModule,
     IonicModule.forRoot({
+      mode: navigator.platform === "MacIntel" ? 'ios' : undefined,
       animated: !window.matchMedia('(prefers-reduced-motion: reduce)').matches
     }),
     AppRoutingModule,
