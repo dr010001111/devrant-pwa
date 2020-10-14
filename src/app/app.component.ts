@@ -54,12 +54,6 @@ export class AppComponent implements OnInit {
     this.router.navigate([ev.detail])
   }
 
-  @HostListener('window:profile-updated', ['$event'])
-  profileUpdate() {
-    const shades = makeShades(this.devrant.profileColor);
-    applyShadesTo(document.documentElement, shades)
-  }
-
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();

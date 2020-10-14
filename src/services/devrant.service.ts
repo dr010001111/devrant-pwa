@@ -9,6 +9,7 @@ import { presentGenericAlert } from 'src/utils/alert-utils';
 import { environment } from '../environments/environment';
 import { AppService } from './app.service';
 import { ConfigService } from './config.service';
+import { makeShades, applyShadesTo } from '@utils/color-utils';
 
 const log = debug('dr:service:devrant');
 
@@ -101,7 +102,6 @@ export class DevRantService {
 
     if (token) {
       this.token = token;
-      this.getProfile();
     }
   }
 
@@ -124,6 +124,7 @@ export class DevRantService {
       token: this.token
     });
 
+    this.getProfile();
     this.validateNotifications();
   }
 
@@ -143,12 +144,16 @@ export class DevRantService {
     if (theme) {
       theme.setAttribute('content', this.profileColor)
     }
+
+    const shades = makeShades(this.profileColor);
+    applyShadesTo(document.documentElement, shades)
   }
 
   async getProfile(userId?: string, content?: string, skip?: number) {
     // we need to have a token AND the SAME userId as in the token OR no id and we use the id in the token.
-    if (this.token && (!userId || userId === String(this.token.user_id))) {
-      const request = this.lazyUpdateProfile(content, skip);
+    if (!this.token || !userId || (userId === String(this.token.user_id))) {
+      const request = this.lazyUpdateLoggedInProfile(content, skip);
+
       if (!this.profile) {
         await request;
       }
@@ -164,9 +169,19 @@ export class DevRantService {
     return response.profile;
   }
 
-  async lazyUpdateProfile(content?: string, skip?: number) {
-    this._profile = await this.fetchProfile(String(this.token.user_id), content, skip);
+  async lazyUpdateLoggedInProfile(content?: string, skip?: number) {
+    if (!this.token) {
+      this._profile = null;
+    } else {
+      this._profile = await this.fetchProfile(String(this.token.user_id), content, skip);
+    }
+
     this.profileUpdated()
+    return this._profile;
+  }
+
+  async logout() {
+    this.token = null;
   }
 
   async login(username: string, password: string) {
@@ -177,7 +192,6 @@ export class DevRantService {
     }
 
     this.token = response.auth_token
-    this.profileUpdated()
     return response.auth_token;
   }
 

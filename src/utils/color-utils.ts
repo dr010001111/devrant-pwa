@@ -67,7 +67,16 @@ export function renderContrast(hex) {
   return (yiq >= 128) ? 'black' : 'white';
 }
 
-export function makeShades(hexBase: string) {
+export function makeShades(hexBase?: string) {
+  if (!hexBase) {
+    return {
+      base: '',
+      tint: '',
+      shade: '',
+      contrast: '',
+    }
+  }
+
   const hex = hexBase.startsWith('#') ? hexBase : `#${hexBase}`;
   const hsl = hexToHSL(hex);
 
