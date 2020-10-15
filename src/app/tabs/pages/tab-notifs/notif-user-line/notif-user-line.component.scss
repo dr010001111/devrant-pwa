@@ -1,31 +1,39 @@
-@import "shared";
+@import 'shared';
 
-$avatar-size: 48px;
+$avatar-size: 56px;
 
 :host {
-  display: grid;
-  gap: 3px 10px;
-  grid-template:
-    "image . created" auto
-    "image . created" auto/ $avatar-size min-content 1fr auto;
+    display: grid;
+    gap: 3px 10px;
+    grid-template: 'image line created' auto/ $avatar-size 1fr auto;
 
-  min-height: 48px;
+    min-height: 48px;
+}
+
+.image {
+    @include user-thumbnail($avatar-size);
 }
 
 .line {
-  font-weight: 500;
-  line-height: 1;
+    padding-right: 20px;
 
-  grid-row: span 2;
-  align-self: center;
+    font-weight: 600;
+    line-height: 1;
+
+    grid-row: span 2;
+    align-self: center;
+}
+
+.username {
+    text-decoration: underline;
 }
 
 .created {
-  opacity: 0.5;
-  grid-area: created;
+    opacity: 0.5;
+    grid-area: created;
 
-  text-align: right;
-  font-size: 14px;
+    text-align: right;
+    font-size: 16px;
 
-  max-width: 70px;
+    align-self: center;
 }

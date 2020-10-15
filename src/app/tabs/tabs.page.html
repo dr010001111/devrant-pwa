@@ -1,21 +1,19 @@
 <ion-tabs #tabs (ionTabsDidChange)="tabChange($event)">
+    <ion-tab-bar slot="bottom">
+        <ion-tab-button tab="feed">
+            <ion-icon src="/assets/ranting.svg"></ion-icon>
+            <ion-label>Rants</ion-label>
+        </ion-tab-button>
 
-  <ion-tab-bar slot="bottom">
-    <ion-tab-button tab="feed">
-      <ion-icon src="/assets/ranting.svg"></ion-icon>
-      <ion-label>Rants</ion-label>
-    </ion-tab-button>
+        <ion-tab-button tab="notifications">
+            <ion-icon name="notifications"></ion-icon>
+            <ion-badge *ngIf="notifs.count">{{notifs.count}}</ion-badge>
+            <ion-label>Notifs</ion-label>
+        </ion-tab-button>
 
-    <ion-tab-button tab="notifications">
-      <ion-icon name="notifications"></ion-icon>
-      <ion-badge *ngIf="notifs.count">{{notifs.count}}</ion-badge>
-      <ion-label>Notifs</ion-label>
-    </ion-tab-button>
-
-    <ion-tab-button tab="profile">
-      <ion-icon src="/assets/user.svg"></ion-icon>
-      <ion-label>Profile</ion-label>
-    </ion-tab-button>
-  </ion-tab-bar>
-
+        <ion-tab-button tab="profile">
+            <ion-icon src="/assets/user.svg"></ion-icon>
+            <ion-label>Profile</ion-label>
+        </ion-tab-button>
+    </ion-tab-bar>
 </ion-tabs>

@@ -8,18 +8,17 @@ import { RantCommentModule } from '../rant-comment/rant-comment.module';
 import { RantModule } from '../rant/rant.module';
 import { ProfileComponent } from './profile.component';
 
-
 @NgModule({
-  declarations: [ProfileComponent],
-  imports: [
-    IonicModule,
-    CommonModule,
-    RantCommentModule,
-    RouterModule,
-    RantModule,
-    CenterContentModule,
-    ContentLoadingModule
-  ],
-  exports: [ProfileComponent]
+    declarations: [ProfileComponent],
+    imports: [
+        IonicModule,
+        CommonModule,
+        RantCommentModule,
+        RouterModule,
+        RantModule,
+        CenterContentModule,
+        ContentLoadingModule,
+    ],
+    exports: [ProfileComponent],
 })
-export class ProfileModule { }
+export class ProfileModule {}

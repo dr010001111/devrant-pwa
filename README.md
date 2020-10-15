@@ -1,15 +1,24 @@
-# devRant PWA
+# devRant PWA (UNOFFICIAL)
 
-[devRant](https://devrant.com/) as a progressive web application. The primary goal of this project is to provide an alternative, future-proof client to the existing applications. In the course of the implementation, the existing problems of the currently official applications are to be solved and if necessary improved.
+[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+![Lint](https://github.com/dr010001111/devrant-pwa/workflows/Lint/badge.svg)
+
+![CI Staging](https://github.com/dr010001111/devrant-pwa/workflows/CI%20Staging/badge.svg)
+![CI Production](https://github.com/dr010001111/devrant-pwa/workflows/CI%20Production/badge.svg)
+
+[devRant](https://devrant.com/) as progressive web application. The primary goal of this project is to provide an alternative, future-proof client to the existing applications. In the course of the implementation, the existing problems of the currently official applications are to be solved and if necessary improved.
+
+THIS PROJECT IS MAINTED BY THE COMMUNITY AND **NOT** OFFICIALY SUPPORTED BY DEVRANT.
 
 A few of them are as following:
-- No more random crashes
-- Accesabillity
-- Usability
-- Load times
-- Identical feature sets on all platforms
-- Respect to the operating system while maintaining devRant's unique Branding
-- Extensive options for customization (additional themes)
+
+-   No more random crashes
+-   Accesabillity
+-   Usability
+-   Load times
+-   Identical feature sets on all platforms
+-   Respect to the operating system while maintaining devRant's unique Branding
+-   Extensive options for customization (additional themes)
 
 ![](./readme_assets/iphone_preview_profile.png)
 ![](./readme_assets/ipad_preview_feed.png)
@@ -74,12 +83,14 @@ Found something? Then please also check out our [contribution details](CONTRIBUT
 
 ## References
 
-- [ts-devrant](https://www.npmjs.com/package/ts-devrant)
-- [devRant-SwiftUI](https://github.com/OmerFlame/devRantSwiftUI)
-- [devRant API](https://devrantapi.docs.apiary.io/)
---- 
-- [Ionic Docs](https://ionicframework.com/docs)
-- [Angular Docs](https://devdocs.io/angular/)
+-   [ts-devrant](https://www.npmjs.com/package/ts-devrant)
+-   [devRant-SwiftUI](https://github.com/OmerFlame/devRantSwiftUI)
+-   [devRant API](https://devrantapi.docs.apiary.io/)
+
+---
+
+-   [Ionic Docs](https://ionicframework.com/docs)
+-   [Angular Docs](https://devdocs.io/angular/)
 
 ---
 

@@ -1,42 +1,42 @@
-name: CI
+name: CI Production
 
 on:
-  push:
-    branches: [main]
+    push:
+        branches: [main]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+    build:
+        runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [14.x]
+        strategy:
+            matrix:
+                node-version: [14.x]
 
-    steps:
-      - uses: actions/checkout@v2
+        steps:
+            - uses: actions/checkout@v2
 
-      - name: Build PWA
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node }}
-      - run: npm ci && npm run build
+            - name: Build PWA
+              uses: actions/setup-node@v1
+              with:
+                  node-version: ${{ matrix.node }}
+            - run: npm ci && npm run build
 
-      - name: Clear previous App
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.HOST }}
-          USERNAME: ${{ secrets.USERNAME }}
-          PORT: ${{ secrets.PORT }}
-          KEY: ${{ secrets.SSHKEY }}
-          script: rm -rf ${{ secrets.PROD_PATH }}
+            - name: Clear previous App
+              uses: appleboy/ssh-action@master
+              with:
+                  host: ${{ secrets.HOST }}
+                  USERNAME: ${{ secrets.USERNAME }}
+                  PORT: ${{ secrets.PORT }}
+                  KEY: ${{ secrets.SSHKEY }}
+                  script: rm -rf ${{ secrets.PROD_PATH }}
 
-      - name: Copy file via scp
-        uses: appleboy/scp-action@master
-        env:
-          HOST: ${{ secrets.HOST }}
-          USERNAME: ${{ secrets.USERNAME }}
-          PORT: ${{ secrets.PORT }}
-          KEY: ${{ secrets.SSHKEY }}
-        with:
-          source: "www"
-          target: ${{ secrets.PROD_PATH }}
+            - name: Copy file via scp
+              uses: appleboy/scp-action@master
+              env:
+                  HOST: ${{ secrets.HOST }}
+                  USERNAME: ${{ secrets.USERNAME }}
+                  PORT: ${{ secrets.PORT }}
+                  KEY: ${{ secrets.SSHKEY }}
+              with:
+                  source: 'www'
+                  target: ${{ secrets.PROD_PATH }}

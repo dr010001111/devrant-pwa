@@ -2,7 +2,7 @@ import debug from 'debug';
 import tsdr, { Notifications, Token } from 'ts-devrant';
 import { MessageKinds, NotificationsChange } from './messages';
 
-debug.enable('*')
+debug.enable('*');
 
 const log = debug('dr:sw');
 log.log = console.log.bind(console);
@@ -19,39 +19,42 @@ class DevrantServiceWorker {
     isUpdating = false;
 
     constructor() {
-        self.addEventListener("message", (ev) => {
+        self.addEventListener('message', (ev) => {
             const message = ev.data as MessageKinds;
-            debug(`Message: ${message.type}`)
+            debug(`Message: ${message.type}`);
 
             switch (message.type) {
                 case 'setAPI': {
                     tsdr.updateConfig({
-                        "api": message.apiURL
-                    })
+                        api: message.apiURL,
+                    });
                     break;
                 }
                 case 'newToken': {
-                    this.token = message.token
-                    this.resetAndRunUpdater()
+                    this.token = message.token;
+                    this.resetAndRunUpdater();
+                    break;
                 }
                 case 'notifsChecked': {
-                    this.notificationsChecked()
+                    this.notificationsChecked();
+                    break;
                 }
                 case 'forceUpdateNotifs': {
                     this.checkNotifications(true);
+                    break;
                 }
             }
         });
 
-        log("Init");
-        log(tsdr)
+        log('Init');
+        log(tsdr);
 
-        this.runUpdater()
+        this.runUpdater();
     }
 
     notificationsChecked() {
         // if the user is checking the notifications, set the last state to the current one.
-        this.notificationsStateSinceLastChecked = this.notifications
+        this.notificationsStateSinceLastChecked = this.notifications;
     }
 
     reset() {
@@ -61,11 +64,14 @@ class DevrantServiceWorker {
 
     resetAndRunUpdater() {
         this.reset();
-        this.runUpdater()
+        this.runUpdater();
     }
 
     runUpdater() {
-        this.updaterId = setInterval(this.update.bind(this), updateInterval) as any;
+        this.updaterId = setInterval(
+            this.update.bind(this),
+            updateInterval
+        ) as any;
         this.update();
     }
 
@@ -74,22 +80,22 @@ class DevrantServiceWorker {
      */
     update() {
         if (!this.token) {
-            return
+            return;
         }
 
         log('Update');
-        this.checkNotifications()
+        this.checkNotifications();
     }
 
     async checkNotifications(forcedRequest?: boolean) {
         if (this.isUpdating) {
-            log('skip update due to active queue.')
+            log('skip update due to active queue.');
             return;
         }
 
         this.isUpdating = true;
         try {
-            const notifs = await tsdr.notifications(this.token)
+            const notifs = await tsdr.notifications(this.token);
 
             if (!forcedRequest) {
                 this.notifyUserOfNewNotifications(notifs.data);
@@ -107,7 +113,7 @@ class DevrantServiceWorker {
     /**
      * This logic is brainfuck and I'm happy it works,
      * please don't let me touch this again
-     * @param newNotifs 
+     * @param newNotifs
      */
     notifyUserOfNewNotifications(newNotifs: Notifications) {
         // abort when there has no notifications been set yet (cold bootup)
@@ -119,36 +125,46 @@ class DevrantServiceWorker {
         if (this.notificationsStateSinceLastChecked) {
             // and the updated response's total is great than the last response's total...
             if (newNotifs.unread.total > this.notifications.unread.total) {
-                const notifStateSLC = this.notificationsStateSinceLastChecked
+                const notifStateSLC = this.notificationsStateSinceLastChecked;
                 // then we get the number of _locally unread_ notifications from all the _server unread_ notifications...
-                const notificationChange = newNotifs.unread.total - notifStateSLC.unread.total
+                const notificationChange =
+                    newNotifs.unread.total - notifStateSLC.unread.total;
 
                 // right before we annoy the user, let's make sure there is anything true to that calculation.
                 if (notificationChange > 0) {
                     // and we finally inform the user that there are X new notifications since he last checked, but not read
-                    this.notify(`You have ${notificationChange} new notifications!`)
+                    this.notify(
+                        `You have ${notificationChange} new notifications!`
+                    );
                 }
             }
         }
     }
 
     async notifyUI(notifs: Notifications, forcedRequest?: boolean) {
-        const allClients: any[] = await (self as any).clients.matchAll(({ includeUncontrolled: true, type: 'window' }))
-        log(`notify ${allClients.length} clients`)
-        allClients.forEach(client => {
+        const allClients: any[] = await (self as any).clients.matchAll({
+            includeUncontrolled: true,
+            type: 'window',
+        });
+        log(`notify ${allClients.length} clients`);
+        allClients.forEach((client) => {
             client.postMessage({
                 type: 'notifications',
-                notifications: notifs
-            } as NotificationsChange)
-        })
+                notifications: notifs,
+            } as NotificationsChange);
+        });
     }
 
-    async notify(title, message?, additionalOptions?: Omit<NotificationOptions, 'message'>) {
+    async notify(
+        title,
+        message?,
+        additionalOptions?: Omit<NotificationOptions, 'message'>
+    ) {
         this.reg.showNotification(title, {
             ...additionalOptions,
             body: message,
             icon: '/assets/icons/icon-128x128.png',
-        })
+        });
     }
 }
 

@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { TabFeedPage } from './tab-feed.page';
+import { TabFeedPageComponent } from './tab-feed.page';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: TabFeedPage,
-  }
+    {
+        path: '',
+        component: TabFeedPageComponent,
+    },
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forChild(routes)],
+    exports: [RouterModule],
 })
-export class TabFeedPageRoutingModule { }
+export class TabFeedPageRoutingModule {}

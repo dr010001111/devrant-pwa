@@ -1,28 +1,28 @@
 ion-item {
-  --padding-start: 0;
-  --inner-padding-start: 10px;
+    --padding-start: 0;
+    --inner-padding-start: 10px;
 }
 
 .highlight {
-  &::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
 
-    z-index: -1;
+        z-index: -1;
 
-    animation: highlight 1s 400ms ease-in-out;
-    animation-iteration-count: 2;
-  }
+        animation: highlight 1s 400ms ease-in-out;
+        animation-iteration-count: 2;
+    }
 }
 
 @keyframes highlight {
-  50% {
-    background: var(--theme-shade);
-  }
+    50% {
+        background: var(--theme-shade);
+    }
 }
 
 .comment-input { 

@@ -1,32 +1,32 @@
 {
-  "compileOnSave": false,
-  "compilerOptions": {
-    "resolveJsonModule": true,
-    "baseUrl": "./",
-    "listEmittedFiles": true,
-    "outDir": "./dist/out-tsc",
-    "allowJs": true,
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-    "sourceMap": true,
-    "declaration": false,
-    "downlevelIteration": true,
-    "experimentalDecorators": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "importHelpers": true,
-    "target": "es2015",
-    "lib": ["es2018", "dom"],
-    "paths": {
-      "@app/*": ["src/app/*"],
-      "@services/*": ["src/services/*"],
-      "@utils/*": ["src/utils/*"],
-      "@/*": ["./*"],
+    "compileOnSave": false,
+    "compilerOptions": {
+        "resolveJsonModule": true,
+        "baseUrl": "./",
+        "listEmittedFiles": true,
+        "outDir": "./dist/out-tsc",
+        "allowJs": true,
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "sourceMap": true,
+        "declaration": false,
+        "downlevelIteration": true,
+        "experimentalDecorators": true,
+        "module": "esnext",
+        "moduleResolution": "node",
+        "importHelpers": true,
+        "target": "es2015",
+        "lib": ["es2018", "dom"],
+        "paths": {
+            "@app/*": ["src/app/*"],
+            "@services/*": ["src/services/*"],
+            "@utils/*": ["src/utils/*"],
+            "@/*": ["./*"]
+        }
+    },
+    "exclude": ["node_modules", "src/service-worker"],
+    "angularCompilerOptions": {
+        "fullTemplateTypeCheck": true,
+        "strictInjectionParameters": true
     }
-  },
-  "exclude": ["node_modules"],
-  "angularCompilerOptions": {
-    "fullTemplateTypeCheck": true,
-    "strictInjectionParameters": true
-  }
 }

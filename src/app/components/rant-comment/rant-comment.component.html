@@ -1,5 +1,11 @@
-<app-vote-bar *ngIf="internalComment" [voteTo]="internalComment" #voter (downvote)="downvote()" (upvote)="upvote()"
-    (clearVote)="clearVote()">
+<app-vote-bar
+    *ngIf="internalComment"
+    [voteTo]="internalComment"
+    #voter
+    (downvote)="downvote()"
+    (upvote)="upvote()"
+    (clearVote)="clearVote()"
+>
 </app-vote-bar>
 
 <div class="loading-skeleton" *ngIf="!internalComment">
@@ -8,6 +14,12 @@
 
 <main *ngIf="internalComment">
     <app-inline-profile [profile]="internalComment"></app-inline-profile>
-    <app-render-content [content]="internalComment.body" [links]="internalComment.links"></app-render-content>
-    <ion-img *ngIf="internalComment.attached_image" src="{{internalComment.attached_image.url}}"></ion-img>
+    <app-render-content
+        [content]="internalComment.body"
+        [links]="internalComment.links"
+    ></app-render-content>
+    <ion-img
+        *ngIf="internalComment.attached_image"
+        src="{{ internalComment.attached_image.url }}"
+    ></ion-img>
 </main>

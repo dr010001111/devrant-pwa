@@ -4,11 +4,10 @@
 > dedication. By submitting a pull request or filing a bug, issue, or
 > feature request, you are agreeing to comply with this waiver of copyright interest.
 
-
 There are two primary ways to help:
- - Using the issue tracker, and
- - Changing the code-base.
 
+-   Using the issue tracker, and
+-   Changing the code-base.
 
 ## Using the issue tracker
 
@@ -20,7 +19,6 @@ Use the issue tracker to find ways to contribute. Find a bug or a feature, menti
 the issue that you will take on that effort, then follow the _Changing the code-base_
 guidance below.
 
-
 ## Changing the code-base
 
 Generally speaking, you should fork this repository, make changes in your
@@ -29,7 +27,6 @@ own fork, and then submit a pull request. The code should follow any stylistic a
 ## Commits
 
 It is highly adviced to use [Conventional Commits](https://www.conventionalcommits.org/).
-
 
 ## Browser support
 

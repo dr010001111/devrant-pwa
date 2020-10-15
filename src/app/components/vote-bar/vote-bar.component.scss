@@ -1,53 +1,54 @@
 %vote-button {
-  background-color: var(--border-color);
-  border-radius: 32px;
-  font-weight: bold;
+    background-color: var(--border-color);
+    border-radius: 32px;
+    font-weight: bold;
 }
 
 :host {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-  align-self: flex-start;
+    align-self: flex-start;
 
-  > * {
-    display: grid;
-    place-content: center;
+    > * {
+        display: grid;
+        place-content: center;
 
-    width: 32px;
-    height: 32px;
-  }
-
-  &[disabled] {
-    .plusplus, .minusminus {
-      opacity: .5;
+        width: 32px;
+        height: 32px;
     }
-  }
 
-  .score.not-up-to-date {
-    opacity: 0.5;
-  }
-
-  .voted {
-    background-color: var(--ion-color-primary-shade);
-    color: var(--ion-color-primary-contrast);
-  } 
-
-  .plusplus {
-    @extend %vote-button;
-
-    &::before {
-      content: "++";
-      line-height: 1;
+    &[disabled] {
+        .plusplus,
+        .minusminus {
+            opacity: 0.5;
+        }
     }
-  }
 
-  .minusminus {
-    @extend %vote-button;
-
-    &::before {
-      content: "--";
+    .score.not-up-to-date {
+        opacity: 0.5;
     }
-  }
+
+    .voted {
+        background-color: var(--ion-color-primary-shade);
+        color: var(--ion-color-primary-contrast);
+    }
+
+    .plusplus {
+        @extend %vote-button;
+
+        &::before {
+            content: '++';
+            line-height: 1;
+        }
+    }
+
+    .minusminus {
+        @extend %vote-button;
+
+        &::before {
+            content: '--';
+        }
+    }
 }

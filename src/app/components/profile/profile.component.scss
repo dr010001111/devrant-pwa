@@ -1,121 +1,119 @@
-@import "shared";
+@import 'shared';
 
 :host {
-  height: 100%;
+    height: 100%;
 }
 
 .image-container {
-  position: relative;
-
-  padding-top: 120%;
-  background: var(--theme, var(--ion-color-primary));
-
-  > ion-img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-
-    border-radius: 8px 8px 0 0;
-  }
-
-  .account-details {
-    --color: var(--ion-color-primary-shade);
-
-    display: grid;
-    gap: 5px;
-
-    height: 100%;
-    align-content: space-between;
-
-    justify-items: start;
-    grid-template:
-      "score dpp" auto
-      "title title" auto / min-content 1fr;
-
-    position: absolute;
-    left: 0;
-    bottom: 0;
-
-    padding: 1ch;
-    color: white;
-
-    .score,
-    .dpp {
-      font-size: 18px;
-    }
-  }
-
-  ion-title {
-    grid-area: title;
-
     position: relative;
 
-    padding: unset;
-    top: unset;
-    height: unset;
+    padding-top: 120%;
+    background: var(--theme, var(--ion-color-primary));
 
-    font-size: 34px;
-    font-weight: 900;
-    text-align: left;
+    > img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+    }
 
-    mix-blend-mode: soft-light;
-  }
+    .account-details {
+        --color: var(--ion-color-primary-shade);
 
-  .score {
-    @include score-badge;
-  }
+        display: grid;
+        gap: 5px;
 
-  .dpp {
-    @include dpp-badge;
-  }
+        height: 100%;
+        align-content: space-between;
+
+        justify-items: start;
+        grid-template:
+            'score dpp' auto
+            'title title' auto / min-content 1fr;
+
+        position: absolute;
+        left: 0;
+        bottom: 0;
+
+        padding: 1ch;
+        color: white;
+
+        .score,
+        .dpp {
+            font-size: 18px;
+        }
+    }
+
+    ion-title {
+        grid-area: title;
+
+        position: relative;
+
+        padding: unset;
+        top: unset;
+        height: unset;
+
+        font-size: 34px;
+        font-weight: 900;
+        text-align: left;
+
+        mix-blend-mode: soft-light;
+    }
+
+    .score {
+        @include score-badge;
+    }
+
+    .dpp {
+        @include dpp-badge;
+    }
 }
 
 .stats-bar {
-  display: flex;
-  flex-flow: row wrap;
-  place-content: center;
+    display: flex;
+    flex-flow: row wrap;
+    place-content: center;
 
-  padding: 5px 20px;
+    padding: 5px 20px;
 
-  &-container {
-    z-index: 2;
+    &-container {
+        z-index: 2;
 
-    width: 100%;
-    overflow-x: scroll;
+        width: 100%;
+        overflow-x: scroll;
 
-    background-color: var(--theme-shade);
-    color: white;
-  }
+        background-color: var(--theme-shade);
+        color: white;
+    }
 }
 
 .stat {
-  position: relative;
-  margin: 0 5px;
-  padding: 5px 10px;
+    position: relative;
+    margin: 0 5px;
+    padding: 5px 10px;
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 
-  z-index: 1;
+    z-index: 1;
 
-  min-height: 48px;
+    min-height: 48px;
 
-  border-radius: 8px;
+    border-radius: 8px;
 
-  &.is-active {
-    background-color: var(--theme);
-  }
+    &.is-active {
+        background-color: var(--theme);
+    }
 }
 
 .maybe-more {
-  margin-bottom: 40vh;
+    margin-bottom: 40vh;
 }
 
 ion-spinner {
-  place-self: center;
+    place-self: center;
 }

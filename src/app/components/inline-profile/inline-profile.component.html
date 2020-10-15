@@ -1,8 +1,20 @@
-<span class="image" style.--color="#{{profile.user_avatar.b}}">
-    <img src="{{imageUrl}}" onerror="this.className = 'broken'" />
+<span class="image" style.--color="#{{ profile.user_avatar.b }}">
+    <img
+        [src]="imageUrl(profile.user_avatar.i)"
+        (error)="$event.target.className = 'broken'"
+    />
 </span>
-<span class="username" (click)="noBubble($event)"
-    routerLink="/user/{{profile.user_id}}">{{profile.user_username}}</span>
-<span class="created">{{humanReadableTime}}</span>
-<span class="score">{{profile.user_score}}</span>
-<span class="dpp" style.--color="#{{profile.user_avatar.b}}" *ngIf="profile.user_dpp">++</span>
+<span
+    class="username"
+    (click)="noBubble($event)"
+    routerLink="/user/{{ profile.user_id }}"
+    >{{ profile.user_username }}</span
+>
+<span class="created">{{ humanReadableTime }}</span>
+<span class="score">{{ profile.user_score }}</span>
+<span
+    class="dpp"
+    style.--color="#{{ profile.user_avatar.b }}"
+    *ngIf="profile.user_dpp"
+    >++</span
+>

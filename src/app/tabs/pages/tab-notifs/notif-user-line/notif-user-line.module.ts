@@ -4,15 +4,9 @@ import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { InlineProfileComponent as NotifUserLineComponent } from './notif-user-line.component';
 
-
-
 @NgModule({
-  declarations: [NotifUserLineComponent],
-  imports: [
-    IonicModule,
-    CommonModule,
-    RouterModule
-  ],
-  exports: [NotifUserLineComponent]
+    declarations: [NotifUserLineComponent],
+    imports: [IonicModule, CommonModule, RouterModule],
+    exports: [NotifUserLineComponent],
 })
-export class NotifUserLineModule { }
+export class NotifUserLineModule {}

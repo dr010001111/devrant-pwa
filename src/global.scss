@@ -10,39 +10,46 @@
  */
 
 /* Core CSS required for Ionic components to work properly */
-@import "~@ionic/angular/css/core.css";
+@import '~@ionic/angular/css/core.css';
 
 /* Basic CSS for apps built with Ionic */
-@import "~@ionic/angular/css/normalize.css";
-@import "~@ionic/angular/css/structure.css";
-@import "~@ionic/angular/css/typography.css";
-@import "~@ionic/angular/css/display.css";
+@import '~@ionic/angular/css/normalize.css';
+@import '~@ionic/angular/css/structure.css';
+@import '~@ionic/angular/css/typography.css';
+@import '~@ionic/angular/css/display.css';
 
 /* Optional CSS utils that can be commented out */
-@import "~@ionic/angular/css/padding.css";
-@import "~@ionic/angular/css/float-elements.css";
-@import "~@ionic/angular/css/text-alignment.css";
-@import "~@ionic/angular/css/text-transformation.css";
-@import "~@ionic/angular/css/flex-utils.css";
+@import '~@ionic/angular/css/padding.css';
+@import '~@ionic/angular/css/float-elements.css';
+@import '~@ionic/angular/css/text-alignment.css';
+@import '~@ionic/angular/css/text-transformation.css';
+@import '~@ionic/angular/css/flex-utils.css';
+
+:root body {
+    --ion-color-primary: var(--theme) !important;
+    --ion-color-primary-tint: var(--theme-tint) !important;
+    --ion-color-primary-shade: var(--theme-shade) !important;
+    --ion-color-primary-contrast: var(--theme-contrast) !important;
+}
 
 :focus {
-  outline: 0 transparent;
+    outline: 0 transparent;
 }
 
 .using-keyboard :focus {
-  outline-color: var(--ion-color-primary);
-  outline-style: solid;
-  outline-offset: -1px;
-  outline-width: 3px;
+    outline-color: var(--ion-color-primary);
+    outline-style: solid;
+    outline-offset: -1px;
+    outline-width: 3px;
 }
 
 ul,
 ol {
-  padding-left: 2ch;
+    padding-left: 2ch;
 }
 
 ion-badge {
-  --padding-top: var(--padding-bottom);
-  --background: var(--theme-shade);
-  --color: var(--theme-contrast);
+    --padding-top: var(--padding-bottom);
+    --background: var(--theme-shade);
+    --color: var(--theme-contrast);
 }

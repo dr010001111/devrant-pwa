@@ -1,13 +1,13 @@
 :host {
-  width: 100%;
-  display: grid;
-  grid-auto-flow: column;
-  grid-template-columns: min-content auto;
+    width: 100%;
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: min-content auto;
 
-  gap: 8px;
-  padding: 10px 0;
+    gap: 8px;
+    padding: 10px 0;
 
-  .loading-skeleton {
-    grid-column: 1/-1;
-  }
+    .loading-skeleton {
+        grid-column: 1/-1;
+    }
 }

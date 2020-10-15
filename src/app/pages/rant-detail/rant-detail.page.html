@@ -12,8 +12,7 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" #content>
-
+<ion-content #content>
     <app-content-loading [loading]="isLoading"></app-content-loading>
     <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
         <ion-refresher-content></ion-refresher-content>
@@ -28,7 +27,14 @@
     </ion-item>
 
     <ion-item *ngIf="service.isSignedIn">
-      <ion-textarea class="comment-input" (input)="getCommentInput($event)" placeholder="Add your 2 cents..." autoGrow="true"></ion-textarea>
-      <ion-button (click)="submitComment()"><ion-icon name="send"></ion-icon></ion-button>
+        <ion-textarea
+            class="comment-input"
+            (input)="getCommentInput($event)"
+            placeholder="Add your 2 cents..."
+            autoGrow="true"
+        ></ion-textarea>
+        <ion-button (click)="submitComment()"
+            ><ion-icon name="send"></ion-icon
+        ></ion-button>
     </ion-item>
 </ion-content>

@@ -1,24 +1,25 @@
-:host, .inner {
-  z-index: 1;
-  pointer-events: none;
+:host,
+.inner {
+    z-index: 1;
+    pointer-events: none;
 
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 
 .inner {
-  display: grid;
+    display: grid;
 
-  place-content: center;
-  place-items: center;
+    place-content: center;
+    place-items: center;
 
-  gap: 20px;
+    gap: 20px;
 
-  > .failed {
-    width: 48px;
-    height: 48px;
-  }
+    > .failed {
+        width: 48px;
+        height: 48px;
+    }
 }

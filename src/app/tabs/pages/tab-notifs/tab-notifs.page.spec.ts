@@ -2,24 +2,24 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 
-import { TabNotifsPage } from './tab-notifs.page';
+import { TabNotifsPageComponent } from './tab-notifs.page';
 
 describe('Tab2Page', () => {
-  let component: TabNotifsPage;
-  let fixture: ComponentFixture<TabNotifsPage>;
+    let component: TabNotifsPageComponent;
+    let fixture: ComponentFixture<TabNotifsPageComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [TabNotifsPage],
-      imports: [IonicModule.forRoot(), ExploreContainerComponentModule]
-    }).compileComponents();
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [TabNotifsPageComponent],
+            imports: [IonicModule.forRoot(), ExploreContainerComponentModule],
+        }).compileComponents();
 
-    fixture = TestBed.createComponent(TabNotifsPage);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  }));
+        fixture = TestBed.createComponent(TabNotifsPageComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    }));
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });
