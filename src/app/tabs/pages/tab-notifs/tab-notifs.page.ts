@@ -13,7 +13,7 @@ import { NotificationService } from 'src/services/notification.service';
     styleUrls: ['tab-notifs.page.scss'],
     encapsulation: ViewEncapsulation.None,
 })
-export class TabNotifsPage {
+export class TabNotifsPageComponent {
     @HostBinding() id = 'notifs';
     hasErrors: boolean;
     constructor(

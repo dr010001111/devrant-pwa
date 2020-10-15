@@ -33,12 +33,15 @@ class DevrantServiceWorker {
                 case 'newToken': {
                     this.token = message.token;
                     this.resetAndRunUpdater();
+                    break;
                 }
                 case 'notifsChecked': {
                     this.notificationsChecked();
+                    break;
                 }
                 case 'forceUpdateNotifs': {
                     this.checkNotifications(true);
+                    break;
                 }
             }
         });

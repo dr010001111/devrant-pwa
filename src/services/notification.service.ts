@@ -12,12 +12,6 @@ import { DevRantService } from './devrant.service';
     providedIn: 'root',
 })
 export class NotificationService {
-    userCheckedNotifications() {
-        this.worker.postMessage({
-            type: 'notifsChecked',
-        } as NotificationsChecked);
-    }
-
     notifications: Notifications;
     worker: ServiceWorker;
 
@@ -76,6 +70,12 @@ export class NotificationService {
                 }
             }
         );
+    }
+
+    userCheckedNotifications() {
+        this.worker.postMessage({
+            type: 'notifsChecked',
+        } as NotificationsChecked);
     }
 
     updateNotifications(notifications: Notifications) {

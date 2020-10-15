@@ -44,6 +44,8 @@ export class RantComponent implements OnInit {
     @ViewChild('voter')
     votebar: VoteBarComponent;
 
+    @HostBinding() tabindex = 0;
+
     doubleChecker;
 
     constructor(
@@ -66,20 +68,9 @@ export class RantComponent implements OnInit {
         }
     }
 
-    async fetchRant() {
-        const rantResponse = await this.devrant.getRant(this.rantId);
-        this.rant = rantResponse.rant;
-    }
-
-    @HostListener('touchmove', ['$event'])
-    clearTap() {
-        this.doubleChecker && this.doubleChecker.clear();
-    }
-
     /**
      * Also make sure this blob is the same as in rant-comment component you dumbfuck
      */
-    @HostBinding() tabindex = 0;
     @HostListener('click', ['$event'])
     @HostListener('keyup', ['$event'])
     onDoubleClick(event: MouseEvent | KeyboardEvent) {
@@ -91,6 +82,16 @@ export class RantComponent implements OnInit {
             },
             event
         );
+    }
+
+    async fetchRant() {
+        const rantResponse = await this.devrant.getRant(this.rantId);
+        this.rant = rantResponse.rant;
+    }
+
+    @HostListener('touchmove', ['$event'])
+    clearTap() {
+        this.doubleChecker && this.doubleChecker.clear();
     }
 
     async clearVote() {

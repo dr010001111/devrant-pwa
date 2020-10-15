@@ -5,7 +5,7 @@ import { RantModule } from '@app/components/rant/rant.module';
 import { CenterContentModule } from '@app/generic/center-content/center-content.module';
 import { IonicModule } from '@ionic/angular';
 import { TabFeedPageRoutingModule } from './tab-feed-routing.module';
-import { TabFeedPage } from './tab-feed.page';
+import { TabFeedPageComponent } from './tab-feed.page';
 
 @NgModule({
     imports: [
@@ -16,6 +16,6 @@ import { TabFeedPage } from './tab-feed.page';
         RantModule,
         CenterContentModule,
     ],
-    declarations: [TabFeedPage],
+    declarations: [TabFeedPageComponent],
 })
 export class TabFeedPageModule {}

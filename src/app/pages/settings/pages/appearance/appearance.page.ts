@@ -7,7 +7,7 @@ import { ConfigService } from '@services/config.service';
     templateUrl: './appearance.page.html',
     styleUrls: ['./appearance.page.scss'],
 })
-export class AppearancePage implements OnInit {
+export class AppearancePageComponent implements OnInit {
     params: Params;
 
     constructor(

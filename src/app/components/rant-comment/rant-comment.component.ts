@@ -20,6 +20,20 @@ import { VoteBarComponent } from '../vote-bar/vote-bar.component';
 })
 export class RantCommentComponent implements OnInit {
     protected _internalComment: any;
+    doubleChecker;
+
+    @ViewChild('voter')
+    votebar: VoteBarComponent;
+
+    @Input()
+    commentId: number;
+
+    @HostBinding() tabindex = 0;
+
+    @Input()
+    set comment(comment: any) {
+        this.internalComment = comment;
+    }
 
     get internalComment() {
         return this._internalComment;
@@ -31,13 +45,24 @@ export class RantCommentComponent implements OnInit {
             .nativeElement as HTMLElement).id = `comment-${this.internalComment.id}`;
     }
 
-    @Input()
-    set comment(comment: any) {
-        this.internalComment = comment;
+    /**
+     * Also make sure this blob is the same as in rant component you dumbfuck
+     */
+    @HostListener('click', ['$event'])
+    @HostListener('keyup', ['$event'])
+    onDoubleClick(event: MouseEvent | KeyboardEvent) {
+        this.doubleChecker = tapOrDouble(
+            {
+                double: () => this.votebar.onUpvote(),
+            },
+            event
+        );
     }
 
-    @Input()
-    commentId: number;
+    @HostListener('touchmove', ['$event'])
+    clearTap() {
+        this.doubleChecker && this.doubleChecker.clear();
+    }
 
     constructor(
         private elRef: ElementRef,
@@ -61,31 +86,6 @@ export class RantCommentComponent implements OnInit {
     async fetchComment() {
         const commentReponse = await this.devrant.getComment(this.commentId);
         this.internalComment = commentReponse.comment;
-    }
-
-    @ViewChild('voter')
-    votebar: VoteBarComponent;
-
-    doubleChecker;
-
-    @HostListener('touchmove', ['$event'])
-    clearTap() {
-        this.doubleChecker && this.doubleChecker.clear();
-    }
-
-    /**
-     * Also make sure this blob is the same as in rant component you dumbfuck
-     */
-    @HostBinding() tabindex = 0;
-    @HostListener('click', ['$event'])
-    @HostListener('keyup', ['$event'])
-    onDoubleClick(event: MouseEvent | KeyboardEvent) {
-        this.doubleChecker = tapOrDouble(
-            {
-                double: () => this.votebar.onUpvote(),
-            },
-            event
-        );
     }
 
     async clearVote() {

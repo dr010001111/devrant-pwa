@@ -7,18 +7,20 @@ import { CenterContentModule } from '@app/generic/center-content/center-content.
 import { IonicModule } from '@ionic/angular';
 
 import { TabProfilePageRoutingModule } from './tab-profile-routing.module';
-import { TabProfilePage } from './tab-profile.page';
+import { TabProfilePageComponent } from './tab-profile.page';
 
 @NgModule({
     imports: [
         IonicModule,
         CommonModule,
         FormsModule,
-        RouterModule.forChild([{ path: '', component: TabProfilePage }]),
+        RouterModule.forChild([
+            { path: '', component: TabProfilePageComponent },
+        ]),
         TabProfilePageRoutingModule,
         ProfileModule,
         CenterContentModule,
     ],
-    declarations: [TabProfilePage],
+    declarations: [TabProfilePageComponent],
 })
 export class TabProfilePageModule {}

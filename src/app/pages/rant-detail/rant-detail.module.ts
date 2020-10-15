@@ -5,10 +5,10 @@ import { RantModule } from '@app/components/rant/rant.module';
 import { ContentLoadingModule } from '@app/generic/content-loading/content-loading.module';
 import { IonicModule } from '@ionic/angular';
 import { RantDetailRoutingModule } from './rant-detail-routing.module';
-import { RantDetailPage } from './rant-detail.page';
+import { RantDetailPageComponent } from './rant-detail.page';
 
 @NgModule({
-    declarations: [RantDetailPage],
+    declarations: [RantDetailPageComponent],
     imports: [
         IonicModule,
         CommonModule,

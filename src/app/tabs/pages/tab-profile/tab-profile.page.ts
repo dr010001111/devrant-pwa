@@ -7,7 +7,7 @@ import { DevRantService } from '@services/devrant.service';
     templateUrl: 'tab-profile.page.html',
     styleUrls: ['tab-profile.page.scss'],
 })
-export class TabProfilePage {
+export class TabProfilePageComponent {
     @ViewChild('username')
     username: HTMLIonInputElement;
 

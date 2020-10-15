@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { applyShadesTo, makeShades } from '@utils/color-utils';
+import debug from 'debug';
 import { SetApiRequest } from 'src/service-worker/messages';
 import { getWorker } from 'src/utils/workers';
 import * as devRant from 'ts-devrant';
-import debug from 'debug';
-import { presentGenericAlert } from 'src/utils/alert-utils';
+import { Profile } from 'ts-devrant';
 import { environment } from '../environments/environment';
 import { AppService } from './app.service';
 import { ConfigService } from './config.service';
-import { makeShades, applyShadesTo } from '@utils/color-utils';
-import { Profile } from 'ts-devrant';
 
 const log = debug('dr:service:devrant');
 
@@ -22,6 +21,9 @@ devRant.updateConfig({
     providedIn: 'root',
 })
 export class DevRantService {
+    private _token: devRant.Token = null;
+    private _profile?: devRant.Profile;
+
     worker: ServiceWorker;
 
     userIdCache: Cache;
@@ -97,10 +99,6 @@ export class DevRantService {
             quirky.present();
         }
     }
-
-    private _token: devRant.Token = null;
-
-    private _profile?: devRant.Profile;
 
     get profile(): Partial<Profile> {
         return this._profile || {};

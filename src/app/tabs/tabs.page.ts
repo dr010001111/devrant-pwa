@@ -7,7 +7,7 @@ import { NotificationService } from 'src/services/notification.service';
     templateUrl: 'tabs.page.html',
     styleUrls: ['tabs.page.scss'],
 })
-export class TabsPage {
+export class TabsPageComponent {
     @ViewChild('tabs')
     tabs: IonTabs;
 

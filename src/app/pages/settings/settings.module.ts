@@ -6,7 +6,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { SettingsPageRoutingModule } from './settings-routing.module';
 
-import { SettingsPage } from './settings.page';
+import { SettingsPageComponent } from './settings.page';
 import { InlineProfileModule } from '@app/components/inline-profile/inline-profile.module';
 
 @NgModule({
@@ -17,6 +17,6 @@ import { InlineProfileModule } from '@app/components/inline-profile/inline-profi
         SettingsPageRoutingModule,
         InlineProfileModule,
     ],
-    declarations: [SettingsPage],
+    declarations: [SettingsPageComponent],
 })
 export class SettingsPageModule {}

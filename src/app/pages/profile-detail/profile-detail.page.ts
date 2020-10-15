@@ -7,7 +7,7 @@ import { DevRantService } from '@services/devrant.service';
     templateUrl: './profile-detail.page.html',
     styleUrls: ['./profile-detail.page.scss'],
 })
-export class ProfileDetailPage implements OnInit {
+export class ProfileDetailPageComponent implements OnInit {
     params: Params;
 
     userId: string;

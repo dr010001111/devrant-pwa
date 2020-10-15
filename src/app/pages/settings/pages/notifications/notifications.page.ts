@@ -6,7 +6,7 @@ import { ActivatedRoute, Params } from '@angular/router';
     templateUrl: './notifications.page.html',
     styleUrls: ['./notifications.page.scss'],
 })
-export class NotificationsPage implements OnInit {
+export class NotificationsPageComponent implements OnInit {
     params: Params;
 
     constructor(private route: ActivatedRoute) {}

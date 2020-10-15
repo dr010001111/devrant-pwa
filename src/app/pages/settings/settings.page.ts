@@ -7,7 +7,7 @@ import { DevRantService } from '@services/devrant.service';
     templateUrl: './settings.page.html',
     styleUrls: ['./settings.page.scss'],
 })
-export class SettingsPage implements OnInit {
+export class SettingsPageComponent implements OnInit {
     params: Params;
 
     constructor(

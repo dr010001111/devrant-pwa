@@ -6,7 +6,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { AppearancePageRoutingModule } from './appearance-routing.module';
 
-import { AppearancePage } from './appearance.page';
+import { AppearancePageComponent } from './appearance.page';
 
 @NgModule({
     imports: [
@@ -15,6 +15,6 @@ import { AppearancePage } from './appearance.page';
         IonicModule,
         AppearancePageRoutingModule,
     ],
-    declarations: [AppearancePage],
+    declarations: [AppearancePageComponent],
 })
 export class AppearancePageModule {}

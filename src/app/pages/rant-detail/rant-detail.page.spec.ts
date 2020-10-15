@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RantDetailPage } from './rant-detail.page';
+import { RantDetailPageComponent } from './rant-detail.page';
 
 describe('RantDetailPage', () => {
-    let component: RantDetailPage;
-    let fixture: ComponentFixture<RantDetailPage>;
+    let component: RantDetailPageComponent;
+    let fixture: ComponentFixture<RantDetailPageComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [RantDetailPage],
+            declarations: [RantDetailPageComponent],
         }).compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(RantDetailPage);
+        fixture = TestBed.createComponent(RantDetailPageComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

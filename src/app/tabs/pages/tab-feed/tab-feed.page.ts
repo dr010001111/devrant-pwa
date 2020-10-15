@@ -9,7 +9,7 @@ import { Sort, RantInFeed } from 'ts-devrant';
     templateUrl: 'tab-feed.page.html',
     styleUrls: ['tab-feed.page.scss'],
 })
-export class TabFeedPage implements AfterViewInit {
+export class TabFeedPageComponent implements AfterViewInit {
     limit = 20;
     offset = 0;
 

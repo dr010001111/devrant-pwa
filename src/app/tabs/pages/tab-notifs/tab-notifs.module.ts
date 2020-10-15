@@ -9,7 +9,7 @@ import { ContentLoadingModule } from '@app/generic/content-loading/content-loadi
 import { IonicModule } from '@ionic/angular';
 import { NotifUserLineModule } from './notif-user-line/notif-user-line.module';
 import { TabNotifsPageRoutingModule } from './tab-notifs-routing.module';
-import { TabNotifsPage } from './tab-notifs.page';
+import { TabNotifsPageComponent } from './tab-notifs.page';
 
 @NgModule({
     imports: [
@@ -24,6 +24,6 @@ import { TabNotifsPage } from './tab-notifs.page';
         InlineProfileModule,
         NotifUserLineModule,
     ],
-    declarations: [TabNotifsPage],
+    declarations: [TabNotifsPageComponent],
 })
 export class TabNotifsPageModule {}

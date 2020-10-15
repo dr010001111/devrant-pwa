@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { RantDetailPage } from './rant-detail.page';
+import { RantDetailPageComponent } from './rant-detail.page';
 
-const routes: Routes = [{ path: ':id', component: RantDetailPage }];
+const routes: Routes = [{ path: ':id', component: RantDetailPageComponent }];
 
 @NgModule({
     imports: [RouterModule.forChild(routes)],

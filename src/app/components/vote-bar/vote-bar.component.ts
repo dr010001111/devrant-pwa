@@ -15,9 +15,9 @@ import { Comment, RantInFeed, VoteState } from 'ts-devrant';
 })
 export class VoteBarComponent implements OnInit {
     private _voteTo: RantInFeed | Comment | { [k: string]: any };
-    voteBefore: boolean = false;
+    voteBefore = false;
 
-    isLoading: boolean = true;
+    isLoading = true;
 
     @Input()
     set voteTo(value: RantInFeed | Comment | { [k: string]: any }) {

@@ -18,7 +18,7 @@ export class ProfileComponent implements OnInit {
     profile: Profile & { blocked?: boolean };
     imageUrl: string;
 
-    activeTab: string = 'rants';
+    activeTab = 'rants';
     hasErrors: boolean;
 
     constructor(

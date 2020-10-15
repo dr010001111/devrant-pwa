@@ -9,7 +9,7 @@ import { RantInFeed } from 'ts-devrant';
     templateUrl: './rant-detail.page.html',
     styleUrls: ['./rant-detail.page.scss'],
 })
-export class RantDetailPage implements OnInit, OnDestroy {
+export class RantDetailPageComponent implements OnInit, OnDestroy {
     isLoading: boolean;
     hasErrors: boolean;
 
