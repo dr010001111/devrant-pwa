@@ -12,7 +12,7 @@ export class AppearancePageComponent implements OnInit {
 
     constructor(
         private route: ActivatedRoute,
-        private readonly configService: ConfigService
+        readonly configService: ConfigService
     ) {
         console.log(this.configService.scheme);
     }
