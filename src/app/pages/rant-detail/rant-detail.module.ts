@@ -7,16 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { RantDetailRoutingModule } from './rant-detail-routing.module';
 import { RantDetailPage } from './rant-detail.page';
 
-
 @NgModule({
-  declarations: [RantDetailPage],
-  imports: [
-    IonicModule,
-    CommonModule,
-    RantModule,
-    RantCommentModule,
-    RantDetailRoutingModule,
-    ContentLoadingModule,
-  ]
+    declarations: [RantDetailPage],
+    imports: [
+        IonicModule,
+        CommonModule,
+        RantModule,
+        RantCommentModule,
+        RantDetailRoutingModule,
+        ContentLoadingModule,
+    ],
 })
-export class RantDetailModule { }
+export class RantDetailModule {}

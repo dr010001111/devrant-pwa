@@ -4,13 +4,13 @@ export function hexToRGB(hex) {
         g: any = 0,
         b: any = 0;
     if (hex.length == 4) {
-        r = "0x" + hex[1] + hex[1];
-        g = "0x" + hex[2] + hex[2];
-        b = "0x" + hex[3] + hex[3];
+        r = '0x' + hex[1] + hex[1];
+        g = '0x' + hex[2] + hex[2];
+        b = '0x' + hex[3] + hex[3];
     } else if (hex.length == 7) {
-        r = "0x" + hex[1] + hex[2];
-        g = "0x" + hex[3] + hex[4];
-        b = "0x" + hex[5] + hex[6];
+        r = '0x' + hex[1] + hex[2];
+        g = '0x' + hex[3] + hex[4];
+        b = '0x' + hex[5] + hex[6];
     }
     // Then to HSL
     r /= 255;
@@ -56,26 +56,26 @@ export function hexToHSL(hex) {
 }
 
 export function renderHex(hsl: { h: any; s: any; l: any }) {
-    return "hsl(" + hsl.h + "," + hsl.s + "%," + hsl.l + "%)";
+    return 'hsl(' + hsl.h + ',' + hsl.s + '%,' + hsl.l + '%)';
 }
 
 export function renderContrast(hex) {
     const { r, g, b } = hexToRGB(hex);
     var yiq = (r * 299 + g * 587 + b * 114) / 1000;
-    return yiq >= 128 ? "black" : "white";
+    return yiq >= 128 ? 'black' : 'white';
 }
 
 export function makeShades(hexBase?: string) {
     if (!hexBase) {
         return {
-            base: "",
-            tint: "",
-            shade: "",
-            contrast: "",
+            base: '',
+            tint: '',
+            shade: '',
+            contrast: '',
         };
     }
 
-    const hex = hexBase.startsWith("#") ? hexBase : `#${hexBase}`;
+    const hex = hexBase.startsWith('#') ? hexBase : `#${hexBase}`;
     const hsl = hexToHSL(hex);
 
     const lightChange = 12;
@@ -98,8 +98,8 @@ export function makeShades(hexBase?: string) {
 }
 
 export function applyShadesTo(target: HTMLElement, shades) {
-    target.style.setProperty("--theme", shades.base);
-    target.style.setProperty("--theme-tint", shades.tint);
-    target.style.setProperty("--theme-shade", shades.shade);
-    target.style.setProperty("--theme-contrast", shades.contrast);
+    target.style.setProperty('--theme', shades.base);
+    target.style.setProperty('--theme-tint', shades.tint);
+    target.style.setProperty('--theme-shade', shades.shade);
+    target.style.setProperty('--theme-contrast', shades.contrast);
 }

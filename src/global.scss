@@ -10,76 +10,76 @@
  */
 
 /* Core CSS required for Ionic components to work properly */
-@import "~@ionic/angular/css/core.css";
+@import '~@ionic/angular/css/core.css';
 
 /* Basic CSS for apps built with Ionic */
-@import "~@ionic/angular/css/normalize.css";
-@import "~@ionic/angular/css/structure.css";
-@import "~@ionic/angular/css/typography.css";
-@import "~@ionic/angular/css/display.css";
+@import '~@ionic/angular/css/normalize.css';
+@import '~@ionic/angular/css/structure.css';
+@import '~@ionic/angular/css/typography.css';
+@import '~@ionic/angular/css/display.css';
 
 /* Optional CSS utils that can be commented out */
-@import "~@ionic/angular/css/padding.css";
-@import "~@ionic/angular/css/float-elements.css";
-@import "~@ionic/angular/css/text-alignment.css";
-@import "~@ionic/angular/css/text-transformation.css";
-@import "~@ionic/angular/css/flex-utils.css";
+@import '~@ionic/angular/css/padding.css';
+@import '~@ionic/angular/css/float-elements.css';
+@import '~@ionic/angular/css/text-alignment.css';
+@import '~@ionic/angular/css/text-transformation.css';
+@import '~@ionic/angular/css/flex-utils.css';
 
 :root body {
-  --ion-color-primary: var(--theme) !important;
-  --ion-color-primary-tint: var(--theme-tint) !important;
-  --ion-color-primary-shade: var(--theme-shade) !important;
-  --ion-color-primary-contrast: var(--theme-contrast) !important;
+    --ion-color-primary: var(--theme) !important;
+    --ion-color-primary-tint: var(--theme-tint) !important;
+    --ion-color-primary-shade: var(--theme-shade) !important;
+    --ion-color-primary-contrast: var(--theme-contrast) !important;
 }
 
 app-inline-profile,
 app-notif-user-line {
-  .image,
-  img {
-    border-radius: 0 !important;
-    position: relative;
+    .image,
+    img {
+        border-radius: 0 !important;
+        position: relative;
 
-    &::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+        &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
 
-      box-shadow: inset -1px -1px #fff, inset 1px 1px grey,
-        inset -2px -2px #dfdfdf, inset 2px 2px #0a0a0a;
+            box-shadow: inset -1px -1px #fff, inset 1px 1px grey,
+                inset -2px -2px #dfdfdf, inset 2px 2px #0a0a0a;
+        }
     }
-  }
 }
 
 img {
-  image-rendering: pixelated;
-  filter: blur(4px)
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='b' x='0' y='0'%3E%3CfeFlood x='4' y='4' height='2' width='2'/%3E%3CfeComposite width='10' height='10'/%3E%3CfeTile result='a'/%3E%3CfeComposite in='SourceGraphic' in2='a' operator='in'/%3E%3CfeMorphology operator='dilate' radius='1'/%3E%3C/filter%3E%3C/svg%3E#b")
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='b' x='0' y='0'%3E%3CfeFlood x='4' y='4' height='2' width='2'/%3E%3CfeComposite width='10' height='10'/%3E%3CfeTile result='a'/%3E%3CfeComposite in='SourceGraphic' in2='a' operator='in'/%3E%3CfeMorphology operator='dilate' radius='1'/%3E%3C/filter%3E%3C/svg%3E#b")
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='b' x='0' y='0'%3E%3CfeFlood x='4' y='4' height='2' width='2'/%3E%3CfeComposite width='10' height='10'/%3E%3CfeTile result='a'/%3E%3CfeComposite in='SourceGraphic' in2='a' operator='in'/%3E%3CfeMorphology operator='dilate' radius='1'/%3E%3C/filter%3E%3C/svg%3E#b")
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='b' x='0' y='0'%3E%3CfeFlood x='4' y='4' height='2' width='2'/%3E%3CfeComposite width='10' height='10'/%3E%3CfeTile result='a'/%3E%3CfeComposite in='SourceGraphic' in2='a' operator='in'/%3E%3CfeMorphology operator='dilate' radius='1'/%3E%3C/filter%3E%3C/svg%3E#b");
+    image-rendering: pixelated;
+    filter: blur(4px)
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='b' x='0' y='0'%3E%3CfeFlood x='4' y='4' height='2' width='2'/%3E%3CfeComposite width='10' height='10'/%3E%3CfeTile result='a'/%3E%3CfeComposite in='SourceGraphic' in2='a' operator='in'/%3E%3CfeMorphology operator='dilate' radius='1'/%3E%3C/filter%3E%3C/svg%3E#b")
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='b' x='0' y='0'%3E%3CfeFlood x='4' y='4' height='2' width='2'/%3E%3CfeComposite width='10' height='10'/%3E%3CfeTile result='a'/%3E%3CfeComposite in='SourceGraphic' in2='a' operator='in'/%3E%3CfeMorphology operator='dilate' radius='1'/%3E%3C/filter%3E%3C/svg%3E#b")
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='b' x='0' y='0'%3E%3CfeFlood x='4' y='4' height='2' width='2'/%3E%3CfeComposite width='10' height='10'/%3E%3CfeTile result='a'/%3E%3CfeComposite in='SourceGraphic' in2='a' operator='in'/%3E%3CfeMorphology operator='dilate' radius='1'/%3E%3C/filter%3E%3C/svg%3E#b")
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='b' x='0' y='0'%3E%3CfeFlood x='4' y='4' height='2' width='2'/%3E%3CfeComposite width='10' height='10'/%3E%3CfeTile result='a'/%3E%3CfeComposite in='SourceGraphic' in2='a' operator='in'/%3E%3CfeMorphology operator='dilate' radius='1'/%3E%3C/filter%3E%3C/svg%3E#b");
 }
 
 :focus {
-  outline: 0 transparent;
+    outline: 0 transparent;
 }
 
 .using-keyboard :focus {
-  outline-color: var(--ion-color-primary);
-  outline-style: solid;
-  outline-offset: -1px;
-  outline-width: 3px;
+    outline-color: var(--ion-color-primary);
+    outline-style: solid;
+    outline-offset: -1px;
+    outline-width: 3px;
 }
 
 ul,
 ol {
-  padding-left: 2ch;
+    padding-left: 2ch;
 }
 
 ion-badge {
-  --padding-top: var(--padding-bottom);
-  --background: var(--theme-shade);
-  --color: var(--theme-contrast);
+    --padding-top: var(--padding-bottom);
+    --background: var(--theme-shade);
+    --color: var(--theme-contrast);
 }

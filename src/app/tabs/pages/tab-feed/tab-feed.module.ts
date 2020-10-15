@@ -7,16 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { TabFeedPageRoutingModule } from './tab-feed-routing.module';
 import { TabFeedPage } from './tab-feed.page';
 
-
 @NgModule({
-  imports: [
-    IonicModule,
-    CommonModule,
-    FormsModule,
-    TabFeedPageRoutingModule,
-    RantModule,
-    CenterContentModule,
-  ],
-  declarations: [TabFeedPage]
+    imports: [
+        IonicModule,
+        CommonModule,
+        FormsModule,
+        TabFeedPageRoutingModule,
+        RantModule,
+        CenterContentModule,
+    ],
+    declarations: [TabFeedPage],
 })
-export class TabFeedPageModule { }
+export class TabFeedPageModule {}

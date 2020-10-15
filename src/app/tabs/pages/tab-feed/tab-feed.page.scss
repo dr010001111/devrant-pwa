@@ -1,49 +1,49 @@
 .app-info {
-  position: absolute;
-  z-index: 11;
+    position: absolute;
+    z-index: 11;
 
-  right: 0;
-  bottom: 0;
+    right: 0;
+    bottom: 0;
 
-  opacity: 0.2;
-  padding: 1ch;
+    opacity: 0.2;
+    padding: 1ch;
 
-  font-size: 10px;
-  font-family: monospace;
-  pointer-events: none;
+    font-size: 10px;
+    font-family: monospace;
+    pointer-events: none;
 }
 
 .unofficial {
-  font-weight: 400;
-  opacity: 0.3;
+    font-weight: 400;
+    opacity: 0.3;
 }
 
 ion-infinite-scroll {
-  margin-top: 32px;
+    margin-top: 32px;
 }
 
 ion-segment {
-  z-index: 2;
+    z-index: 2;
 
-  &.md {
-    position: sticky;
-    top: 0;
+    &.md {
+        position: sticky;
+        top: 0;
 
-    --background: var(--ion-background-color);
-  }
-
-  &.ios {
-    position: absolute;
-    min-height: 40px;
-    bottom: 20px;
-    width: 80%;
-    left: 10%;
-
-    backdrop-filter: blur(20px) contrast(0.5);
-    box-shadow: 0 0 5px -3px black;
-
-    @media (prefers-color-scheme: dark) {
-      backdrop-filter: blur(20px) brightness(0.3);
+        --background: var(--ion-background-color);
     }
-  }
+
+    &.ios {
+        position: absolute;
+        min-height: 40px;
+        bottom: 20px;
+        width: 80%;
+        left: 10%;
+
+        backdrop-filter: blur(20px) contrast(0.5);
+        box-shadow: 0 0 5px -3px black;
+
+        @media (prefers-color-scheme: dark) {
+            backdrop-filter: blur(20px) brightness(0.3);
+        }
+    }
 }

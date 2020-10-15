@@ -6,82 +6,85 @@ import { Subscription } from 'rxjs';
 import { RantInFeed } from 'ts-devrant';
 
 @Component({
-  templateUrl: './rant-detail.page.html',
-  styleUrls: ['./rant-detail.page.scss']
+    templateUrl: './rant-detail.page.html',
+    styleUrls: ['./rant-detail.page.scss'],
 })
 export class RantDetailPage implements OnInit, OnDestroy {
-  isLoading: boolean;
-  hasErrors: boolean;
+    isLoading: boolean;
+    hasErrors: boolean;
 
-  routeSub: Subscription;
+    routeSub: Subscription;
 
-  rant: RantInFeed;
-  comments: any[];
-  highlightComment: string;
+    rant: RantInFeed;
+    comments: any[];
+    highlightComment: string;
 
-  @ViewChild('content', { static: false })
-  content: HTMLIonContentElement;
+    @ViewChild('content', { static: false })
+    content: HTMLIonContentElement;
 
-  constructor(
-    private readonly service: DevRantService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private _location: Location
-  ) {
+    constructor(
+        private readonly service: DevRantService,
+        private route: ActivatedRoute,
+        private router: Router,
+        private _location: Location
+    ) {
+        this.router.events.subscribe((ev) => {
+            if (ev instanceof Scroll) {
+                this.highlightComment = ev.anchor;
+                this.scrollToComment();
+            }
+        });
+    }
 
-    this.router.events.subscribe(
-      ev => {
-        if (ev instanceof Scroll) {
-          this.highlightComment = ev.anchor;
-          this.scrollToComment()
-        }
-      });
-  }
+    async doRefresh(event: CustomEvent) {
+        await this.fetchRant(this.rant.id);
+        (event.target as HTMLIonRefresherElement).complete();
+    }
 
-  async doRefresh(event: CustomEvent) {
-    await this.fetchRant(this.rant.id);
-    (event.target as HTMLIonRefresherElement).complete()
-  }
+    async ngOnInit() {
+        this.routeSub = this.route.params.subscribe(async (params) => {
+            this.isLoading = true;
+            const rantId = params['id'];
 
-  async ngOnInit() {
-    this.routeSub = this.route.params.subscribe(async params => {
-      this.isLoading = true;
-      const rantId = params["id"];
+            await this.fetchRant(rantId);
+            this.isLoading = false;
+        });
+    }
 
-      await this.fetchRant(rantId);
-      this.isLoading = false;
-    });
-  }
-
-  scrollToComment() {
-    setTimeout(() => {
-      const targetComment = document.getElementById(`comment-${this.highlightComment}`)
-
-      if (targetComment) {
+    scrollToComment() {
         setTimeout(() => {
-          const elBounds = targetComment.getBoundingClientRect();
-          targetComment.classList.add('highlight')
-          this.content.scrollToPoint(elBounds.left, elBounds.top - 100, 400)
-        }, 200)
-      }
-    }, 100)
-  }
+            const targetComment = document.getElementById(
+                `comment-${this.highlightComment}`
+            );
 
-  async fetchRant(rantId: number) {
-    const response = await this.service.getRant(rantId)
+            if (targetComment) {
+                setTimeout(() => {
+                    const elBounds = targetComment.getBoundingClientRect();
+                    targetComment.classList.add('highlight');
+                    this.content.scrollToPoint(
+                        elBounds.left,
+                        elBounds.top - 100,
+                        400
+                    );
+                }, 200);
+            }
+        }, 100);
+    }
 
-    this.comments = response.comments;
-    this.rant = response.rant;
+    async fetchRant(rantId: number) {
+        const response = await this.service.getRant(rantId);
 
-    this.scrollToComment();
-  }
+        this.comments = response.comments;
+        this.rant = response.rant;
 
-  back() {
-    this._location.back();
-  }
+        this.scrollToComment();
+    }
 
-  ngOnDestroy() {
-    this.routeSub.unsubscribe();
-  }
+    back() {
+        this._location.back();
+    }
 
+    ngOnDestroy() {
+        this.routeSub.unsubscribe();
+    }
 }

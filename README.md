@@ -5,13 +5,14 @@
 THIS PROJECT IS MAINTED BY THE COMMUNITY AND **NOT** OFFICIALY SUPPORTED BY DEVRANT.
 
 A few of them are as following:
-- No more random crashes
-- Accesabillity
-- Usability
-- Load times
-- Identical feature sets on all platforms
-- Respect to the operating system while maintaining devRant's unique Branding
-- Extensive options for customization (additional themes)
+
+-   No more random crashes
+-   Accesabillity
+-   Usability
+-   Load times
+-   Identical feature sets on all platforms
+-   Respect to the operating system while maintaining devRant's unique Branding
+-   Extensive options for customization (additional themes)
 
 ![](./readme_assets/iphone_preview_profile.png)
 ![](./readme_assets/ipad_preview_feed.png)
@@ -76,12 +77,14 @@ Found something? Then please also check out our [contribution details](CONTRIBUT
 
 ## References
 
-- [ts-devrant](https://www.npmjs.com/package/ts-devrant)
-- [devRant-SwiftUI](https://github.com/OmerFlame/devRantSwiftUI)
-- [devRant API](https://devrantapi.docs.apiary.io/)
---- 
-- [Ionic Docs](https://ionicframework.com/docs)
-- [Angular Docs](https://devdocs.io/angular/)
+-   [ts-devrant](https://www.npmjs.com/package/ts-devrant)
+-   [devRant-SwiftUI](https://github.com/OmerFlame/devRantSwiftUI)
+-   [devRant API](https://devrantapi.docs.apiary.io/)
+
+---
+
+-   [Ionic Docs](https://ionicframework.com/docs)
+-   [Angular Docs](https://devdocs.io/angular/)
 
 ---
 

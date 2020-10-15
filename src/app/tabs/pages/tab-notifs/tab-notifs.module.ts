@@ -11,20 +11,19 @@ import { NotifUserLineModule } from './notif-user-line/notif-user-line.module';
 import { TabNotifsPageRoutingModule } from './tab-notifs-routing.module';
 import { TabNotifsPage } from './tab-notifs.page';
 
-
 @NgModule({
-  imports: [
-    IonicModule,
-    CommonModule,
-    FormsModule,
-    TabNotifsPageRoutingModule,
-    RantModule,
-    RantCommentModule,
-    CenterContentModule,
-    ContentLoadingModule,
-    InlineProfileModule,
-    NotifUserLineModule
-  ],
-  declarations: [TabNotifsPage]
+    imports: [
+        IonicModule,
+        CommonModule,
+        FormsModule,
+        TabNotifsPageRoutingModule,
+        RantModule,
+        RantCommentModule,
+        CenterContentModule,
+        ContentLoadingModule,
+        InlineProfileModule,
+        NotifUserLineModule,
+    ],
+    declarations: [TabNotifsPage],
 })
-export class TabNotifsPageModule { }
+export class TabNotifsPageModule {}

@@ -1,10 +1,12 @@
-<span class="image" style.--color="#{{user.avatar.b}}">
+<span class="image" style.--color="#{{ user.avatar.b }}">
     <img [src]="imageUrl(user.avatar.i)" onerror="this.className = 'broken'" />
 </span>
 <div class="line">
-    <span class="username" routerLink="/user/{{user.id}}">{{user.name}}</span>
+    <span class="username" routerLink="/user/{{ user.id }}">{{
+        user.name
+    }}</span>
     <span class="slot">
         <ng-content></ng-content>
     </span>
 </div>
-<span class="created" *ngIf="humanReadableTime">{{humanReadableTime}}</span>
+<span class="created" *ngIf="humanReadableTime">{{ humanReadableTime }}</span>

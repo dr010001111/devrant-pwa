@@ -7,14 +7,14 @@ import { VoteBarModule } from '../vote-bar/vote-bar.module';
 import { RantComponent } from './rant.component';
 
 @NgModule({
-  declarations: [RantComponent],
-  imports: [
-    IonicModule,
-    CommonModule,
-    VoteBarModule,
-    InlineProfileModule,
-    RenderContentModule
-  ],
-  exports: [RantComponent],
+    declarations: [RantComponent],
+    imports: [
+        IonicModule,
+        CommonModule,
+        VoteBarModule,
+        InlineProfileModule,
+        RenderContentModule,
+    ],
+    exports: [RantComponent],
 })
-export class RantModule { }
+export class RantModule {}

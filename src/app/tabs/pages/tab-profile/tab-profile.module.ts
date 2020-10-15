@@ -9,17 +9,16 @@ import { IonicModule } from '@ionic/angular';
 import { TabProfilePageRoutingModule } from './tab-profile-routing.module';
 import { TabProfilePage } from './tab-profile.page';
 
-
 @NgModule({
-  imports: [
-    IonicModule,
-    CommonModule,
-    FormsModule,
-    RouterModule.forChild([{ path: '', component: TabProfilePage }]),
-    TabProfilePageRoutingModule,
-    ProfileModule,
-    CenterContentModule
-  ],
-  declarations: [TabProfilePage],
+    imports: [
+        IonicModule,
+        CommonModule,
+        FormsModule,
+        RouterModule.forChild([{ path: '', component: TabProfilePage }]),
+        TabProfilePageRoutingModule,
+        ProfileModule,
+        CenterContentModule,
+    ],
+    declarations: [TabProfilePage],
 })
-export class TabProfilePageModule { }
+export class TabProfilePageModule {}

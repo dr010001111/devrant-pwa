@@ -1,72 +1,72 @@
-@import "themes/all";
+@import 'themes/all';
 
 @media (prefers-color-scheme: light) {
-  html {
-    @include light-theme;
-  }
+    html {
+        @include light-theme;
+    }
 }
 
 @media (prefers-color-scheme: dark) {
-  html {
-    @include dark-theme;
-  }
+    html {
+        @include dark-theme;
+    }
 }
 
 %black-base {
-  @include dark-theme;
+    @include dark-theme;
 }
 
 html.black {
-  @extend %black-base;
+    @extend %black-base;
 }
 
 html.dark {
-  @extend %black-base;
+    @extend %black-base;
 
-  &.ios,
-  &.md {
-    body {
-      $blue: #5c5c78;
-      $blue-medium: #40415a;
-      $blue-dark: #2f2f41;
-      $blue-black: #202029;
+    &.ios,
+    &.md {
+        body {
+            $blue: #5c5c78;
+            $blue-medium: #40415a;
+            $blue-dark: #2f2f41;
+            $blue-black: #202029;
 
-      --ion-background-color: #{$blue-medium};
+            --ion-background-color: #{$blue-medium};
 
-      --ion-border-color: #{mix($blue-dark, $blue-medium)};
+            --ion-border-color: #{mix($blue-dark, $blue-medium)};
 
-      --ion-item-background: #{$blue-dark};
+            --ion-item-background: #{$blue-dark};
 
-      --ion-toolbar-background: #{$blue-black};
+            --ion-toolbar-background: #{$blue-black};
 
-      --ion-tab-bar-background: #{$blue-black};
+            --ion-tab-bar-background: #{$blue-black};
 
-      $hue: hue($blue-dark);
-      $sat: saturation($blue-dark);
+            $hue: hue($blue-dark);
+            $sat: saturation($blue-dark);
 
-      --ion-color-step-50: #{hsl($hue, $sat, 5%)};
-      --ion-color-step-100: #{hsl($hue, $sat, 10%)};
-      --ion-color-step-150: #{hsl($hue, $sat, 15%)};
-      --ion-color-step-200: #{hsl($hue, $sat, 20%)};
-      --ion-color-step-250: #{hsl($hue, $sat, 25%)};
-      --ion-color-step-300: #{hsl($hue, $sat, 30%)};
-      --ion-color-step-350: #{hsl($hue, $sat, 35%)};
-      --ion-color-step-400: #{hsl($hue, $sat, 40%)};
-      --ion-color-step-450: #{hsl($hue, $sat, 45%)};
-      --ion-color-step-500: #{hsl($hue, $sat, 50%)};
-      --ion-color-step-550: #{hsl($hue, $sat, 55%)};
-      --ion-color-step-600: #{hsl($hue, $sat, 60%)};
-      --ion-color-step-650: #{hsl($hue, $sat, 65%)};
-      --ion-color-step-700: #{hsl($hue, $sat, 70%)};
-      --ion-color-step-750: #{hsl($hue, $sat, 75%)};
-      --ion-color-step-800: #{hsl($hue, $sat, 80%)};
-      --ion-color-step-850: #{hsl($hue, $sat, 85%)};
-      --ion-color-step-900: #{hsl($hue, $sat, 90%)};
-      --ion-color-step-950: #{hsl($hue, $sat, 95%)};
+            --ion-color-step-50: #{hsl($hue, $sat, 5%)};
+            --ion-color-step-100: #{hsl($hue, $sat, 10%)};
+            --ion-color-step-150: #{hsl($hue, $sat, 15%)};
+            --ion-color-step-200: #{hsl($hue, $sat, 20%)};
+            --ion-color-step-250: #{hsl($hue, $sat, 25%)};
+            --ion-color-step-300: #{hsl($hue, $sat, 30%)};
+            --ion-color-step-350: #{hsl($hue, $sat, 35%)};
+            --ion-color-step-400: #{hsl($hue, $sat, 40%)};
+            --ion-color-step-450: #{hsl($hue, $sat, 45%)};
+            --ion-color-step-500: #{hsl($hue, $sat, 50%)};
+            --ion-color-step-550: #{hsl($hue, $sat, 55%)};
+            --ion-color-step-600: #{hsl($hue, $sat, 60%)};
+            --ion-color-step-650: #{hsl($hue, $sat, 65%)};
+            --ion-color-step-700: #{hsl($hue, $sat, 70%)};
+            --ion-color-step-750: #{hsl($hue, $sat, 75%)};
+            --ion-color-step-800: #{hsl($hue, $sat, 80%)};
+            --ion-color-step-850: #{hsl($hue, $sat, 85%)};
+            --ion-color-step-900: #{hsl($hue, $sat, 90%)};
+            --ion-color-step-950: #{hsl($hue, $sat, 95%)};
+        }
     }
-  }
 }
 
 html.light {
-  @include light-theme;
+    @include light-theme;
 }

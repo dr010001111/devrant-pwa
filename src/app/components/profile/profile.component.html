@@ -15,38 +15,58 @@
         </ion-item>
 
         <div class="span image-container">
-            <img src="{{imageUrl}}" width="1400" height="1400" />
+            <img src="{{ imageUrl }}" width="1400" height="1400" />
             <div class="account-details">
-                <ion-title>{{profile.username}}</ion-title>
-                <span class="score">{{profile.score}}</span>
+                <ion-title>{{ profile.username }}</ion-title>
+                <span class="score">{{ profile.score }}</span>
                 <span class="dpp" *ngIf="profile.dpp">++</span>
             </div>
         </div>
 
         <div class="stats-bar-container">
             <div class="stats-bar">
-                <div routerLink="." [class.is-active]="this.activeTab === 'rants'" fragment="rants" class="stat"
-                    *ngIf="profile.content.counts.rants">
-                    <span>{{profile.content.counts.rants}}</span>
+                <div
+                    routerLink="."
+                    [class.is-active]="this.activeTab === 'rants'"
+                    fragment="rants"
+                    class="stat"
+                    *ngIf="profile.content.counts.rants"
+                >
+                    <span>{{ profile.content.counts.rants }}</span>
                     <span class="stat-label">Rants</span>
                 </div>
-                <div routerLink="." [class.is-active]="this.activeTab === 'upvoted'" fragment="upvoted" class="stat"
-                    *ngIf="profile.content.counts.upvoted">
-                    <span>{{profile.content.counts.upvoted}}</span>
+                <div
+                    routerLink="."
+                    [class.is-active]="this.activeTab === 'upvoted'"
+                    fragment="upvoted"
+                    class="stat"
+                    *ngIf="profile.content.counts.upvoted"
+                >
+                    <span>{{ profile.content.counts.upvoted }}</span>
                     <span class="stat-label">Upvoted</span>
                 </div>
-                <div routerLink="." [class.is-active]="this.activeTab === 'comments'" fragment="comments" class="stat"
-                    *ngIf="profile.content.counts.comments">
-                    <span>{{profile.content.counts.comments}}</span>
+                <div
+                    routerLink="."
+                    [class.is-active]="this.activeTab === 'comments'"
+                    fragment="comments"
+                    class="stat"
+                    *ngIf="profile.content.counts.comments"
+                >
+                    <span>{{ profile.content.counts.comments }}</span>
                     <span class="stat-label">Comments</span>
                 </div>
                 <div class="stat" *ngIf="profile.content.counts.collabs">
-                    <span>{{profile.content.counts.collabs}}</span>
+                    <span>{{ profile.content.counts.collabs }}</span>
                     <span class="stat-label">Collabs</span>
                 </div>
-                <div routerLink="." [class.is-active]="this.activeTab === 'favorites'" fragment="favorites" class="stat"
-                    *ngIf="profile.content.counts.favorites">
-                    <span>{{profile.content.counts.favorites}}</span>
+                <div
+                    routerLink="."
+                    [class.is-active]="this.activeTab === 'favorites'"
+                    fragment="favorites"
+                    class="stat"
+                    *ngIf="profile.content.counts.favorites"
+                >
+                    <span>{{ profile.content.counts.favorites }}</span>
                     <span class="stat-label">Favorites</span>
                 </div>
             </div>
@@ -57,34 +77,50 @@
                 <ion-item *ngFor="let rant of profile.content.content.rants">
                     <app-rant [rant]="rant"></app-rant>
                 </ion-item>
-                <ion-item class="maybe-more" disabled *ngIf="profile.content.content.rants">There may be more, but not
-                    here.
+                <ion-item
+                    class="maybe-more"
+                    disabled
+                    *ngIf="profile.content.content.rants"
+                    >There may be more, but not here.
                 </ion-item>
             </ng-container>
             <ng-container *ngSwitchCase="'upvoted'">
                 <ion-item *ngFor="let rant of profile.content.content.upvoted">
                     <app-rant [rant]="rant"></app-rant>
                 </ion-item>
-                <ion-item class="maybe-more" disabled *ngIf="profile.content.content.upvoted">There may be more, but not
-                    here.</ion-item>
+                <ion-item
+                    class="maybe-more"
+                    disabled
+                    *ngIf="profile.content.content.upvoted"
+                    >There may be more, but not here.</ion-item
+                >
             </ng-container>
             <ng-container *ngSwitchCase="'comments'">
-                <ion-item *ngFor="let comment of profile.content.content.comments">
+                <ion-item
+                    *ngFor="let comment of profile.content.content.comments"
+                >
                     <app-rant-comment [comment]="comment"></app-rant-comment>
                 </ion-item>
-                <ion-item class="maybe-more" disabled *ngIf="profile.content.content.comments">There may be more, but
-                    not
-                    here.</ion-item>
+                <ion-item
+                    class="maybe-more"
+                    disabled
+                    *ngIf="profile.content.content.comments"
+                    >There may be more, but not here.</ion-item
+                >
             </ng-container>
             <ng-container *ngSwitchCase="'favorites'">
-                <ion-item *ngFor="let rant of profile.content.content.favorites">
+                <ion-item
+                    *ngFor="let rant of profile.content.content.favorites"
+                >
                     <app-rant [rant]="rant"></app-rant>
                 </ion-item>
-                <ion-item class="maybe-more" disabled *ngIf="profile.content.content.favorites">There may be more, but
-                    not
-                    here.</ion-item>
+                <ion-item
+                    class="maybe-more"
+                    disabled
+                    *ngIf="profile.content.content.favorites"
+                    >There may be more, but not here.</ion-item
+                >
             </ng-container>
         </div>
     </div>
-
 </ion-content>

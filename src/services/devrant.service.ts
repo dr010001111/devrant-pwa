@@ -15,247 +15,268 @@ import { Profile } from 'ts-devrant';
 const log = debug('dr:service:devrant');
 
 devRant.updateConfig({
-  "api": environment.apiURL,
-})
+    api: environment.apiURL,
+});
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root',
 })
 export class DevRantService {
-  worker: ServiceWorker;
+    worker: ServiceWorker;
 
-  userIdCache: Cache;
-  activeUserIdQueue = {};
+    userIdCache: Cache;
+    activeUserIdQueue = {};
 
-  async getUserIdByName(username) {
-    const hitCache = await this.userIdCache.match(username)
-    const inActiveQueue = this.activeUserIdQueue[username]
+    async getUserIdByName(username) {
+        const hitCache = await this.userIdCache.match(username);
+        const inActiveQueue = this.activeUserIdQueue[username];
 
-    if (inActiveQueue) {
-      return inActiveQueue
+        if (inActiveQueue) {
+            return inActiveQueue;
+        }
+
+        if (hitCache) {
+            return hitCache.json();
+        } else {
+            const idPromise = devRant.getIdByUsername(username);
+            this.activeUserIdQueue[username] = idPromise;
+
+            const idResponse = await idPromise;
+
+            delete this.activeUserIdQueue[username];
+
+            const idCachableResponse = new Response(
+                JSON.stringify(idResponse)
+            );
+            this.userIdCache.put(username, idCachableResponse);
+
+            return idResponse;
+        }
     }
 
-    if (hitCache) {
-      return hitCache.json()
-    } else {
-      const idPromise = devRant.getIdByUsername(username);
-      this.activeUserIdQueue[username] = idPromise;
+    async validateNotifications() {
+        if (!this.isSignedIn) {
+            return;
+        }
 
-      const idResponse = await idPromise
+        if (Notification.permission === 'default') {
+            const alert = await this.alert.create({
+                header: 'Notifications',
+                subHeader:
+                    'To keep you updated, we need you to allow notifications.',
+                message: 'We will only push notifications related to devRant.',
+                buttons: [
+                    'Ask me later',
+                    {
+                        text: 'Sure!',
+                        handler: () => this.requestNotifications(),
+                    },
+                ],
+            });
 
-      delete this.activeUserIdQueue[username]
-
-      const idCachableResponse = new Response(JSON.stringify(idResponse));
-      this.userIdCache.put(username, idCachableResponse)
-
-      return idResponse
-    }
-  }
-
-  async validateNotifications() {
-    if (!this.isSignedIn) {
-      return;
-    }
-
-    if (Notification.permission === 'default') {
-      const alert = await this.alert.create({
-        header: 'Notifications',
-        subHeader: "To keep you updated, we need you to allow notifications.",
-        message: "We will only push notifications related to devRant.",
-        buttons: [
-          "Ask me later",
-          {
-            text: "Sure!",
-            handler: () => this.requestNotifications()
-          }
-        ]
-      })
-
-      alert.present();
-    }
-  }
-
-  async requestNotifications() {
-    const confirmed = await Notification.requestPermission()
-    if (confirmed === "granted") {
-      const notification = new Notification("Thanks for confirming!", {
-        body: "This is how a notification could look like.",
-        icon: '/assets/icons/icon-128x128.png'
-      })
-    } else if (confirmed === "denied") {
-      const quirky = await this.alert.create({
-        header: "Bipolar feelings?",
-        subHeader: "We won't ask you again",
-        message: "If you changed your mind, you can change this in your browser settings.",
-        buttons: ["OK"]
-      })
-
-      quirky.present()
-    }
-  }
-
-  private _token: devRant.Token = null;
-
-  private _profile?: devRant.Profile;
-
-  get profile(): Partial<Profile> {
-    return this._profile || {};
-  }
-
-  get profileColor() {
-    if (this.profile) {
-      return `#${this.profile.avatar.b}`;
+            alert.present();
+        }
     }
 
-    return null
-  }
+    async requestNotifications() {
+        const confirmed = await Notification.requestPermission();
+        if (confirmed === 'granted') {
+            const notification = new Notification('Thanks for confirming!', {
+                body: 'This is how a notification could look like.',
+                icon: '/assets/icons/icon-128x128.png',
+            });
+        } else if (confirmed === 'denied') {
+            const quirky = await this.alert.create({
+                header: 'Bipolar feelings?',
+                subHeader: "We won't ask you again",
+                message:
+                    'If you changed your mind, you can change this in your browser settings.',
+                buttons: ['OK'],
+            });
 
-  constructor(
-    private appService: AppService,
-    private configService: ConfigService,
-    private alert: AlertController,
-    private router: Router
-  ) {
-    log('init');
-    this.setupService();
-    log('connector', devRant)
-  }
-
-  async setupService() {
-    const token = JSON.parse(localStorage.getItem('token'))
-    await this.setupWorker()
-
-    this.userIdCache = await caches.open('username-id-map');
-
-    if (token) {
-      this.token = token;
-    }
-  }
-
-  async setupWorker() {
-    this.worker = await getWorker()
-    this.worker.postMessage({
-      type: 'setAPI',
-      apiURL: environment.apiURL
-    } as SetApiRequest)
-
-    log('worker setup')
-  }
-
-  set token(newToken: devRant.Token) {
-    this._token = newToken
-    localStorage.setItem('token', JSON.stringify(newToken || null))
-
-    this.worker.postMessage({
-      type: 'newToken',
-      token: this.token
-    });
-
-    this.getProfile();
-    this.validateNotifications();
-  }
-
-  get token() {
-    return this._token
-  }
-
-  profileUpdated() {
-    const ev = new CustomEvent('profile-updated');
-    window.dispatchEvent(ev);
-
-    this.updateBrowserTheme()
-  }
-
-  updateBrowserTheme() {
-    const theme = document.head.querySelector('meta[theme-color]')
-    if (theme) {
-      theme.setAttribute('content', this.profileColor)
+            quirky.present();
+        }
     }
 
-    const shades = makeShades(this.profileColor);
-    applyShadesTo(document.body, shades)
-  }
+    private _token: devRant.Token = null;
 
-  async getProfile(userId?: string, content?: string, skip?: number) {
-    // we need to have a token AND the SAME userId as in the token OR no id and we use the id in the token.
-    if (!this.token || !userId || (userId === String(this.token.user_id))) {
-      const request = this.lazyUpdateLoggedInProfile(content, skip);
+    private _profile?: devRant.Profile;
 
-      if (!this.profile) {
-        await request;
-      }
-
-      return this._profile;
-    } else {
-      return this.fetchProfile(userId, content, skip);
-    }
-  }
-
-  private async fetchProfile(userId?: string, content?: string, skip?: number) {
-    const response = await devRant.profile(userId, content, skip, this.token);
-    return response.profile;
-  }
-
-  async lazyUpdateLoggedInProfile(content?: string, skip?: number) {
-    if (!this.token) {
-      this._profile = null;
-    } else {
-      this._profile = await this.fetchProfile(String(this.token.user_id), content, skip);
+    get profile(): Partial<Profile> {
+        return this._profile || {};
     }
 
-    this.profileUpdated()
-    return this._profile;
-  }
+    get profileColor() {
+        if (this.profile) {
+            return `#${this.profile.avatar.b}`;
+        }
 
-  async logout() {
-    this.token = null;
-  }
-
-  async login(username: string, password: string) {
-    const response = await devRant.login(username, password);
-
-    if (!response.success) {
-      throw new Error(response.error)
+        return null;
     }
 
-    this.token = response.auth_token
-    return response.auth_token;
-  }
+    constructor(
+        private appService: AppService,
+        private configService: ConfigService,
+        private alert: AlertController,
+        private router: Router
+    ) {
+        log('init');
+        this.setupService();
+        log('connector', devRant);
+    }
 
-  get isSignedIn() {
-    return !!this.token;
-  }
+    async setupService() {
+        const token = JSON.parse(localStorage.getItem('token'));
+        await this.setupWorker();
 
-  async vote(vote: devRant.VoteState, rantId: number) {
-    const response = await devRant.vote(vote, rantId, this.token);
-    return response.rant;
-  }
+        this.userIdCache = await caches.open('username-id-map');
 
-  async voteComment(vote: devRant.VoteState, commentId: number) {
-    const response = await devRant.voteComment(vote, commentId, this.token);
-    return response.comment;
-  }
+        if (token) {
+            this.token = token;
+        }
+    }
 
-  /**
-   * Resolve a specific rant by it's `id`.
-   * @param randId 
-   */
-  async getRant(randId: number) {
-    return devRant.rant(randId, this.token);
-  }
+    async setupWorker() {
+        this.worker = await getWorker();
+        this.worker.postMessage({
+            type: 'setAPI',
+            apiURL: environment.apiURL,
+        } as SetApiRequest);
 
-  async getComment(commentId: number) {
-    return devRant.comment(commentId, this.token);
-  }
+        log('worker setup');
+    }
 
-  /**
-   * Resolve multiple rants from the feed.
-   * @
-   * @param sort 
-   * @param limit 
-   * @param skip 
-   */
-  async getFeedRants(sort: devRant.Sort, limit: number, skip: number) {
-    return devRant.rants(sort, limit, skip, null, this.token)
-  }
+    set token(newToken: devRant.Token) {
+        this._token = newToken;
+        localStorage.setItem('token', JSON.stringify(newToken || null));
+
+        this.worker.postMessage({
+            type: 'newToken',
+            token: this.token,
+        });
+
+        this.getProfile();
+        this.validateNotifications();
+    }
+
+    get token() {
+        return this._token;
+    }
+
+    profileUpdated() {
+        const ev = new CustomEvent('profile-updated');
+        window.dispatchEvent(ev);
+
+        this.updateBrowserTheme();
+    }
+
+    updateBrowserTheme() {
+        const theme = document.head.querySelector('meta[theme-color]');
+        if (theme) {
+            theme.setAttribute('content', this.profileColor);
+        }
+
+        const shades = makeShades(this.profileColor);
+        applyShadesTo(document.body, shades);
+    }
+
+    async getProfile(userId?: string, content?: string, skip?: number) {
+        // we need to have a token AND the SAME userId as in the token OR no id and we use the id in the token.
+        if (!this.token || !userId || userId === String(this.token.user_id)) {
+            const request = this.lazyUpdateLoggedInProfile(content, skip);
+
+            if (!this.profile) {
+                await request;
+            }
+
+            return this._profile;
+        } else {
+            return this.fetchProfile(userId, content, skip);
+        }
+    }
+
+    private async fetchProfile(
+        userId?: string,
+        content?: string,
+        skip?: number
+    ) {
+        const response = await devRant.profile(
+            userId,
+            content,
+            skip,
+            this.token
+        );
+        return response.profile;
+    }
+
+    async lazyUpdateLoggedInProfile(content?: string, skip?: number) {
+        if (!this.token) {
+            this._profile = null;
+        } else {
+            this._profile = await this.fetchProfile(
+                String(this.token.user_id),
+                content,
+                skip
+            );
+        }
+
+        this.profileUpdated();
+        return this._profile;
+    }
+
+    async logout() {
+        this.token = null;
+    }
+
+    async login(username: string, password: string) {
+        const response = await devRant.login(username, password);
+
+        if (!response.success) {
+            throw new Error(response.error);
+        }
+
+        this.token = response.auth_token;
+        return response.auth_token;
+    }
+
+    get isSignedIn() {
+        return !!this.token;
+    }
+
+    async vote(vote: devRant.VoteState, rantId: number) {
+        const response = await devRant.vote(vote, rantId, this.token);
+        return response.rant;
+    }
+
+    async voteComment(vote: devRant.VoteState, commentId: number) {
+        const response = await devRant.voteComment(
+            vote,
+            commentId,
+            this.token
+        );
+        return response.comment;
+    }
+
+    /**
+     * Resolve a specific rant by it's `id`.
+     * @param randId
+     */
+    async getRant(randId: number) {
+        return devRant.rant(randId, this.token);
+    }
+
+    async getComment(commentId: number) {
+        return devRant.comment(commentId, this.token);
+    }
+
+    /**
+     * Resolve multiple rants from the feed.
+     * @
+     * @param sort
+     * @param limit
+     * @param skip
+     */
+    async getFeedRants(sort: devRant.Sort, limit: number, skip: number) {
+        return devRant.rants(sort, limit, skip, null, this.token);
+    }
 }

@@ -6,16 +6,14 @@ import { IonicModule } from '@ionic/angular';
 import { ProfileDetailPageRoutingModule } from './profile-detail-routing.module';
 import { ProfileDetailPage } from './profile-detail.page';
 
-
-
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    ProfileModule,
-    ProfileDetailPageRoutingModule,
-  ],
-  declarations: [ProfileDetailPage]
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        ProfileModule,
+        ProfileDetailPageRoutingModule,
+    ],
+    declarations: [ProfileDetailPage],
 })
 export class ProfileDetailPageModule {}

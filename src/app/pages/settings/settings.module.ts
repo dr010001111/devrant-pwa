@@ -10,13 +10,13 @@ import { SettingsPage } from './settings.page';
 import { InlineProfileModule } from '@app/components/inline-profile/inline-profile.module';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    SettingsPageRoutingModule,
-    InlineProfileModule,
-  ],
-  declarations: [SettingsPage]
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        SettingsPageRoutingModule,
+        InlineProfileModule,
+    ],
+    declarations: [SettingsPage],
 })
-export class SettingsPageModule { }
+export class SettingsPageModule {}

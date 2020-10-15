@@ -12,8 +12,4 @@ What shall happen instead?
 
 1.
 
-
 ## Screenshots (optional)
-
-
-

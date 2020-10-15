@@ -9,12 +9,12 @@ import { AppearancePageRoutingModule } from './appearance-routing.module';
 import { AppearancePage } from './appearance.page';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    AppearancePageRoutingModule
-  ],
-  declarations: [AppearancePage]
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        AppearancePageRoutingModule,
+    ],
+    declarations: [AppearancePage],
 })
 export class AppearancePageModule {}

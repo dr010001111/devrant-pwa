@@ -3,14 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { TabNotifsPage } from './tab-notifs.page';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: TabNotifsPage,
-  }
+    {
+        path: '',
+        component: TabNotifsPage,
+    },
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forChild(routes)],
+    exports: [RouterModule],
 })
 export class TabNotifsPageRoutingModule {}

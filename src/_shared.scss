@@ -1,56 +1,56 @@
 @mixin user-thumbnail($avatar-size: 48px) {
-  position: relative;
+    position: relative;
 
-  grid-area: image;
-  align-self: center;
+    grid-area: image;
+    align-self: center;
 
-  width: $avatar-size;
-  height: $avatar-size;
+    width: $avatar-size;
+    height: $avatar-size;
 
-  border-radius: 100px;
-  overflow: hidden;
+    border-radius: 100px;
+    overflow: hidden;
 
-  background-color: var(--color);
+    background-color: var(--color);
 
-  > img {
-    width: 100%;
-    height: 100%;
+    > img {
+        width: 100%;
+        height: 100%;
 
-    &.broken {
-      opacity: 0;
+        &.broken {
+            opacity: 0;
+        }
     }
-  }
 }
 
 %badge {
-  position: relative;
+    position: relative;
 
-  align-self: start;
-  justify-self: start;
+    align-self: start;
+    justify-self: start;
 
-  padding: 0.35em 0.5em;
+    padding: 0.35em 0.5em;
 
-  font-size: 14px;
-  font-weight: 500;
+    font-size: 14px;
+    font-weight: 500;
 
-  line-height: 0.96;
-  z-index: 1;
+    line-height: 0.96;
+    z-index: 1;
 
-  background-color: var(--color);
-  border-radius: 8px;
+    background-color: var(--color);
+    border-radius: 8px;
 }
 
 @mixin dpp-badge {
-  --color: var(--theme-shade);
+    --color: var(--theme-shade);
 
-  @extend %badge;
+    @extend %badge;
 }
 
 @mixin score-badge {
-  @extend %badge;
+    @extend %badge;
 
-  --color: var(--ion-color-primary-shade);
-  color: var(--ion-color-primary-contrast);
+    --color: var(--ion-color-primary-shade);
+    color: var(--ion-color-primary-contrast);
 
-  grid-area: score;
+    grid-area: score;
 }

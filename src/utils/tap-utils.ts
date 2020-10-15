@@ -1,4 +1,3 @@
-
 interface TapCalls {
     single?: () => any;
     double?: () => any;
@@ -8,22 +7,26 @@ let lastTap;
 let lastTapClickId;
 let lastTarget;
 
-export function tapOrDouble(calls: TapCalls, event: MouseEvent | KeyboardEvent | TouchEvent, wait = 200): { clear?: () => void } {
+export function tapOrDouble(
+    calls: TapCalls,
+    event: MouseEvent | KeyboardEvent | TouchEvent,
+    wait = 200
+): { clear?: () => void } {
     clearTimeout(lastTapClickId);
 
     const clear = () => {
         lastTap = null;
-        clearTimeout(lastTapClickId)
-    }
+        clearTimeout(lastTapClickId);
+    };
 
     if (event.target !== lastTarget) {
-        clear()
+        clear();
     }
 
     lastTarget = event.target;
 
     if (event.type.match(/^key/i)) {
-        if ((event as KeyboardEvent).code !== "Enter") {
+        if ((event as KeyboardEvent).code !== 'Enter') {
             return { clear };
         }
     }
@@ -34,12 +37,12 @@ export function tapOrDouble(calls: TapCalls, event: MouseEvent | KeyboardEvent |
     } else {
         lastTapClickId = setTimeout(() => {
             if (calls.single) calls.single();
-        }, wait)
+        }, wait);
     }
 
     lastTap = new Date().getTime();
 
     return {
-        clear
-    }
+        clear,
+    };
 }
