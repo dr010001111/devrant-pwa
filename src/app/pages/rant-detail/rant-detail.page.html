@@ -27,8 +27,8 @@
         <app-rant-comment [comment]="comment"></app-rant-comment>
     </ion-item>
 
-    <ion-item>
-      <ion-textarea (input)="getCommentInput($event)" placeholder="Add your 2 cents..."></ion-textarea>
+    <ion-item *ngIf="service.isSignedIn">
+      <ion-textarea class="comment-input" (input)="getCommentInput($event)" placeholder="Add your 2 cents..." autoGrow="true"></ion-textarea>
       <ion-button (click)="submitComment()"><ion-icon name="send"></ion-icon></ion-button>
     </ion-item>
 </ion-content>
