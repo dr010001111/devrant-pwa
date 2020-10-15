@@ -10,6 +10,7 @@ import { environment } from '../environments/environment';
 import { AppService } from './app.service';
 import { ConfigService } from './config.service';
 import { makeShades, applyShadesTo } from '@utils/color-utils';
+import { Profile } from 'ts-devrant';
 
 const log = debug('dr:service:devrant');
 
@@ -97,8 +98,8 @@ export class DevRantService {
 
   private _profile?: devRant.Profile;
 
-  get profile() {
-    return this._profile;
+  get profile(): Partial<Profile> {
+    return this._profile || {};
   }
 
   get profileColor() {
@@ -172,7 +173,7 @@ export class DevRantService {
     }
 
     const shades = makeShades(this.profileColor);
-    applyShadesTo(document.documentElement, shades)
+    applyShadesTo(document.body, shades)
   }
 
   async getProfile(userId?: string, content?: string, skip?: number) {

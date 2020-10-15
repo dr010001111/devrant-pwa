@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { Image, Comment } from 'ts-devrant';
 import dayjs from 'dayjs';
-import { getImageURL } from 'ts-devrant';
+import { Comment, getImageURL, Profile } from 'ts-devrant';
 
 @Component({
   selector: 'app-inline-profile',
@@ -12,7 +11,7 @@ import { getImageURL } from 'ts-devrant';
 export class InlineProfileComponent implements OnInit {
 
   @Input()
-  profile: Comment
+  profile: Comment;
 
   humanReadableTime: string;
 

@@ -4,7 +4,7 @@
       Profile
     </ion-title>
     <ion-buttons slot="end">
-      <ion-menu-button autoHide="false" fill="outline" *ngIf="devrant.isSignedIn" (click)="onLogout($event)">
+      <ion-menu-button autoHide="false" *ngIf="devrant.isSignedIn" (click)="onLogout($event)">
         <ion-icon name="log-out-outline"></ion-icon>
       </ion-menu-button>
     </ion-buttons>
@@ -13,7 +13,7 @@
 
 <app-profile [userId]="userId" *ngIf="isSignedIn"></app-profile>
 
-<ion-content [fullscreen]="true" *ngIf="!isSignedIn">
+<ion-content *ngIf="!isSignedIn">
   <app-center-content>
     Sign in to view your profile.
     <ion-buttons>

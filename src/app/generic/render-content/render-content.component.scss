@@ -5,7 +5,10 @@ app-render-content {
 
   p {
     margin: 0;
-    margin-bottom: 2ch;
+
+    &:not(:last-of-type) {
+      margin-bottom: 2ch;
+    }
   }
 
   a {

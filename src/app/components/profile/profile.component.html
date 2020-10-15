@@ -1,6 +1,6 @@
 <app-content-loading animate [loading]="isLoading"></app-content-loading>
 
-<ion-content [fullscreen]="true">
+<ion-content>
     <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
         <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
@@ -15,7 +15,7 @@
         </ion-item>
 
         <div class="span image-container">
-            <ion-img src="{{imageUrl}}" width="1400" height="1400"></ion-img>
+            <img src="{{imageUrl}}" width="1400" height="1400" />
             <div class="account-details">
                 <ion-title>{{profile.username}}</ion-title>
                 <span class="score">{{profile.score}}</span>

@@ -12,7 +12,7 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" #content>
+<ion-content #content>
 
     <app-content-loading [loading]="isLoading"></app-content-loading>
     <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">

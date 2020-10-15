@@ -2,9 +2,10 @@ import { Component, HostListener, OnInit, ViewEncapsulation } from '@angular/cor
 import { Router } from '@angular/router';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { AlertController, Platform } from '@ionic/angular';
+import { AlertController, Platform, Config } from '@ionic/angular';
+import { ConfigService } from '@services/config.service';
+
 import { DevRantService } from 'src/services/devrant.service';
-import { applyShadesTo, hexToHSL, makeShades, renderHex } from 'src/utils/color-utils';
 
 
 @Component({
@@ -18,7 +19,8 @@ export class AppComponent implements OnInit {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private devrant: DevRantService,
+    private configService: ConfigService,
+    private ionicConfig: Config,
     private router: Router,
     private alert: AlertController
   ) {
@@ -55,6 +57,11 @@ export class AppComponent implements OnInit {
   }
 
   initializeApp() {
+    this.configService.registerRunner('scheme', (newScheme, oldScheme) => {
+      document.documentElement.classList.remove(oldScheme)
+      document.documentElement.classList.add(newScheme)
+    })
+
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();

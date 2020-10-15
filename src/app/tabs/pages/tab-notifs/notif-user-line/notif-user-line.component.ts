@@ -12,19 +12,16 @@ import { getImageURL } from 'ts-devrant';
 export class InlineProfileComponent implements OnInit {
 
   @Input()
-  userId: number;
-
-  @Input()
   time: number;
 
   @Input()
   user: {
+    id: number
     name: string,
     avatar: Avatar
   }
 
   humanReadableTime: string;
-  imageUrl: string;
 
   constructor() { }
 
@@ -32,8 +29,12 @@ export class InlineProfileComponent implements OnInit {
     event.stopImmediatePropagation();
   }
 
+  imageUrl(imageId) {
+    debugger
+    return getImageURL(imageId);
+  }
+
   ngOnInit(): void {
-    this.imageUrl = getImageURL(this.user.avatar.i);
     if (this.time) {
       this.humanReadableTime = dayjs(this.time * 1000).fromNow()
     }

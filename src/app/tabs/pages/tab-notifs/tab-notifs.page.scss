@@ -1,16 +1,26 @@
-ion-item > div {
-  display: flex;
-  flex-direction: column;
-  white-space: normal;
-  width: 100%;
+app-tab-notifications {
+  div {
+    display: flex;
+    flex-direction: column;
+    white-space: normal;
+    width: 100%;
 
-  ion-title {
-    padding: 0;
-    word-break: normal;
+    ion-title {
+      padding: 0;
+      word-break: normal;
+    }
   }
-}
 
-ion-list {
-  display: grid;
-  gap: 10px;
+  app-vote-bar {
+    width: 56px;
+  }
+
+  ion-item {
+    --padding-start: 0;
+
+    --inner-padding-start: 20px;
+
+    --inner-padding-bottom: 10px;
+    --inner-padding-top: 10px;
+  }
 }

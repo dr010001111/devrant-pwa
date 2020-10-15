@@ -1,12 +1,12 @@
-import { Component, HostBinding, HostListener } from '@angular/core';
+import { Component, HostBinding, HostListener, ViewEncapsulation } from '@angular/core';
 import { DevRantService } from '@services/devrant.service';
 import { NotificationService } from 'src/services/notification.service';
-import { Comment } from 'ts-devrant';
 
 @Component({
   selector: 'app-tab-notifications',
   templateUrl: 'tab-notifs.page.html',
-  styleUrls: ['tab-notifs.page.scss']
+  styleUrls: ['tab-notifs.page.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class TabNotifsPage {
 
@@ -40,12 +40,12 @@ export class TabNotifsPage {
   remapToProfile(userId: number) {
     const containsUser = this.notifyService.notifications.username_map[userId]
     if (containsUser) {
+      debugger
       return {
-        user_id: userId,
-        user_username: containsUser.name,
-        user_avatar: containsUser.avatar,
-        user_avatar_lg: containsUser.avatar
-      } as Comment
+        id: userId,
+        name: containsUser.name,
+        avatar: containsUser.avatar,
+      }
     }
   }
 

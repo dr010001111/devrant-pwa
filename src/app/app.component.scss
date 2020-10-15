@@ -27,19 +27,22 @@
   }
 }
 
+ion-header[collapse="condense"] {
+  ion-buttons {
+    padding-bottom: 12px;
+  }
+}
+
 ion-refresher {
   z-index: 2;
 }
 
-body {
-  --ion-color-primary: var(--theme);
-  --ion-color-primary-tint: var(--theme-tint);
-  --ion-color-primary-shade: var(--theme-shade);
-}
-
-ion-item {
-  --padding-start: 0;
-  --inner-padding-start: 10px;
+ion-toolbar.toolbar-title-default {
+  .header-collapse-condense-inactive:not(.header-collapse-condense) & {
+    ion-title {
+      transform: translateY(25%);
+    }
+  }
 }
 
 ion-app {
