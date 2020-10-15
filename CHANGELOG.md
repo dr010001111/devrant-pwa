@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.2](https://github.com/dr010001111/devrant-pwa/compare/v0.0.1...v0.0.2) (2020-10-15)
+
+
+### Bug Fixes
+
+* correct `commitUrlFormat` for CHANGELOG generation ([3a4d419](https://github.com/dr010001111/devrant-pwa/commit/3a4d419b969260ff101a16698f06f9ede85f9aaa))
+
 ### 0.0.1 (2020-10-15)
 
 
