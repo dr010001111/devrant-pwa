@@ -1,6 +1,6 @@
 {
     "name": "drant-pwa",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "author": "Ionic Framework",
     "homepage": "https://ionicframework.com/",
     "commit": {
@@ -19,12 +19,16 @@
         "build:sw": "rollup -c rollup.sw.config.ts",
         "test": "ng test",
         "lint": "ng lint",
-        "e2e": "ng e2e"
+        "e2e": "ng e2e",
+        "release": "HUSKY_SKIP_HOOKS=1 standard-version --no-verify",
+        "release:minor": "standard-version --release-as minor",
+        "release:patch": "standard-version --release-as patch",
+        "release:major": "standard-version --release-as major"
     },
     "husky": {
         "hooks": {
             "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true",
-            "post-commit": "exec < /dev/tty && node_modules/.bin/standard-version || true"
+            "post-commit": "npm run release"
         }
     },
     "private": true,
