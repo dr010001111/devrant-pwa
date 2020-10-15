@@ -20,7 +20,7 @@
         "test": "ng test",
         "lint": "ng lint",
         "e2e": "ng e2e",
-        "release": "HUSKY_SKIP_HOOKS=1 standard-version --no-verify",
+        "release": "HUSKY_SKIP_HOOKS=1 standard-version --no-verify --skip.tag",
         "release:minor": "standard-version --release-as minor",
         "release:patch": "standard-version --release-as patch",
         "release:major": "standard-version --release-as major"
