@@ -8,9 +8,30 @@ import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
 
 import relativeTime from 'dayjs/plugin/relativeTime';
+import updateLocale from 'dayjs/plugin/updateLocale';
+
 import dayjs from 'dayjs';
 
+dayjs.extend(updateLocale)
 dayjs.extend(relativeTime)
+
+dayjs.updateLocale('en', {
+  relativeTime: {
+    future: "in %s",
+    past: "%s ago",
+    s: 'a few seconds',
+    m: "a minute",
+    mm: "%dm",
+    h: "an hour",
+    hh: "%dh",
+    d: "a day",
+    dd: "%dd",
+    M: "a month",
+    MM: "%dm",
+    y: "a year",
+    yy: "%dy"
+  }
+})
 
 window.addEventListener('keydown', (ev) => {
   document.documentElement.classList.add('using-keyboard')

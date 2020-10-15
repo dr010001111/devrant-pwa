@@ -36,9 +36,6 @@ export class InlineProfileComponent implements OnInit {
     this.imageUrl = getImageURL(this.user.avatar.i);
     if (this.time) {
       this.humanReadableTime = dayjs(this.time * 1000).fromNow()
-        .replace('hours', 'h')
-        .replace('minutes', 'm')
-        .replace(/\s+(\w)/, '$1')
     }
   }
 
