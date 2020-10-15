@@ -4,11 +4,15 @@ name: Lint
 
 on:
   push:
-    branches: 
-      - *
+    branches:
+      - main
+      - develop
+      - feature/*
+      - fix/*
   pull_request:
-    branches: 
-      - *
+    branches:
+      - feature/*
+      - fix/*
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
