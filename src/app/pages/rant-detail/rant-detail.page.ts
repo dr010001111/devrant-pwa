@@ -1,12 +1,11 @@
 import { Location } from '@angular/common';
-import { ModalController } from '@ionic/angular';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router, Scroll } from '@angular/router';
 import { DevRantService } from '@services/devrant.service';
 import { Subscription } from 'rxjs';
 import { RantInFeed } from 'ts-devrant';
 
-import { CommentFormComponent } from '../../components/comment-form/comment-form.component';
+import { AlertService } from 'src/services/alert.service';
 
 @Component({
     templateUrl: './rant-detail.page.html',
@@ -17,6 +16,7 @@ export class RantDetailPageComponent implements OnInit, OnDestroy {
     hasErrors: boolean;
 
     routeSub: Subscription;
+    private commentString = '';
 
     rant: RantInFeed;
     rantId: number;
@@ -31,7 +31,7 @@ export class RantDetailPageComponent implements OnInit, OnDestroy {
         private route: ActivatedRoute,
         private router: Router,
         private _location: Location,
-        private modalController: ModalController
+        private alertService: AlertService
     ) {
         this.router.events.subscribe((ev) => {
             if (ev instanceof Scroll) {
@@ -89,21 +89,36 @@ export class RantDetailPageComponent implements OnInit, OnDestroy {
         this._location.back();
     }
 
-    /**
-     * showCommentForm displays the comment modal
-     * it passes the rantId to the modal
-     */
-    async showCommentForm() {
-        const modal = await this.modalController.create({
-            component: CommentFormComponent,
-            componentProps: {
-                rantId: this.rantId,
-            },
-        });
-        return await modal.present();
-    }
-
     ngOnDestroy() {
         this.routeSub.unsubscribe();
+    }
+
+    getCommentInput($event) {
+        this.commentString = $event.target.value;
+    }
+    /**
+     * Submit the comment with the API
+     */
+    submitComment() {
+        // length checks on text area
+        if (this.commentString.length < 1) {
+            console.log('Comment length has to be greater than 1');
+            this.alertService.showAlert('Empty Comment', 'Type more things!!');
+            return;
+        } else if (this.commentString.length >= 1000) {
+            console.log('Comment characters cannot exceed 1000');
+            // this.showToast('Comment length cannot exceed 1000 characters');
+            this.alertService.showAlert(
+                'Comment too Long',
+                'Comment length cannot exceed 1000 characters'
+            );
+            return;
+        }
+
+        const token = this.service.token;
+
+        console.log('rant: ', this.rant);
+        // const response = this.service.postComment(this.rantId, this.commentString, token);
+        // console.log("comment response: ", response);
     }
 }
