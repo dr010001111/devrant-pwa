@@ -3,6 +3,10 @@ $offset: 0.16ch;
 app-render-content {
     line-height: 1.3;
 
+    white-space: pre-wrap;
+    word-break: break-word;
+    hyphens: auto;
+
     p {
         margin: 0;
 
