@@ -1,5 +1,11 @@
 # devRant PWA (UNOFFICIAL)
 
+[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+![Lint](https://github.com/dr010001111/devrant-pwa/workflows/Lint/badge.svg)
+
+![CI Staging](https://github.com/dr010001111/devrant-pwa/workflows/CI%20Staging/badge.svg)
+![CI Production](https://github.com/dr010001111/devrant-pwa/workflows/CI%20Production/badge.svg)
+
 [devRant](https://devrant.com/) as progressive web application. The primary goal of this project is to provide an alternative, future-proof client to the existing applications. In the course of the implementation, the existing problems of the currently official applications are to be solved and if necessary improved.
 
 THIS PROJECT IS MAINTED BY THE COMMUNITY AND **NOT** OFFICIALY SUPPORTED BY DEVRANT.
