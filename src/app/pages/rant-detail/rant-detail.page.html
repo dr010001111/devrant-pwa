@@ -28,6 +28,7 @@
     </ion-item>
 
     <ion-item>
-      <ion-button (click)="showCommentForm()">Comment</ion-button>
+      <ion-textarea (input)="getCommentInput($event)" placeholder="Add your 2 cents..."></ion-textarea>
+      <ion-button (click)="submitComment()"><ion-icon name="send"></ion-icon></ion-button>
     </ion-item>
 </ion-content>
