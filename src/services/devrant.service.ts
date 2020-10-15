@@ -251,4 +251,14 @@ export class DevRantService {
     async getFeedRants(sort: devRant.Sort, limit: number, skip: number) {
         return devRant.rants(sort, limit, skip, null, this.token);
     }
+
+    /**
+     * postComment is a middle way service - no images for now
+     * @param rantId
+     * @param comment
+     * @param token
+     */
+    async postComment(rantId: number, comment: string, token: devRant.Token) {
+        return devRant.postComment(rantId, comment, null, token);
+    }
 }

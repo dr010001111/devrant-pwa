@@ -49,9 +49,9 @@ export class RantDetailPageComponent implements OnInit, OnDestroy {
     async ngOnInit() {
         this.routeSub = this.route.params.subscribe(async (params) => {
             this.isLoading = true;
-            this.rantId = params['id'];
+            const rant = params['id'];
 
-            await this.fetchRant(this.rantId);
+            await this.fetchRant(rant);
             this.isLoading = false;
         });
     }
@@ -105,7 +105,7 @@ export class RantDetailPageComponent implements OnInit, OnDestroy {
             console.log('Comment length has to be greater than 1');
             this.alertService.showAlert('Empty Comment', 'Type more things!!');
             return;
-        } else if (this.commentString.length >= 1000) {
+        } else if (this.commentString.length > 1000) {
             console.log('Comment characters cannot exceed 1000');
             // this.showToast('Comment length cannot exceed 1000 characters');
             this.alertService.showAlert(
@@ -115,10 +115,14 @@ export class RantDetailPageComponent implements OnInit, OnDestroy {
             return;
         }
 
-        const token = this.service.token;
-
-        console.log('rant: ', this.rant);
-        // const response = this.service.postComment(this.rantId, this.commentString, token);
-        // console.log("comment response: ", response);
+        if (this.service.isSignedIn) {
+            const token = this.service.token;
+            const response = this.service.postComment(
+                this.rant.id,
+                this.commentString,
+                token
+            );
+            // this.fetchRant(this.rant.id);
+        }
     }
 }
