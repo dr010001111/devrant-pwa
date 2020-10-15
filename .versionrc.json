@@ -9,6 +9,6 @@
         { "type": "perf", "hidden": true },
         { "type": "test", "hidden": true }
     ],
-    "commitUrlFormat": "https://github.com/dr010001111/devrant-pwa/commits/{{hash}}",
+    "commitUrlFormat": "https://github.com/dr010001111/devrant-pwa/commit/{{hash}}",
     "compareUrlFormat": "https://github.com/dr010001111/devrant-pwa/compare/{{previousTag}}...{{currentTag}}"
 }
