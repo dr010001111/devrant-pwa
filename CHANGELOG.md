@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.5](https://github.com/dr010001111/devrant-pwa/compare/v0.0.1...v0.0.5) (2020-10-16)
+
+
+### Bug Fixes
+
+* **ios:** prevent swipe gesture ([72dafe4](https://github.com/dr010001111/devrant-pwa/commit/72dafe4eee26b4b1ca24c9dfae8f88fc145ff944))
+* allow user content to wrap properly including hyphenation ([d459931](https://github.com/dr010001111/devrant-pwa/commit/d4599310edd5b801e0e6f464c2642f4071b70b60))
+* correct `commitUrlFormat` for CHANGELOG generation ([3a4d419](https://github.com/dr010001111/devrant-pwa/commit/3a4d419b969260ff101a16698f06f9ede85f9aaa))
+
 ### [0.0.4](https://github.com/dr010001111/devrant-pwa/compare/v0.0.1...v0.0.4) (2020-10-15)
 
 
