@@ -33,7 +33,7 @@ dayjs.updateLocale('en', {
     },
 });
 
-document.body.addEventListener('touchstart', (e: any) => {
+document.querySelector('ion-app').addEventListener('touchstart', (e: any) => {
 
     // is not near edge of view, exit
     if (e.pageX > 10 && e.pageX < window.innerWidth - 10) return;
