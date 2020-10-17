@@ -33,17 +33,25 @@ dayjs.updateLocale('en', {
     },
 });
 
+window.addEventListener('keydown', (ev) => {
+    if (!navigator.maxTouchPoints) {
+        document.documentElement.classList.add('using-keyboard');
+        document.documentElement.classList.remove('using-mouse');
+    }
 });
 
-window.addEventListener('keydown', (ev) => {
-    document.documentElement.classList.add('using-keyboard');
-    document.documentElement.classList.remove('using-mouse');
+window.addEventListener('mousedown', (ev) => {
+    if (!navigator.maxTouchPoints) {
+        document.documentElement.classList.remove('using-keyboard');
+        document.documentElement.classList.add('using-mouse');
+    }
 });
 
 // needed for non-form components like alerts
 const submitSelector = 'button[type="submit"],button[type="button"]';
 window.addEventListener('keypress', (ev) => {
-    if (ev.code === 'Enter' && ev.ctrlKey) {
+    const inputEnter = ev.key === 'Enter' && (ev.target as HTMLElement).tagName === 'INPUT';
+    if (inputEnter || (ev.key === 'Enter' && ev.ctrlKey)) {
         const target = ev.target as HTMLElement;
         const parentFocusable: HTMLElement = target.parentElement.closest(
             '[tabindex]'
@@ -61,11 +69,6 @@ window.addEventListener('keypress', (ev) => {
             }
         }
     }
-});
-
-window.addEventListener('mousedown', (ev) => {
-    document.documentElement.classList.remove('using-keyboard');
-    document.documentElement.classList.add('using-mouse');
 });
 
 window.addEventListener('keyup', (ev) => {
