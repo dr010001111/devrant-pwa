@@ -3,6 +3,8 @@ import {
     HostListener,
     OnInit,
     ViewEncapsulation,
+    ViewChild,
+    ElementRef,
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -20,6 +22,7 @@ import { DevRantService } from 'src/services/devrant.service';
 })
 export class AppComponent implements OnInit {
     constructor(
+        private ref: ElementRef,
         private platform: Platform,
         private splashScreen: SplashScreen,
         private statusBar: StatusBar,
@@ -69,6 +72,17 @@ export class AppComponent implements OnInit {
         this.platform.ready().then(() => {
             this.statusBar.styleDefault();
             this.splashScreen.hide();
+
+            this.disableSwipeGestures()
+        });
+    }
+
+    disableSwipeGestures() {
+        this.ref.nativeElement.addEventListener('touchstart', (e: TouchEvent & { pageX: number }) => {
+            if (e.pageX < 50 || e.pageX > window.innerWidth - 10) {
+                console.log('TOUCHSTART')
+                e.preventDefault();
+            }
         });
     }
 }

@@ -33,13 +33,6 @@ dayjs.updateLocale('en', {
     },
 });
 
-document.querySelector('ion-app').addEventListener('touchstart', (e: any) => {
-
-    // is not near edge of view, exit
-    if (e.pageX > 10 && e.pageX < window.innerWidth - 10) return;
-
-    // prevent swipe to navigate gesture
-    e.preventDefault();
 });
 
 window.addEventListener('keydown', (ev) => {
