@@ -7,7 +7,7 @@ debug.enable('*');
 const log = debug('dr:sw');
 log.log = console.log.bind(console);
 
-const updateInterval = 1e3 * 7;
+const updateInterval = 1e3 * 30;
 
 class DevrantServiceWorker {
     token?: Token;

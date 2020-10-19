@@ -1,5 +1,5 @@
 import pkg from '@/package.json';
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ViewChild, ElementRef, ChangeDetectionStrategy } from '@angular/core';
 import { Config } from '@ionic/angular';
 import { DevRantService } from '@services/devrant.service';
 import { Sort, RantInFeed } from 'ts-devrant';
@@ -7,10 +7,10 @@ import { Sort, RantInFeed } from 'ts-devrant';
 @Component({
     selector: 'app-tab-feed',
     templateUrl: 'tab-feed.page.html',
-    styleUrls: ['tab-feed.page.scss'],
+    styleUrls: ['tab-feed.page.scss']
 })
 export class TabFeedPageComponent implements AfterViewInit {
-    limit = 20;
+    limit = 5;
     offset = 0;
 
     feed = [];
@@ -26,7 +26,7 @@ export class TabFeedPageComponent implements AfterViewInit {
     listEl: { el: HTMLIonListElement };
 
     @ViewChild('feedContainer')
-    feedEl: { el: HTMLElement };
+    feedContainer: ElementRef;
 
     @ViewChild('header')
     headerEl: { el: HTMLElement };
@@ -53,9 +53,9 @@ export class TabFeedPageComponent implements AfterViewInit {
         }
     }
 
-    async doRefresh(event: CustomEvent) {
-        this.resetFeed();
+    async doRefresh(event) {
         const target = event.target as HTMLIonRefresherElement;
+        this.resetFeed();
         await this.fetchFeed();
         target.complete();
     }
@@ -89,7 +89,10 @@ export class TabFeedPageComponent implements AfterViewInit {
                 this.limit,
                 this.offset
             );
-            this.feed = [...this.feed, ...response.rants];
+
+            response.rants.forEach(rant => {
+                this.feed.push(rant);
+            });
 
             this.offset += this.limit;
             this.hasErrors = false;

@@ -105,9 +105,9 @@ export class RenderContentComponent implements OnInit {
 
     _links: LinkDef[];
 
-    constructor(private ref: ElementRef, private devrant: DevRantService) {}
+    constructor(private ref: ElementRef, private devrant: DevRantService) { }
 
-    ngOnInit(): void {}
+    ngOnInit(): void { }
 
     fetchMentionsAync() {
         const mentions = this.internalContent.match(/@([\w-]+)/gi);

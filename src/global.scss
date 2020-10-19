@@ -26,10 +26,12 @@
 @import '~@ionic/angular/css/flex-utils.css';
 
 :root body {
-    --ion-color-primary: var(--theme) !important;
-    --ion-color-primary-tint: var(--theme-tint) !important;
-    --ion-color-primary-shade: var(--theme-shade) !important;
-    --ion-color-primary-contrast: var(--theme-contrast) !important;
+    --ion-font-family: 'Nunito', 'Roboto', system-ui;
+
+    --ion-color-primary: var(--ion-color-primary);
+    --ion-color-primary-shade: var(--ion-color-primary-shade);
+    --ion-color-primary-tint: var(--ion-color-primary-tint);
+    --ion-color-primary-contrast: var(--ion-color-primary-contrast);
 }
 
 :focus {
@@ -50,6 +52,26 @@ ol {
 
 ion-badge {
     --padding-top: var(--padding-bottom);
-    --background: var(--theme-shade);
-    --color: var(--theme-contrast);
+    --background: var(--ion-color-primary-shade);
+    --color: var(--ion-color-primary-contrast);
+}
+
+img,
+ion-img {
+    border-radius: 8px;
+    overflow: hidden;
+
+    max-width: 100%;
+    height: auto;
+}
+
+main {
+    display: grid;
+    grid-auto-rows: min-content;
+    gap: 5px;
+}
+
+article {
+    word-break: break-word;
+    white-space: break-spaces;
 }

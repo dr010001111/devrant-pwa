@@ -10,15 +10,15 @@ export class AlertService {
     public alertController: AlertController
   ) { }
 
-  async showAlert(header: string, msg: string) {
+  async genericAlert(header: string, message?: string) {
     const alert = await this.alertController.create({
       header: header,
-      message: msg,
+      message: message,
       backdropDismiss: false,
       buttons: ['OK']
     });
 
-    await alert.present();
+    alert.present();
   }
 }
 

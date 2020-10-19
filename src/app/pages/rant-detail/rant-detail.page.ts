@@ -2,10 +2,11 @@ import { Location } from '@angular/common';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router, Scroll } from '@angular/router';
 import { DevRantService } from '@services/devrant.service';
+import { fromEvent } from 'file-selector';
 import { Subscription } from 'rxjs';
+import { AlertService } from 'src/services/alert.service';
 import { RantInFeed } from 'ts-devrant';
 
-import { AlertService } from 'src/services/alert.service';
 
 @Component({
     templateUrl: './rant-detail.page.html',
@@ -26,8 +27,10 @@ export class RantDetailPageComponent implements OnInit, OnDestroy {
     @ViewChild('content', { static: false })
     content: HTMLIonContentElement;
 
+    attachedImage: File = null;
+
     constructor(
-        private readonly service: DevRantService,
+        readonly service: DevRantService,
         private route: ActivatedRoute,
         private router: Router,
         private _location: Location,
@@ -54,6 +57,21 @@ export class RantDetailPageComponent implements OnInit, OnDestroy {
             await this.fetchRant(rant);
             this.isLoading = false;
         });
+    }
+
+    async onDrop(event: Event) {
+        event.preventDefault();
+        this.fileChange(event)
+    }
+
+    async applyFile(files: File[]) {
+        const [firstFile = null] = files;
+        this.attachedImage = firstFile;
+    }
+
+    async fileChange(event: Event) {
+        const files = (await fromEvent(event)) as File[];
+        this.applyFile(files);
     }
 
     scrollToComment() {

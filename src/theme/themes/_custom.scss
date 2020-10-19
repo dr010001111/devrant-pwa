@@ -1,0 +1,76 @@
+@mixin custom-theme {
+    /*
+     * Dark Colors
+     * -------------------------------------------
+     */
+
+    body {
+        --ion-toolbar-color: var(--ion-text-color);
+        --button-color: var(--ion-text-color);
+
+        --ion-color-step-50: rgba(0, 0, 0, 5%);
+        --ion-color-step-100: rgba(0, 0, 0, 10%);
+        --ion-color-step-150: rgba(0, 0, 0, 15%);
+        --ion-color-step-200: rgba(0, 0, 0, 20%);
+        --ion-color-step-250: rgba(0, 0, 0, 25%);
+        --ion-color-step-300: rgba(0, 0, 0, 30%);
+        --ion-color-step-350: rgba(0, 0, 0, 35%);
+        --ion-color-step-400: rgba(0, 0, 0, 40%);
+        --ion-color-step-450: rgba(0, 0, 0, 45%);
+        --ion-color-step-500: rgba(0, 0, 0, 50%);
+        --ion-color-step-550: rgba(0, 0, 0, 55%);
+        --ion-color-step-600: rgba(0, 0, 0, 60%);
+        --ion-color-step-650: rgba(0, 0, 0, 65%);
+        --ion-color-step-700: rgba(0, 0, 0, 70%);
+        --ion-color-step-750: rgba(0, 0, 0, 75%);
+        --ion-color-step-800: rgba(0, 0, 0, 80%);
+        --ion-color-step-850: rgba(0, 0, 0, 85%);
+        --ion-color-step-900: rgba(0, 0, 0, 90%);
+        --ion-color-step-950: rgba(0, 0, 0, 95%);
+
+        --ion-color-primary: #{$app-primary};
+        --ion-color-primary-rgb: #{rgb-values($app-primary)};
+        --ion-color-primary-contrast: #{$app-primary-contrast};
+        --ion-color-primary-contrast-rgb: 255, 255, 255;
+        --ion-color-primary-shade: #{$app-primary-shade};
+        --ion-color-primary-tint: #{$app-primary-tint};
+
+        --ion-color-dark: #f4f5f8;
+        --ion-color-dark-rgb: 244, 245, 248;
+        --ion-color-dark-contrast: #000000;
+        --ion-color-dark-contrast-rgb: 0, 0, 0;
+        --ion-color-dark-shade: #d7d8da;
+        --ion-color-dark-tint: #f5f6f9;
+
+        --ion-color-medium: rgba(0, 0, 0, 62%);
+        --ion-color-medium-rgb: 152, 154, 162;
+        --ion-color-medium-contrast: #000000;
+        --ion-color-medium-contrast-rgb: 0, 0, 0;
+        --ion-color-medium-shade: rgba(0, 0, 0, 54%);
+        --ion-color-medium-tint: rgba(0, 0, 0, 65%);
+
+        --ion-color-light: rgba(0, 0, 0, 15%);
+        --ion-color-light-rgb: 34, 36, 40;
+        --ion-color-light-contrast: #ffffff;
+        --ion-color-light-contrast-rgb: 255, 255, 255;
+        --ion-color-light-shade: rgba(0, 0, 0, 13%);
+        --ion-color-light-tint: rgba(0, 0, 0, 23%);
+
+        ion-action-sheet {
+            --button-color: inherit;
+        }
+
+        ion-segment-button {
+            --color-checked: var(--ion-text-color);
+        }
+
+        ion-tab-button {
+            --color: var(--ion-color-primary);
+            --color-selected: var(--ion-text-color);
+        }
+
+        ion-badge {
+            --background: var(--ion-color-primary-shade);
+        }
+    }
+}

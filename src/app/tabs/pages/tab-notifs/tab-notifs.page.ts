@@ -19,7 +19,7 @@ export class TabNotifsPageComponent {
     constructor(
         private notifyService: NotificationService,
         readonly devrant: DevRantService
-    ) {}
+    ) { }
 
     @HostListener('window:tab-change', ['$event'])
     tabSelected(event: CustomEvent<{ tab: string }>) {
@@ -36,7 +36,7 @@ export class TabNotifsPageComponent {
         } catch (e) {
             this.hasErrors = true;
         } finally {
-            target.complete();
+            //target.complete();
         }
     }
 
@@ -49,7 +49,6 @@ export class TabNotifsPageComponent {
             userId
         ];
         if (containsUser) {
-            debugger;
             return {
                 id: userId,
                 name: containsUser.name,

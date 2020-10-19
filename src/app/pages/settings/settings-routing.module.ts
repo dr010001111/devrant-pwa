@@ -15,17 +15,10 @@ const routes: Routes = [
                 (m) => m.NotificationsPageModule
             ),
     },
-    {
-        path: 'appearance',
-        loadChildren: () =>
-            import('./pages/appearance/appearance.module').then(
-                (m) => m.AppearancePageModule
-            ),
-    },
 ];
 
 @NgModule({
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule],
 })
-export class SettingsPageRoutingModule {}
+export class SettingsPageRoutingModule { }

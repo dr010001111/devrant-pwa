@@ -9,10 +9,11 @@ import {
 import { Router } from '@angular/router';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { AlertController, Platform, Config } from '@ionic/angular';
+import { AlertController, Platform, Config, IonRouterOutlet } from '@ionic/angular';
 import { ConfigService } from '@services/config.service';
 
 import { DevRantService } from 'src/services/devrant.service';
+import { applyThemeFromHex } from '@utils/color-utils';
 
 @Component({
     selector: 'app-root',
@@ -56,6 +57,10 @@ export class AppComponent implements OnInit {
 
             firstUsageAlert.present();
         }
+
+        const schemeWatcher = window.matchMedia('(prefers-color-scheme: dark)')
+        schemeWatcher.onchange = this.systemOSChange.bind(this);
+        this.systemOSChange()
     }
 
     @HostListener('window:internal-link', ['$event'])
@@ -63,10 +68,44 @@ export class AppComponent implements OnInit {
         this.router.navigate([ev.detail]);
     }
 
+
+    systemOSChange() {
+        const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.classList.remove('auto-light');
+        document.documentElement.classList.remove('auto-dark');
+
+        if (this.configService.scheme !== 'auto') {
+            return;
+        }
+
+        if (isDark) {
+            document.documentElement.classList.add('auto-dark');
+        } else {
+            document.documentElement.classList.add('auto-light');
+        }
+    }
+
     initializeApp() {
-        this.configService.registerRunner('scheme', (newScheme, oldScheme) => {
-            document.documentElement.classList.remove(oldScheme);
-            document.documentElement.classList.add(newScheme);
+        this.configService.registerRunner('scheme', (newScheme: string, oldScheme: null | string) => {
+            document.documentElement.classList.remove('theme-custom', `theme-${oldScheme}`);
+
+            if (String(oldScheme).startsWith('#')) {
+                const body = document.body;
+                // @see applyThemeFromHex
+                body.style.removeProperty('--ion-background-color')
+                body.style.removeProperty('--ion-border-color')
+                body.style.removeProperty('--ion-toolbar-background')
+                body.style.removeProperty('--ion-tab-bar-background')
+            }
+
+            if (newScheme.startsWith('#')) {
+                document.documentElement.classList.add(`theme-custom`);
+                applyThemeFromHex(newScheme);
+            } else {
+                document.documentElement.classList.add(`theme-${newScheme}`);
+            }
+
+            this.systemOSChange();
         });
 
         this.platform.ready().then(() => {

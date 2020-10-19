@@ -26,15 +26,28 @@
         <app-rant-comment [comment]="comment"></app-rant-comment>
     </ion-item>
 
-    <ion-item *ngIf="service.isSignedIn">
+    <ion-item
+        class="comment-bar"
+        *ngIf="service.isSignedIn"
+        (drop)="onDrop($event)"
+    >
         <ion-textarea
             class="comment-input"
             (input)="getCommentInput($event)"
+            (keyup)="onKeyUp($event)"
             placeholder="Add your 2 cents..."
             autoGrow="true"
         ></ion-textarea>
-        <ion-button (click)="submitComment()"
-            ><ion-icon name="send"></ion-icon
-        ></ion-button>
+
+        <ion-buttons>
+            <ion-menu-button [autoHide]="false" class="file-upload">
+                <ion-icon name="image-outline"></ion-icon>
+                <input type="file" (change)="fileChange($event)" />
+            </ion-menu-button>
+
+            <ion-menu-button [autoHide]="false" (click)="submitComment()">
+                <ion-icon name="send"></ion-icon>
+            </ion-menu-button>
+        </ion-buttons>
     </ion-item>
 </ion-content>

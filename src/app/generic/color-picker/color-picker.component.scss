@@ -1,0 +1,12 @@
+@import '@simonwep/pickr/dist/themes/nano.min.css';
+
+app-color-picker {
+    > .pickr {
+        display: none;
+    }
+
+    .pcr-app {
+        width: 100% !important;
+        padding-bottom: 1ch;
+    }
+}

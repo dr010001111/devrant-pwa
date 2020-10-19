@@ -8,7 +8,7 @@
     position: relative;
 
     padding-top: 120%;
-    background: var(--theme, var(--ion-color-primary));
+    background: var(--ion-color-primary, var(--ion-color-primary));
 
     > img {
         position: absolute;
@@ -84,7 +84,7 @@
         width: 100%;
         overflow-x: scroll;
 
-        background-color: var(--theme-shade);
+        background-color: var(--ion-color-primary-shade);
         color: white;
     }
 }
@@ -106,7 +106,7 @@
     border-radius: 8px;
 
     &.is-active {
-        background-color: var(--theme);
+        background-color: var(--ion-color-primary);
     }
 }
 

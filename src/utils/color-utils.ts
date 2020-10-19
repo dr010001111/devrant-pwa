@@ -1,3 +1,7 @@
+
+const lightChange = 16;
+const saturationChange = 8;
+
 export function hexToRGB(hex) {
     // Convert hex to RGB first
     let r: any = 0,
@@ -78,15 +82,12 @@ export function makeShades(hexBase?: string) {
     const hex = hexBase.startsWith('#') ? hexBase : `#${hexBase}`;
     const hsl = hexToHSL(hex);
 
-    const lightChange = 12;
-    const saturationChange = 6;
-
     const hslTint = { ...hsl };
     hslTint.l += lightChange;
     hslTint.s += saturationChange;
 
     const hslShade = { ...hsl };
-    hslShade.l -= lightChange;
+    hslShade.l -= lightChange * 1.6;
     hslShade.s += saturationChange;
 
     return {
@@ -94,12 +95,39 @@ export function makeShades(hexBase?: string) {
         tint: renderHex(hslTint),
         shade: renderHex(hslShade),
         contrast: renderContrast(hexBase),
+        hsl
     };
 }
 
 export function applyShadesTo(target: HTMLElement, shades) {
-    target.style.setProperty('--theme', shades.base);
-    target.style.setProperty('--theme-tint', shades.tint);
-    target.style.setProperty('--theme-shade', shades.shade);
-    target.style.setProperty('--theme-contrast', shades.contrast);
+    target.style.setProperty('--ion-color-primary', shades.base);
+    target.style.setProperty('--ion-color-primary-tint', shades.tint);
+    target.style.setProperty('--ion-color-primary-shade', shades.shade);
+    target.style.setProperty('--ion-color-primary-contrast', shades.contrast);
+}
+
+export function applyThemeFromHex(hex) {
+    const theme = makeShades(hex);
+    const body = document.body;
+
+    // const customShadeBase = { ...theme.hsl };
+    // customShadeBase.l += lightChange * 1.2;
+    // customShadeBase.s += saturationChange;
+
+    applyShadesTo(body, theme);
+
+    const darkerShadeHSL = { ...theme.hsl };
+    darkerShadeHSL.l -= lightChange * 2.4;
+    darkerShadeHSL.s += saturationChange * 2;
+
+    const darkerShade = renderHex(darkerShadeHSL);
+
+    body.style.setProperty('--ion-color-primary', 'darkerShade');
+    body.style.setProperty('--ion-text-color', theme.contrast);
+    body.style.setProperty('--ion-background-color', theme.base);
+    body.style.setProperty('--ion-border-color', theme.tint);
+    body.style.setProperty('--ion-item-background', 'transparent');
+    body.style.setProperty('--ion-toolbar-background', theme.shade);
+    body.style.setProperty('--ion-tab-bar-background', theme.shade);
+
 }

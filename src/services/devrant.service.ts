@@ -105,7 +105,7 @@ export class DevRantService {
     }
 
     get profileColor() {
-        if (this.profile) {
+        if (this.profile && this.profile.avatar) {
             return `#${this.profile.avatar.b}`;
         }
 
@@ -176,7 +176,7 @@ export class DevRantService {
         }
 
         const shades = makeShades(this.profileColor);
-        applyShadesTo(document.body, shades);
+        applyShadesTo(document.documentElement, shades);
     }
 
     async getProfile(userId?: string, content?: string, skip?: number) {
@@ -285,7 +285,11 @@ export class DevRantService {
      * @param comment
      * @param token
      */
-    async postComment(rantId: number, comment: string, token: devRant.Token) {
-        return devRant.postComment(rantId, comment, null, token);
+    async postComment(
+        rantId: number,
+        comment: string,
+        image: File | Blob
+    ) {
+        return devRant.postComment(rantId, comment, image, this.token);
     }
 }

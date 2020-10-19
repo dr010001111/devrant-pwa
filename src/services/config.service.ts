@@ -9,7 +9,8 @@ const CONFIG_KEY = 'drAppConfiguration';
  * @see ConfigService constructor
  */
 class AppConfiguration {
-    scheme: 'auto' | 'light' | 'dark' | 'black' = 'auto';
+    // if it's any other string than listed below, it should be an hex.
+    scheme: 'auto' | 'light' | 'dark' | 'devrant-dark' | string = 'auto';
     theme: 'default' | 'win98' = 'default';
 }
 
@@ -52,8 +53,8 @@ export class ConfigService implements IAppConfiguration {
 
         log('init');
     }
+    scheme: 'auto' | 'light' | 'dark' | 'devrant-dark' | string;
     [key: string]: unknown;
-    scheme: 'auto' | 'light' | 'dark' | 'black';
     theme: 'default' | 'win98';
 
     registerRunner(

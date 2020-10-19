@@ -20,7 +20,7 @@
                         "polyfills": "src/polyfills.ts",
                         "tsConfig": "tsconfig.app.json",
                         "stylePreprocessorOptions": {
-                            "includePaths": ["src/"]
+                            "includePaths": ["src/", "node_modules"]
                         },
                         "assets": [
                             {

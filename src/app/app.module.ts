@@ -9,55 +9,40 @@ import { RouteReuseStrategy } from '@angular/router';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { IonicModule, IonicRouteStrategy, IonRouterOutlet } from '@ionic/angular';
 import Hammer from 'hammerjs';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { GlobalErrorHandler } from './crashed';
+import { ColorPickerComponent } from './generic/color-picker/color-picker.component';
 
-@Injectable()
-export class DrantHammerConfig extends HammerGestureConfig {
-    overrides = <any>{
-        pan: { direction: 6 },
-        pinch: { enable: false },
-        rotate: { enable: false },
-    };
-
-    buildHammer(element: HTMLElement) {
-        const mc = new Hammer(element, {
-            touchAction: 'pan-y',
-        });
-
-        return mc;
-    }
-}
+const acuratePointing = window.matchMedia('@media (pointer: fine)').matches;
 
 @NgModule({
-    declarations: [AppComponent],
+    declarations: [AppComponent, ColorPickerComponent],
     imports: [
         BrowserModule,
         HammerModule,
         IonicModule.forRoot({
-            mode: navigator.platform === 'MacIntel' ? 'ios' : undefined,
+            experimentalTransitionShadow: true,
+            scrollAssist: true,
+            swipeBackEnabled: true,
+            mode: acuratePointing && navigator.platform === 'MacIntel' ? 'ios' : undefined,
             animated: !window.matchMedia('(prefers-reduced-motion: reduce)')
                 .matches,
         }),
         AppRoutingModule,
         environment.production
             ? ServiceWorkerModule.register('/sw-master.js', {
-                  enabled: true,
-                  registrationStrategy: 'registerImmediately',
-              })
+                enabled: true,
+                registrationStrategy: 'registerImmediately',
+            })
             : ServiceWorkerModule.register('/sw-devrant.js', {
-                  enabled: true,
-              }),
+                enabled: true,
+            }),
     ],
     providers: [
-        {
-            provide: HAMMER_GESTURE_CONFIG,
-            useClass: DrantHammerConfig,
-        },
         StatusBar,
         SplashScreen,
         { provide: ErrorHandler, useClass: GlobalErrorHandler },
@@ -65,4 +50,4 @@ export class DrantHammerConfig extends HammerGestureConfig {
     ],
     bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

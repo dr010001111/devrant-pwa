@@ -2,10 +2,10 @@ import {
     ChangeDetectionStrategy,
     Component,
     Input,
-    OnInit,
+    OnInit
 } from '@angular/core';
 import dayjs from 'dayjs';
-import { Comment, getImageURL, Profile } from 'ts-devrant';
+import { Comment, getImageURL } from 'ts-devrant';
 
 @Component({
     selector: 'app-inline-profile',
@@ -19,7 +19,7 @@ export class InlineProfileComponent implements OnInit {
 
     humanReadableTime: string;
 
-    constructor() {}
+    constructor() { }
 
     noBubble(event: Event) {
         event.stopImmediatePropagation();

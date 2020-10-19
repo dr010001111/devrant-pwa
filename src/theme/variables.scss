@@ -1,72 +1,50 @@
+@import 'functions';
+
+$devrant-red: hsl(353, 61%, 58%);
+$devrant-red-shade: hsl(353, 49%, 52%);
+
+$devrant-orange: hsl(21, 92%, 69%);
+$devrant-orange-shade: hsl(21, 74%, 62%);
+$devrant-orange-contrast: mix(#e68854, black, 12%);
+
+$devrant-purple-tint: mix(white, #a973a2, 7%);
+$devrant-purple: hsl(308, 24%, 56%);
+$devrant-purple-shade: hsl(308, 22%, 49%);
+
+$devrant-dark-blue-tint: #5c5c78;
+$devrant-dark-blue: #54556e;
+$devrant-dark-blue-shade: #40415a;
+$devrant-dark-blue-blacked: mix(#40415a, black, 20%);
+
+$devrant-blue: #6bc9cd;
+$devrant-turquoise: #2a8b9d;
+$devrant-green: #7bc8a4;
+$devrant-yellow: #e6c653;
+
+$app-primary-tint: $devrant-yellow;
+$app-primary: $devrant-orange;
+$app-primary-shade: $devrant-orange-shade;
+$app-primary-contrast: $devrant-orange-contrast;
+
 @import 'themes/all';
 
-@media (prefers-color-scheme: light) {
-    html {
-        @include light-theme;
-    }
+html.auto-light,
+html.theme-light {
+    @include light-theme;
 }
 
-@media (prefers-color-scheme: dark) {
-    html {
-        @include dark-theme;
-    }
-}
-
-%black-base {
+html.auto-dark,
+html.theme-dark {
     @include dark-theme;
 }
 
-html.black {
-    @extend %black-base;
+////
+/// Devrant dark
+////
+html.theme-devrant-dark {
+    @include devrant-dark-theme;
 }
 
-html.dark {
-    @extend %black-base;
-
-    &.ios,
-    &.md {
-        body {
-            $blue: #5c5c78;
-            $blue-medium: #40415a;
-            $blue-dark: #2f2f41;
-            $blue-black: #202029;
-
-            --ion-background-color: #{$blue-medium};
-
-            --ion-border-color: #{mix($blue-dark, $blue-medium)};
-
-            --ion-item-background: #{$blue-dark};
-
-            --ion-toolbar-background: #{$blue-black};
-
-            --ion-tab-bar-background: #{$blue-black};
-
-            $hue: hue($blue-dark);
-            $sat: saturation($blue-dark);
-
-            --ion-color-step-50: #{hsl($hue, $sat, 5%)};
-            --ion-color-step-100: #{hsl($hue, $sat, 10%)};
-            --ion-color-step-150: #{hsl($hue, $sat, 15%)};
-            --ion-color-step-200: #{hsl($hue, $sat, 20%)};
-            --ion-color-step-250: #{hsl($hue, $sat, 25%)};
-            --ion-color-step-300: #{hsl($hue, $sat, 30%)};
-            --ion-color-step-350: #{hsl($hue, $sat, 35%)};
-            --ion-color-step-400: #{hsl($hue, $sat, 40%)};
-            --ion-color-step-450: #{hsl($hue, $sat, 45%)};
-            --ion-color-step-500: #{hsl($hue, $sat, 50%)};
-            --ion-color-step-550: #{hsl($hue, $sat, 55%)};
-            --ion-color-step-600: #{hsl($hue, $sat, 60%)};
-            --ion-color-step-650: #{hsl($hue, $sat, 65%)};
-            --ion-color-step-700: #{hsl($hue, $sat, 70%)};
-            --ion-color-step-750: #{hsl($hue, $sat, 75%)};
-            --ion-color-step-800: #{hsl($hue, $sat, 80%)};
-            --ion-color-step-850: #{hsl($hue, $sat, 85%)};
-            --ion-color-step-900: #{hsl($hue, $sat, 90%)};
-            --ion-color-step-950: #{hsl($hue, $sat, 95%)};
-        }
-    }
-}
-
-html.light {
-    @include light-theme;
+html.theme-custom {
+    @include custom-theme;
 }

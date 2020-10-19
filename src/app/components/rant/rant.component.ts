@@ -5,7 +5,7 @@ import {
     HostListener,
     Input,
     OnInit,
-    ViewChild,
+    ViewChild
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { DevRantService } from '@services/devrant.service';
@@ -20,6 +20,7 @@ import { VoteBarComponent } from '../vote-bar/vote-bar.component';
     styleUrls: ['./rant.component.scss'],
 })
 export class RantComponent implements OnInit {
+
     internalRant: RantInFeed;
 
     @Input()
@@ -39,6 +40,9 @@ export class RantComponent implements OnInit {
     small: boolean;
 
     @Input()
+    showVotebar: boolean;
+
+    @Input()
     showUser: boolean;
 
     @ViewChild('voter')
@@ -52,14 +56,16 @@ export class RantComponent implements OnInit {
         private refEl: ElementRef,
         private readonly devrant: DevRantService,
         private readonly router: Router
-    ) {}
+    ) { }
 
     ngOnInit() {
         if (!this.internalRant && this.rantId) {
             const untilVisible = () =>
-                requestAnimationFrame(() => {
+                requestAnimationFrame(async () => {
                     if (isVisible(this.refEl.nativeElement)) {
-                        this.fetchRant();
+                        await this.fetchRant();
+                        const ev = new Event('resize');
+                        window.dispatchEvent(ev);
                     } else {
                         untilVisible();
                     }

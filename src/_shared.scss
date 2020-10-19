@@ -41,7 +41,7 @@
 }
 
 @mixin dpp-badge {
-    --color: var(--theme-shade);
+    --color: var(--ion-color-primary-shade);
 
     @extend %badge;
 }

@@ -29,7 +29,10 @@ ion-segment {
         position: sticky;
         top: 0;
 
-        --background: var(--ion-background-color);
+        --background: var(
+            --ion-toolbar-background,
+            var(--ion-background-color, #fff)
+        );
     }
 
     &.ios {

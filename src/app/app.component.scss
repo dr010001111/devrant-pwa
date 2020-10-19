@@ -1,15 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,300;1,400&display=swap');
 
-:root {
-    --ion-font-family: 'Nunito', 'Roboto', system-ui;
-
-    --theme: var(--ion-color-primary);
-    --theme-shade: var(--ion-color-primary-shade);
-    --theme-tint: var(--ion-color-primary-tint);
-    --theme-contrast: var(--ion-color-primary-contrast);
-}
-
 .greetings-alert .alert-wrapper {
     white-space: pre-line;
 
@@ -64,19 +55,16 @@ ion-app {
     border-radius: 8px;
 }
 
-img,
-ion-img {
-    border-radius: 8px;
-    object-fit: contain;
-}
+body {
+    &::after {
+        content: '';
+        position: absolute;
 
-main {
-    display: grid;
-    grid-auto-rows: min-content;
-    gap: 5px;
-}
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: var(--ion-safe-area-top, 0);
 
-article {
-    word-break: break-word;
-    white-space: break-spaces;
+        background-color: var(--app-safe-area-color, var(--ion-background));
+    }
 }

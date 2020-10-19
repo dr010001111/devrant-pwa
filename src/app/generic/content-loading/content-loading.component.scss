@@ -6,7 +6,7 @@
     place-content: center;
 
     background: var(--ion-background-color);
-    z-index: 2;
+    z-index: 10;
 }
 
 :host([animate]) {

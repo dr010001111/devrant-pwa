@@ -34,7 +34,6 @@ export class InlineProfileComponent implements OnInit {
     }
 
     imageUrl(imageId) {
-        debugger;
         return getImageURL(imageId);
     }
 

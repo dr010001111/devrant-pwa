@@ -1,0 +1,45 @@
+@mixin devrant-dark-theme {
+    @include dark-theme;
+
+    ion-item-divider {
+        --color: var(--ion-color-step-850);
+    }
+
+    &.ios,
+    &.md {
+        body {
+            --ion-background-color: #{$devrant-dark-blue};
+
+            --ion-border-color: #{$devrant-dark-blue-tint};
+
+            --ion-item-background: transparent;
+
+            --ion-toolbar-background: #{$devrant-dark-blue-shade};
+
+            --ion-tab-bar-background: #{$devrant-dark-blue-shade};
+
+            $hue: hue($devrant-dark-blue-blacked);
+            $sat: saturation($devrant-dark-blue-blacked);
+
+            --ion-color-step-50: #{hsl($hue, $sat, 5%)};
+            --ion-color-step-100: #{hsl($hue, $sat, 10%)};
+            --ion-color-step-150: #{hsl($hue, $sat, 15%)};
+            --ion-color-step-200: #{hsl($hue, $sat, 20%)};
+            --ion-color-step-250: #{hsl($hue, $sat, 25%)};
+            --ion-color-step-300: #{hsl($hue, $sat, 30%)};
+            --ion-color-step-350: #{hsl($hue, $sat, 50%)};
+            --ion-color-step-400: #{hsl($hue, $sat, 40%)};
+            --ion-color-step-450: #{hsl($hue, $sat, 45%)};
+            --ion-color-step-500: #{hsl($hue, $sat, 50%)};
+            --ion-color-step-550: #{hsl($hue, $sat, 55%)};
+            --ion-color-step-600: #{hsl($hue, $sat, 60%)};
+            --ion-color-step-650: #{hsl($hue, $sat, 65%)};
+            --ion-color-step-700: #{hsl($hue, $sat, 70%)};
+            --ion-color-step-750: #{hsl($hue, $sat, 75%)};
+            --ion-color-step-800: #{hsl($hue, $sat, 80%)};
+            --ion-color-step-850: #{hsl($hue, $sat, 85%)};
+            --ion-color-step-900: #{hsl($hue, $sat, 90%)};
+            --ion-color-step-950: #{hsl($hue, $sat, 95%)};
+        }
+    }
+}

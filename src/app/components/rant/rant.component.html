@@ -1,5 +1,5 @@
 <app-vote-bar
-    *ngIf="!small"
+    *ngIf="showVotebar || !small"
     [voteTo]="internalRant"
     #voter
     (downvote)="downvote()"
@@ -19,14 +19,17 @@
     ></app-inline-profile>
 
     <app-render-content
+        #rantContent
         [content]="internalRant.text"
         [links]="internalRant.links"
     ></app-render-content>
 
-    <img
+    <ion-img
         *ngIf="internalRant.attached_image"
-        src="{{ internalRant.attached_image.url }}"
-    />
+        [src]="internalRant.attached_image.url"
+        [style.width]="internalRant.attached_image.width"
+        [style.height]="internalRant.attached_image.height"
+    ></ion-img>
 
     <footer>
         <span class="rant-tags-container">
