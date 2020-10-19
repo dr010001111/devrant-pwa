@@ -121,12 +121,12 @@ export class RantDetailPageComponent implements OnInit, OnDestroy {
         // length checks on text area
         if (this.commentString.length < 1) {
             console.log('Comment length has to be greater than 1');
-            this.alertService.showAlert('Empty Comment', 'Type more things!!');
+            this.alertService.genericAlert('Empty Comment', 'Type more things!!');
             return;
         } else if (this.commentString.length > 1000) {
             console.log('Comment characters cannot exceed 1000');
             // this.showToast('Comment length cannot exceed 1000 characters');
-            this.alertService.showAlert(
+            this.alertService.genericAlert(
                 'Comment too Long',
                 'Comment length cannot exceed 1000 characters'
             );
@@ -138,7 +138,7 @@ export class RantDetailPageComponent implements OnInit, OnDestroy {
             const response = this.service.postComment(
                 this.rant.id,
                 this.commentString,
-                token
+                this.attachedImage
             );
             // this.fetchRant(this.rant.id);
         }

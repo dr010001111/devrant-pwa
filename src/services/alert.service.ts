@@ -5,7 +5,6 @@ import { AlertController } from '@ionic/angular';
   providedIn: 'root'
 })
 export class AlertService {
-
   constructor(
     public alertController: AlertController
   ) { }
