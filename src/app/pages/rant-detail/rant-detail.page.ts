@@ -117,7 +117,7 @@ export class RantDetailPageComponent implements OnInit, OnDestroy {
     /**
      * Submit the comment with the API
      */
-    submitComment() {
+    async submitComment() {
         // length checks on text area
         if (this.commentString.length < 1) {
             console.log('Comment length has to be greater than 1');
@@ -135,12 +135,12 @@ export class RantDetailPageComponent implements OnInit, OnDestroy {
 
         if (this.service.isSignedIn) {
             const token = this.service.token;
-            const response = this.service.postComment(
+            const response = await this.service.postComment(
                 this.rant.id,
                 this.commentString,
                 this.attachedImage
             );
-            // this.fetchRant(this.rant.id);
+            this.fetchRant(this.rant.id);
         }
     }
 }
