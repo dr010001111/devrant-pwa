@@ -5,6 +5,8 @@ import { DevRantService } from '@services/devrant.service';
 import { Subscription } from 'rxjs';
 import { RantInFeed } from 'ts-devrant';
 
+import { AlertService } from 'src/services/alert.service';
+
 @Component({
     templateUrl: './rant-detail.page.html',
     styleUrls: ['./rant-detail.page.scss'],
@@ -14,8 +16,10 @@ export class RantDetailPageComponent implements OnInit, OnDestroy {
     hasErrors: boolean;
 
     routeSub: Subscription;
+    private commentString = '';
 
     rant: RantInFeed;
+    rantId: number;
     comments: any[];
     highlightComment: string;
 
@@ -26,7 +30,8 @@ export class RantDetailPageComponent implements OnInit, OnDestroy {
         private readonly service: DevRantService,
         private route: ActivatedRoute,
         private router: Router,
-        private _location: Location
+        private _location: Location,
+        private alertService: AlertService
     ) {
         this.router.events.subscribe((ev) => {
             if (ev instanceof Scroll) {
@@ -44,9 +49,9 @@ export class RantDetailPageComponent implements OnInit, OnDestroy {
     async ngOnInit() {
         this.routeSub = this.route.params.subscribe(async (params) => {
             this.isLoading = true;
-            const rantId = params['id'];
+            const rant = params['id'];
 
-            await this.fetchRant(rantId);
+            await this.fetchRant(rant);
             this.isLoading = false;
         });
     }
@@ -86,5 +91,38 @@ export class RantDetailPageComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         this.routeSub.unsubscribe();
+    }
+
+    getCommentInput($event) {
+        this.commentString = $event.target.value;
+    }
+    /**
+     * Submit the comment with the API
+     */
+    submitComment() {
+        // length checks on text area
+        if (this.commentString.length < 1) {
+            console.log('Comment length has to be greater than 1');
+            this.alertService.showAlert('Empty Comment', 'Type more things!!');
+            return;
+        } else if (this.commentString.length > 1000) {
+            console.log('Comment characters cannot exceed 1000');
+            // this.showToast('Comment length cannot exceed 1000 characters');
+            this.alertService.showAlert(
+                'Comment too Long',
+                'Comment length cannot exceed 1000 characters'
+            );
+            return;
+        }
+
+        if (this.service.isSignedIn) {
+            const token = this.service.token;
+            const response = this.service.postComment(
+                this.rant.id,
+                this.commentString,
+                token
+            );
+            // this.fetchRant(this.rant.id);
+        }
     }
 }

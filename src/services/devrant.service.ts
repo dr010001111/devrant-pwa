@@ -21,10 +21,10 @@ devRant.updateConfig({
     providedIn: 'root',
 })
 export class DevRantService {
+    worker: ServiceWorker;
+
     private _token: devRant.Token = null;
     private _profile?: devRant.Profile;
-
-    worker: ServiceWorker;
 
     userIdCache: Cache;
     activeUserIdQueue = {};
@@ -131,6 +131,7 @@ export class DevRantService {
 
         if (token) {
             this.token = token;
+            this.getProfile();
         }
     }
 
@@ -182,7 +183,6 @@ export class DevRantService {
         // we need to have a token AND the SAME userId as in the token OR no id and we use the id in the token.
         if (!this.token || !userId || userId === String(this.token.user_id)) {
             const request = this.lazyUpdateLoggedInProfile(content, skip);
-
             if (!this.profile) {
                 await request;
             }
@@ -234,6 +234,7 @@ export class DevRantService {
         }
 
         this.token = response.auth_token;
+        this.profileUpdated();
         return response.auth_token;
     }
 
@@ -276,5 +277,15 @@ export class DevRantService {
      */
     async getFeedRants(sort: devRant.Sort, limit: number, skip: number) {
         return devRant.rants(sort, limit, skip, null, this.token);
+    }
+
+    /**
+     * postComment is a middle way service - no images for now
+     * @param rantId
+     * @param comment
+     * @param token
+     */
+    async postComment(rantId: number, comment: string, token: devRant.Token) {
+        return devRant.postComment(rantId, comment, null, token);
     }
 }

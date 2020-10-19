@@ -133,9 +133,11 @@ export class RenderContentComponent implements OnInit {
         (this.links || [])
             .filter((link) => {
                 const regex = /\[[^\]]*\]\([^\)]+\)/gi;
+                debugger;
                 markdown = markdown.replace(regex, (markdownLink) => {
                     return markdownLink.replace(link.short_url, link.url);
                 });
+                return true;
             })
             .forEach((link) => {
                 markdown = markdown.replace(
