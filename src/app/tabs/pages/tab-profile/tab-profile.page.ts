@@ -19,7 +19,7 @@ export class TabProfilePageComponent {
         readonly devrant: DevRantService,
         private readonly toast: ToastController,
         private readonly alert: AlertController
-    ) {}
+    ) { }
 
     get isSignedIn() {
         return this.devrant.isSignedIn;
@@ -48,7 +48,11 @@ export class TabProfilePageComponent {
     async showSignIn() {
         const alert = await this.alert.create({
             header: 'Sign In',
-            subHeader: 'We will never share your credentials.',
+            message: [
+                'Sadly, because dfox does not reply to my request,',
+                "the login uses `local-cors-proxy`, it's only",
+                'for this one request. YOU HAVE BEEN WARNED.'
+            ].join(' '),
             inputs: [
                 {
                     name: 'username',

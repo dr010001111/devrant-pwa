@@ -227,7 +227,17 @@ export class DevRantService {
     }
 
     async login(username: string, password: string) {
+        const { api } = devRant.getConfig();
+        devRant.updateConfig({
+            api: environment.loginURL
+        })
+
+        debugger
         const response = await devRant.login(username, password);
+
+        devRant.updateConfig({
+            api
+        })
 
         if (!response.success) {
             throw new Error(response.error);
