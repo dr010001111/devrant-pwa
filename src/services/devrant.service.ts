@@ -139,7 +139,7 @@ export class DevRantService {
         this.worker = await getWorker();
         this.worker.postMessage({
             type: 'setAPI',
-            apiURL: environment.apiURL,
+            apiURL: environment.loginURL,
         } as SetApiRequest);
 
         log('worker setup');
@@ -232,7 +232,6 @@ export class DevRantService {
             api: environment.loginURL
         })
 
-        debugger
         const response = await devRant.login(username, password);
 
         devRant.updateConfig({
