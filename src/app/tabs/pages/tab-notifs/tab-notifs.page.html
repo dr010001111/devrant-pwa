@@ -49,6 +49,7 @@
                             commentented on a rant you commented on!
                         </app-notif-user-line>
                         <app-rant
+                            *ngIf="!config['notifications:simple']"
                             [small]="true"
                             [showVotebar]="true"
                             [rantId]="notif.rant_id"
@@ -61,26 +62,35 @@
                         >
                             ++'ed your rant!
                         </app-notif-user-line>
-                        <app-notif-user-line
-                            [user]="remapToProfile(notif.uid)"
-                            [time]="notif.created_time"
-                        ></app-notif-user-line>
                         <app-rant
+                            *ngIf="!config['notifications:simple']"
                             [small]="true"
                             [showVotebar]="true"
                             [rantId]="notif.rant_id"
                         ></app-rant>
                     </ng-container>
                     <ng-container *ngSwitchCase="'rant_sub'">
-                        <h3>New Rant from your subscripted users!</h3>
+                        <app-notif-user-line
+                            [user]="remapToProfile(notif.uid)"
+                            [time]="notif.created_time"
+                        >
+                            New Rant from your subscripted users!
+                        </app-notif-user-line>
                         <app-rant
+                            *ngIf="!config['notifications:simple']"
                             [showUser]="true"
                             [rantId]="notif.rant_id"
                         ></app-rant>
                     </ng-container>
                     <ng-container *ngSwitchCase="'comment_content'">
-                        <h3>Comment on your Rant</h3>
+                        <app-notif-user-line
+                            [user]="remapToProfile(notif.uid)"
+                            [time]="notif.created_time"
+                        >
+                            Comment on your Rant
+                        </app-notif-user-line>
                         <app-rant-comment
+                            *ngIf="!config['notifications:simple']"
                             [commentId]="notif.comment_id"
                         ></app-rant-comment>
                     </ng-container>
@@ -92,6 +102,7 @@
                             mentioned you in a comment!
                         </app-notif-user-line>
                         <app-rant-comment
+                            *ngIf="!config['notifications:simple']"
                             [commentId]="notif.comment_id"
                         ></app-rant-comment>
                     </ng-container>
@@ -103,6 +114,7 @@
                             ++'ed your comment!
                         </app-notif-user-line>
                         <app-rant-comment
+                            *ngIf="!config['notifications:simple']"
                             [commentId]="notif.comment_id"
                         ></app-rant-comment>
                     </ng-container>

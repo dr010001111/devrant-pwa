@@ -6,6 +6,7 @@ import {
 } from '@angular/core';
 import { DevRantService } from '@services/devrant.service';
 import { NotificationService } from 'src/services/notification.service';
+import { ConfigService } from '@services/config.service';
 
 @Component({
     selector: 'app-tab-notifications',
@@ -18,7 +19,8 @@ export class TabNotifsPageComponent {
     hasErrors: boolean;
     constructor(
         private notifyService: NotificationService,
-        readonly devrant: DevRantService
+        readonly devrant: DevRantService,
+        readonly config: ConfigService
     ) { }
 
     @HostListener('window:tab-change', ['$event'])
@@ -36,7 +38,7 @@ export class TabNotifsPageComponent {
         } catch (e) {
             this.hasErrors = true;
         } finally {
-            //target.complete();
+            target.complete();
         }
     }
 

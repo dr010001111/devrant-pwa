@@ -12,6 +12,7 @@ class AppConfiguration {
     // if it's any other string than listed below, it should be an hex.
     scheme: 'auto' | 'light' | 'dark' | 'devrant-dark' | string = 'auto';
     theme: 'default' | 'win98' = 'default';
+    'notifications:simple' = false;
 }
 
 // signature for correct class properties exposure
@@ -53,6 +54,7 @@ export class ConfigService implements IAppConfiguration {
 
         log('init');
     }
+    'notifications:simple': boolean;
     scheme: 'auto' | 'light' | 'dark' | 'devrant-dark' | string;
     [key: string]: unknown;
     theme: 'default' | 'win98';
@@ -76,7 +78,7 @@ export class ConfigService implements IAppConfiguration {
         oldValue: unknown
     ) {
         const runners = this._listeners[configName];
-        if (runners.length) {
+        if (runners && runners.length) {
             log(`exec ${runners.length} runners for ${configName}`);
             runners.forEach((runner) => runner(this[configName], oldValue));
         }
