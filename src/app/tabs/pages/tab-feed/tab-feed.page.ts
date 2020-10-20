@@ -1,6 +1,6 @@
 import pkg from '@/package.json';
 import { AfterViewInit, Component, ViewChild, ElementRef, ChangeDetectionStrategy } from '@angular/core';
-import { Config } from '@ionic/angular';
+import { Config, IonVirtualScroll, IonInfiniteScroll } from '@ionic/angular';
 import { DevRantService } from '@services/devrant.service';
 import { Sort, RantInFeed } from 'ts-devrant';
 
@@ -10,7 +10,7 @@ import { Sort, RantInFeed } from 'ts-devrant';
     styleUrls: ['tab-feed.page.scss']
 })
 export class TabFeedPageComponent implements AfterViewInit {
-    limit = 5;
+    limit = 20;
     offset = 0;
 
     feed = [];
@@ -19,14 +19,11 @@ export class TabFeedPageComponent implements AfterViewInit {
 
     pkg = pkg;
 
+    @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
+    @ViewChild(IonVirtualScroll) virtualScroll: IonVirtualScroll;
+
     @ViewChild('content')
     contentEl: { el: HTMLIonContentElement };
-
-    @ViewChild('list')
-    listEl: { el: HTMLIonListElement };
-
-    @ViewChild('feedContainer')
-    feedContainer: ElementRef;
 
     @ViewChild('header')
     headerEl: { el: HTMLElement };
@@ -53,11 +50,9 @@ export class TabFeedPageComponent implements AfterViewInit {
         }
     }
 
-    async doRefresh(event) {
-        const target = event.target as HTMLIonRefresherElement;
+    async doRefresh() {
         this.resetFeed();
-        await this.fetchFeed();
-        target.complete();
+        this.fetchFeed();
     }
 
     feedFilterChange(ev) {
@@ -90,19 +85,21 @@ export class TabFeedPageComponent implements AfterViewInit {
                 this.offset
             );
 
-            response.rants.forEach(rant => {
-                this.feed.push(rant);
-            });
+            this.feed.push(...response.rants);
+            this.infiniteScroll.complete();
+            if (this.virtualScroll) {
+                this.virtualScroll.checkEnd();
+            }
 
             this.offset += this.limit;
             this.hasErrors = false;
         } catch (e) {
             this.hasErrors = true;
+            console.error(e)
         }
     }
 
-    async loadMore(event: CustomEvent) {
+    async loadMore() {
         await this.fetchFeed();
-        (event.target as HTMLIonInfiniteScrollElement).complete();
     }
 }

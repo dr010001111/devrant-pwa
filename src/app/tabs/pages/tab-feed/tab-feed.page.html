@@ -41,25 +41,17 @@
         </ion-toolbar>
     </ion-header>
 
-    <ion-refresher
-        slot="fixed"
-        (ionRefresh)="doRefresh($event)"
-    ></ion-refresher>
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh()"></ion-refresher>
 
-    <ion-list *ngIf="feed.length" #list>
-        <ion-virtual-scroll
-            [trackBy]="rantIdentity"
-            [items]="feed"
-            approxItemHeight="400px"
-            #feedContainer
-        >
+    <ion-list *ngIf="feed.length">
+        <ion-virtual-scroll [items]="feed" approxItemHeight="400px">
             <ion-item *virtualItem="let rant">
                 <app-rant [showUser]="true" [rant]="rant"></app-rant>
             </ion-item>
         </ion-virtual-scroll>
     </ion-list>
 
-    <ion-infinite-scroll threshold="300px" (ionInfinite)="loadMore($event)">
+    <ion-infinite-scroll threshold="300px" (ionInfinite)="loadMore()">
         <ion-infinite-scroll-content loadingText="Loading more data...">
         </ion-infinite-scroll-content>
     </ion-infinite-scroll>
