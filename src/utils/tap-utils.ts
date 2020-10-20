@@ -10,7 +10,7 @@ let lastTarget;
 export function tapOrDouble(
     calls: TapCalls,
     event: MouseEvent | KeyboardEvent | TouchEvent,
-    wait = 200
+    wait = 160
 ): { clear?: () => void } {
     clearTimeout(lastTapClickId);
 
