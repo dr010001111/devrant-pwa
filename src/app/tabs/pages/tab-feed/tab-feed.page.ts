@@ -1,6 +1,6 @@
 import pkg from '@/package.json';
 import { AfterViewInit, Component, ViewChild, ElementRef, ChangeDetectionStrategy } from '@angular/core';
-import { Config, IonVirtualScroll, IonInfiniteScroll } from '@ionic/angular';
+import { Config, IonVirtualScroll, IonInfiniteScroll, IonRefresher } from '@ionic/angular';
 import { DevRantService } from '@services/devrant.service';
 import { Sort, RantInFeed } from 'ts-devrant';
 
@@ -21,6 +21,7 @@ export class TabFeedPageComponent implements AfterViewInit {
 
     @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
     @ViewChild(IonVirtualScroll) virtualScroll: IonVirtualScroll;
+    @ViewChild(IonRefresher) refresher: IonRefresher;
 
     @ViewChild('content')
     contentEl: { el: HTMLIonContentElement };
@@ -89,6 +90,9 @@ export class TabFeedPageComponent implements AfterViewInit {
             this.infiniteScroll.complete();
             if (this.virtualScroll) {
                 this.virtualScroll.checkEnd();
+            }
+            if (this.refresher) {
+                this.refresher.complete();
             }
 
             this.offset += this.limit;
