@@ -26,7 +26,7 @@ const acuratePointing = window.matchMedia('@media (pointer: fine)').matches;
         HammerModule,
         IonicModule.forRoot({
             experimentalTransitionShadow: true,
-            scrollAssist: true,
+            scrollAssist: false,
             swipeBackEnabled: true,
             mode: acuratePointing && navigator.platform === 'MacIntel' ? 'ios' : undefined,
             animated: !window.matchMedia('(prefers-reduced-motion: reduce)')
