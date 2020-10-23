@@ -125,14 +125,14 @@ export class DevRantService {
 
     async setupService() {
         const token = JSON.parse(localStorage.getItem('token'));
-        await this.setupWorker();
 
-        this.userIdCache = await caches.open('username-id-map');
+        await this.setupWorker();
 
         if (token) {
             this.token = token;
-            this.getProfile();
         }
+
+        this.userIdCache = await caches.open('username-id-map');
     }
 
     async setupWorker() {
@@ -198,6 +198,7 @@ export class DevRantService {
         content?: string,
         skip?: number
     ) {
+        debug('feztch profile')
         const response = await devRant.profile(
             userId,
             content,
@@ -208,6 +209,7 @@ export class DevRantService {
     }
 
     async lazyUpdateLoggedInProfile(content?: string, skip?: number) {
+        debug('lazyUpdateLoggedInProfile')
         if (!this.token) {
             this._profile = null;
         } else {
@@ -249,6 +251,14 @@ export class DevRantService {
 
     get isSignedIn() {
         return !!this.token;
+    }
+
+    clearNotifications() {
+        if (this.isSignedIn) {
+            devRant.clearNotifications(this.token)
+        } else {
+            throw new Error('Not signed in');
+        }
     }
 
     async vote(vote: devRant.VoteState, rantId: number) {
