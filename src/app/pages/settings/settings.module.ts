@@ -11,12 +11,12 @@ import { InlineProfileModule } from '@app/components/inline-profile/inline-profi
 
 @NgModule({
     imports: [
+        IonicModule,
         CommonModule,
         FormsModule,
-        IonicModule,
         SettingsPageRoutingModule,
         InlineProfileModule,
     ],
     declarations: [SettingsPageComponent],
 })
-export class SettingsPageModule {}
+export class SettingsPageModule { }

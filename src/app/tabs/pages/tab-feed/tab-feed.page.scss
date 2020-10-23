@@ -37,16 +37,32 @@ ion-segment {
 
     &.ios {
         position: absolute;
-        min-height: 40px;
+        min-height: 35px;
         bottom: 20px;
         width: 80%;
         left: 10%;
 
-        backdrop-filter: blur(20px) contrast(0.5);
+        backdrop-filter: blur(20px);
         box-shadow: 0 0 5px -3px black;
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--ion-background-color);
+            opacity: 0.7;
+            z-index: -2;
+        }
 
         @media (prefers-color-scheme: dark) {
             backdrop-filter: blur(20px) brightness(0.3);
+
+            &::after {
+                opacity: 0.2;
+            }
         }
     }
 }

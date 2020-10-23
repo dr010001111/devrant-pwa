@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header [translucent]="true">
     <ion-toolbar>
         <ion-buttons slot="start">
             <ion-back-button defaultHref="/"></ion-back-button>
@@ -7,11 +7,25 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content [fullscreen]="true">
+    <ion-header collapse="condense">
+        <ion-toolbar>
+            <ion-title size="large">Settings</ion-title>
+        </ion-toolbar>
+    </ion-header>
     <ion-list>
-        <ion-item-divider>Application</ion-item-divider>
-        <ion-item button detail (click)="showLightnessSheet()">Theme</ion-item>
-        <ion-item button detail (click)="showAccentSheet()">Accent</ion-item>
-        <ion-item routerLink="./notifs">Notifications</ion-item>
+        <ion-item-group>
+            <ion-item detail routerLink="/about">About</ion-item>
+        </ion-item-group>
+        <ion-item-group>
+            <ion-item button (click)="showLightnessSheet()">
+                Appearance
+            </ion-item>
+            <ion-item button (click)="showAccentSheet()">Accent</ion-item>
+            <ion-item button>Special Theme</ion-item>
+        </ion-item-group>
+        <ion-item-group>
+            <ion-item detail routerLink="./notifs">Notifications</ion-item>
+        </ion-item-group>
     </ion-list>
 </ion-content>

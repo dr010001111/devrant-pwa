@@ -1,8 +1,9 @@
 import pkg from '@/package.json';
 import { AfterViewInit, Component, ViewChild, ElementRef, ChangeDetectionStrategy } from '@angular/core';
-import { Config, IonVirtualScroll, IonInfiniteScroll, IonRefresher } from '@ionic/angular';
+import { Config, IonVirtualScroll, IonInfiniteScroll, IonRefresher, PopoverController } from '@ionic/angular';
 import { DevRantService } from '@services/devrant.service';
 import { Sort, RantInFeed } from 'ts-devrant';
+import { PopoverMenuComponent } from '@app/presentationals/popover-menu/popover-menu.component';
 
 @Component({
     selector: 'app-tab-feed',
@@ -36,9 +37,20 @@ export class TabFeedPageComponent implements AfterViewInit {
 
     constructor(
         private readonly config: Config,
-        private readonly service: DevRantService
+        private readonly service: DevRantService,
+        private readonly popoverController: PopoverController
     ) {
         this.fetchFeed();
+    }
+
+    async presentPopover(ev) {
+        const popover = await this.popoverController.create({
+            component: PopoverMenuComponent,
+            event: ev,
+            translucent: true,
+
+        });
+        popover.present();
     }
 
     rantIdentity(_index, rant: RantInFeed) {
@@ -52,8 +64,7 @@ export class TabFeedPageComponent implements AfterViewInit {
     }
 
     async doRefresh() {
-        this.resetFeed();
-        this.fetchFeed();
+        this.fetchFeed(true);
     }
 
     feedFilterChange(ev) {
@@ -69,30 +80,36 @@ export class TabFeedPageComponent implements AfterViewInit {
                 break;
         }
 
-        this.resetFeed();
-        this.fetchFeed();
+        this.fetchFeed(true);
     }
 
-    resetFeed() {
-        this.offset = 0;
-        this.feed = [];
-    }
-
-    async fetchFeed() {
+    async fetchFeed(reset?: boolean) {
         try {
+            if (reset) {
+                this.offset = 0;
+            }
+
             const response = await this.service.getFeedRants(
                 this.sort,
                 this.limit,
                 this.offset
             );
 
-            this.feed.push(...response.rants);
+            if (reset) {
+                this.feed = response.rants;
+            } else {
+                this.feed.push(...response.rants);
+            }
             this.infiniteScroll.complete();
             if (this.virtualScroll) {
                 this.virtualScroll.checkEnd();
             }
             if (this.refresher) {
                 this.refresher.complete();
+                this.refresher.disabled = true;
+                setTimeout(() => {
+                    this.refresher.disabled = false
+                }, 3e3)
             }
 
             this.offset += this.limit;

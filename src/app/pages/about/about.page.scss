@@ -1,0 +1,24 @@
+ion-content {
+    --padding-start: 16px;
+    --padding-end: 16px;
+
+    ion-title {
+        padding: 0;
+        padding-top: 40px;
+
+        position: relative;
+        display: block;
+        height: auto;
+    }
+}
+
+.app-deps-container {
+    html.ios & > ion-item {
+        --padding-start: 0;
+    }
+}
+
+.third-party {
+    display: block;
+    margin-block: 1em;
+}

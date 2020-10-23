@@ -1,18 +1,11 @@
 <ion-header [translucent]="true" #header>
-    <span class="app-info">
-        {{pkg.version}}#{{pkg.commit.sha}}@{{pkg.commit.date}}
-    </span>
-
     <ion-toolbar>
         <ion-title>
             devRant <span class="unofficial">UNOFFICIAL</span>
         </ion-title>
         <ion-buttons slot="end">
-            <ion-menu-button autoHide="false" (click)="doRefresh()">
-                <ion-icon name="refresh"></ion-icon>
-            </ion-menu-button>
-            <ion-menu-button autoHide="false" routerLink="/settings">
-                <ion-icon name="settings-outline"></ion-icon>
+            <ion-menu-button autoHide="false" (click)="presentPopover($event)">
+                <ion-icon name="ellipsis-horizontal"></ion-icon>
             </ion-menu-button>
         </ion-buttons>
     </ion-toolbar>
@@ -30,7 +23,7 @@
     </ion-segment-button>
 </ion-segment>
 
-<ion-content #content [fullscreen]="true">
+<ion-content #content [fullscreen]="true" [forceOverscroll]="false">
     <app-center-content failed="true" *ngIf="hasErrors">
         Unable to fetch feed.
     </app-center-content>
@@ -41,7 +34,17 @@
         </ion-toolbar>
     </ion-header>
 
-    <ion-refresher slot="fixed" (ionRefresh)="doRefresh()"></ion-refresher>
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh()">
+        <ion-refresher-content
+            pullFactor="1"
+            pullMin="200"
+            pullMax="400"
+            pullingIcon="arrow-down-outline"
+            pullingText=""
+            refreshingSpinner="lines-small"
+        >
+        </ion-refresher-content>
+    </ion-refresher>
 
     <ion-list *ngIf="feed.length">
         <ion-virtual-scroll [items]="feed" approxItemHeight="400px">

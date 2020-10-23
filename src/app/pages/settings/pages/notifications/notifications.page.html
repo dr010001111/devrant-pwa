@@ -8,8 +8,66 @@
 </ion-header>
 
 <ion-content>
-    <ion-item>
-        <ion-label>Simple notifications</ion-label>
-        <ion-toggle (ionChange)="onToggle($event)"></ion-toggle>
-    </ion-item>
+    <ion-item-group>
+        <ion-item-divider>Notification Center</ion-item-divider>
+        <ion-item>
+            <ion-label>Simple notifications</ion-label>
+            <ion-toggle (ionChange)="onToggle($event)"></ion-toggle> </ion-item
+    ></ion-item-group>
+
+    <ion-item-group>
+        <ion-item-divider>Push Notifications</ion-item-divider>
+        <ion-item>
+            <ion-label>notif_new_likes_on_your_rants</ion-label>
+            <ion-toggle
+                (ionChange)="onNotifSettingToggle($event, 'notif_new_likes_on_your_rants')"
+            ></ion-toggle>
+        </ion-item>
+        <ion-item>
+            <ion-label>notif_new_likes_on_your_comments</ion-label>
+            <ion-toggle
+                (ionChange)="onNotifSettingToggle($event, 'notif_new_likes_on_your_comments')"
+            ></ion-toggle>
+        </ion-item>
+        <ion-item>
+            <ion-label>notif_new_comments_on_your_rants</ion-label>
+            <ion-toggle
+                (ionChange)="onNotifSettingToggle($event, 'notif_new_comments_on_your_rants')"
+            ></ion-toggle>
+        </ion-item>
+        <ion-item>
+            <ion-label>notif_new_comments_on_commented_on</ion-label>
+            <ion-toggle
+                (ionChange)="onNotifSettingToggle($event, 'notif_new_comments_on_commented_on')"
+            ></ion-toggle>
+        </ion-item>
+        <ion-item>
+            <ion-label>notif_mention</ion-label>
+            <ion-toggle
+                (ionChange)="onNotifSettingToggle($event, 'notif_mention')"
+            ></ion-toggle>
+        </ion-item>
+        <ion-item>
+            <ion-label>notif_rant_sub</ion-label>
+            <ion-toggle
+                (ionChange)="onNotifSettingToggle($event, 'notif_rant_sub')"
+            ></ion-toggle>
+        </ion-item>
+        <ion-item>
+            <ion-label>notif_update_new_rants</ion-label>
+            <ion-toggle
+                (ionChange)="onNotifSettingToggle($event, 'notif_update_new_rants')"
+            ></ion-toggle>
+        </ion-item>
+    </ion-item-group>
+
+    <ion-item-group>
+        <ion-item-divider>Email Notifications</ion-item-divider>
+        <ion-item>
+            <ion-label>email_weekly_top_rants</ion-label>
+            <ion-toggle
+                (ionChange)="onNotifSettingToggle($event, 'email_weekly_top_rants')"
+            ></ion-toggle>
+        </ion-item>
+    </ion-item-group>
 </ion-content>

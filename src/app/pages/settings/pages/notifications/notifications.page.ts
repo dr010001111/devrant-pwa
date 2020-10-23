@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { ConfigService } from '@services/config.service';
+import { AlertService } from '@services/alert.service';
 
 @Component({
     selector: 'app-notifications',
@@ -13,6 +14,7 @@ export class NotificationsPageComponent implements OnInit {
     constructor(
         private route: ActivatedRoute,
         private config: ConfigService,
+        private alert: AlertService
     ) { }
 
     ngOnInit() {
@@ -23,6 +25,12 @@ export class NotificationsPageComponent implements OnInit {
         const { checked } = event.detail;
 
         this.config['notifications:simple'] = checked
+    }
+
+    onNotifSettingToggle(event: CustomEvent, type) {
+        switch (type) {
+            default: this.alert.genericAlert('Not implemented.')
+        }
     }
 }
 

@@ -1,0 +1,58 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>About</ion-title>
+        <ion-buttons slot="end">
+            <ion-button (click)="location.back()">Done</ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+    <ion-title size="large">
+        v{{pkg.version}} Build {{pkg.commit.sha}}
+    </ion-title>
+    <ion-note>Deployed at {{pkg.commit.date}}</ion-note>
+
+    <p>
+        <code>devrant.app</code> is a project maintained by 010001111 and NOT
+        an official product of devRant!
+    </p>
+
+    <ion-title>Honorable mentions</ion-title>
+
+    <ion-note
+        >For a list of contributors, please check the GitHub
+        repository.</ion-note
+    >
+
+    <ul>
+        <li>OmerFlame for letting me steal his iOS design</li>
+    </ul>
+
+    <br />
+    <br />
+    <br />
+
+    <ion-button
+        expand="block"
+        fill="outline"
+        (click)="toggleShowAppDependencies()"
+    >
+        <ng-container *ngIf="showAppDependencies">
+            Hide dependencies
+        </ng-container>
+
+        <ng-container *ngIf="!showAppDependencies">
+            Show all app dependencies
+        </ng-container>
+    </ion-button>
+
+    <div class="app-deps-container" *ngIf="showAppDependencies">
+        <ion-item *ngFor="let dependency of appDependencies">
+            {{dependency.name}}
+            <ion-note slot="end">{{dependency.version}}</ion-note>
+        </ion-item>
+    </div>
+
+    <code class="third-party" [innerText]="thirdPartyLicenses"></code>
+</ion-content>
