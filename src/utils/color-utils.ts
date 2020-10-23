@@ -1,6 +1,6 @@
 
 const lightChange = 16;
-const saturationChange = 8;
+const saturationChange = 5;
 
 export function hexToRGB(hex) {
     // Convert hex to RGB first

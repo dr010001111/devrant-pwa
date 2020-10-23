@@ -4,6 +4,8 @@
      * -------------------------------------------
      */
     &.ios body {
+        --ion-background-color: #fafcff;
+        --ion-background-color-rgb: #{rgb-values(#fafcff)};
     }
 
     /*
@@ -12,6 +14,8 @@
      */
 
     &.md body {
+        --ion-background-color: #fff;
+        --ion-background-color-rgb: 255, 255, 255;
     }
 
     /** Ionic CSS Variables **/
@@ -37,21 +41,17 @@
         --ion-color-step-900: #1a1a1a;
         --ion-color-step-950: #0d0d0d;
 
-        --ion-background-color: #fff;
-        --ion-background-color-rgb: 255, 255, 255;
-
         --ion-text-color: #000;
         --ion-text-color-rgb: 0, 0, 0;
 
         --ion-border-color: #c8c7cc;
 
-        --ion-item-background: #1c1c1d;
+        --ion-item-background: #fff;
 
         --ion-toolbar-background: var(--ion-background-color);
 
-        --ion-item-background: var(--ion-background-color);
-
-        --ion-card-background: #1c1c1d;
+        --ion-card-background: #fff;
+        --ion-item-border-color: #{mix(black, #f2f2f2, 1%)};
 
         /** primary **/
         --ion-color-primary: #{$devrant-purple};

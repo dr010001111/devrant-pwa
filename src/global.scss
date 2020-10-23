@@ -28,10 +28,14 @@
 :root body {
     --ion-font-family: 'Nunito', 'Roboto', system-ui;
 
+    font-family: var(--ion-font-family);
+
     --ion-color-primary: var(--ion-color-primary);
     --ion-color-primary-shade: var(--ion-color-primary-shade);
     --ion-color-primary-tint: var(--ion-color-primary-tint);
     --ion-color-primary-contrast: var(--ion-color-primary-contrast);
+
+    --outline-type: 0 0 0 2px;
 }
 
 :focus {
@@ -39,10 +43,9 @@
 }
 
 .using-keyboard :focus {
-    outline-color: var(--ion-color-primary);
-    outline-style: solid;
-    outline-offset: -1px;
-    outline-width: 3px;
+    box-shadow: inset var(--outline-type)
+        var(--outline-color, var(--ion-color-primary));
+    border-radius: var(--outline-radius, 4px);
 }
 
 ul,
@@ -54,6 +57,28 @@ ion-badge {
     --padding-top: var(--padding-bottom);
     --background: var(--ion-color-primary-shade);
     --color: var(--ion-color-primary-contrast);
+}
+
+ion-list.list-ios {
+    background: transparent;
+}
+
+ion-popover {
+    html.ios & {
+        .popover-content {
+            box-shadow: 0 0 50px #00000026;
+        }
+    }
+}
+
+ion-item-group {
+    margin-top: 1em;
+    border-top: 1px solid var(--ion-item-border-color);
+    border-bottom: 1px solid var(--ion-item-border-color);
+}
+
+ion-item:last-of-type {
+    --border-style: none;
 }
 
 img,

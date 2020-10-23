@@ -34,3 +34,14 @@
     --ion-color-danger-shade: #e04055;
     --ion-color-danger-tint: #ff5b71;
 }
+
+html.ios {
+    ion-segment-button {
+        color: var(--ion-text-color);
+        --indicator-color: var(--ion-color-primary);
+    }
+
+    ion-segment-button.segment-button-checked {
+        color: var(--ion-color-primary-contrast);
+    }
+}
