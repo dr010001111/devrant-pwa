@@ -7,6 +7,10 @@
     gap: 8px;
     padding: 10px 0;
 
+    &:focus {
+        --outline-type: none;
+    }
+
     .loading-skeleton {
         grid-column: 1/-1;
     }

@@ -1,8 +1,9 @@
 <span class="image" style.--color="#{{ profile.user_avatar.b }}">
-    <img
+    <ion-img
+        *ngIf="profile.user_avatar.i"
         [src]="imageUrl(profile.user_avatar.i)"
         (error)="$event.target.className = 'broken'"
-    />
+    ></ion-img>
 </span>
 <span
     class="username"
