@@ -9,7 +9,13 @@ import {
 import { Router } from '@angular/router';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { AlertController, Platform, Config, IonRouterOutlet } from '@ionic/angular';
+import {
+    AlertController,
+    Platform,
+    Config,
+    IonRouterOutlet,
+    LoadingController,
+} from '@ionic/angular';
 import { ConfigService } from '@services/config.service';
 
 import { DevRantService } from 'src/services/devrant.service';
@@ -22,6 +28,8 @@ import { applyThemeFromHex } from '@utils/color-utils';
     encapsulation: ViewEncapsulation.None,
 })
 export class AppComponent implements OnInit {
+    tabletOrAbove = false;
+
     constructor(
         private ref: ElementRef,
         private platform: Platform,
@@ -38,6 +46,12 @@ export class AppComponent implements OnInit {
     async ngOnInit() {
         const fl = 'devrant-pwa-first-load';
         const firstUsage = !localStorage.getItem(fl);
+
+        const media = matchMedia('(min-width: 770px)');
+        this.tabletOrAbove = media.matches;
+        media.addEventListener('change', () => {
+            this.tabletOrAbove = media.matches;
+        });
 
         if (firstUsage) {
             const firstUsageAlert = await this.alert.create({
@@ -58,9 +72,11 @@ export class AppComponent implements OnInit {
             firstUsageAlert.present();
         }
 
-        const schemeWatcher = window.matchMedia('(prefers-color-scheme: dark)')
+        const schemeWatcher = window.matchMedia(
+            '(prefers-color-scheme: dark)'
+        );
         schemeWatcher.onchange = this.systemOSChange.bind(this);
-        this.systemOSChange()
+        this.systemOSChange();
     }
 
     @HostListener('window:internal-link', ['$event'])
@@ -68,9 +84,9 @@ export class AppComponent implements OnInit {
         this.router.navigate([ev.detail]);
     }
 
-
     systemOSChange() {
-        const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const isDark = window.matchMedia('(prefers-color-scheme: dark)')
+            .matches;
         document.documentElement.classList.remove('auto-light');
         document.documentElement.classList.remove('auto-dark');
 
@@ -86,42 +102,53 @@ export class AppComponent implements OnInit {
     }
 
     initializeApp() {
-        this.configService.registerRunner('scheme', (newScheme: string, oldScheme: null | string) => {
-            document.documentElement.classList.remove('theme-custom', `theme-${oldScheme}`);
+        this.configService.registerRunner(
+            'scheme',
+            (newScheme: string, oldScheme: null | string) => {
+                document.documentElement.classList.remove(
+                    'theme-custom',
+                    `theme-${oldScheme}`
+                );
 
-            if (String(oldScheme).startsWith('#')) {
-                const body = document.body;
-                // @see applyThemeFromHex
-                body.style.removeProperty('--ion-background-color')
-                body.style.removeProperty('--ion-border-color')
-                body.style.removeProperty('--ion-toolbar-background')
-                body.style.removeProperty('--ion-tab-bar-background')
+                if (String(oldScheme).startsWith('#')) {
+                    const body = document.body;
+                    // @see applyThemeFromHex
+                    body.style.removeProperty('--ion-background-color');
+                    body.style.removeProperty('--ion-border-color');
+                    body.style.removeProperty('--ion-toolbar-background');
+                    body.style.removeProperty('--ion-tab-bar-background');
+                }
+
+                if (newScheme.startsWith('#')) {
+                    document.documentElement.classList.add(`theme-custom`);
+                    applyThemeFromHex(newScheme);
+                } else {
+                    document.documentElement.classList.add(
+                        `theme-${newScheme}`
+                    );
+                }
+
+                this.systemOSChange();
             }
-
-            if (newScheme.startsWith('#')) {
-                document.documentElement.classList.add(`theme-custom`);
-                applyThemeFromHex(newScheme);
-            } else {
-                document.documentElement.classList.add(`theme-${newScheme}`);
-            }
-
-            this.systemOSChange();
-        });
+        );
 
         this.platform.ready().then(() => {
             this.statusBar.styleDefault();
             this.splashScreen.hide();
 
-            this.disableSwipeGestures()
+            this.disableSwipeGestures();
         });
     }
 
     disableSwipeGestures() {
-        this.ref.nativeElement.addEventListener('touchstart', (e: TouchEvent & { pageX: number }) => {
-            if (e.pageX < 50 || e.pageX > window.innerWidth - 10) {
-                console.log('TOUCHSTART')
-                e.preventDefault();
+        this.ref.nativeElement.addEventListener(
+            'touchstart',
+            (e: TouchEvent & { pageX: number }) => {
+                if (e.pageX < 50 || e.pageX > window.innerWidth - 10) {
+                    console.log('TOUCHSTART');
+                    e.preventDefault();
+                }
             }
-        });
+        );
     }
 }

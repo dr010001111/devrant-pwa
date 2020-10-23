@@ -1,3 +1,15 @@
 <ion-app>
-    <ion-router-outlet></ion-router-outlet>
+    <ion-grid>
+        <ion-row>
+            <ion-col class="side side-left" *ngIf="tabletOrAbove" size="3">
+                left
+            </ion-col>
+            <ion-col>
+                <ion-router-outlet></ion-router-outlet>
+            </ion-col>
+            <ion-col class="side side-right" *ngIf="tabletOrAbove" size="3">
+                right
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 </ion-app>

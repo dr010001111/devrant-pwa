@@ -16,19 +16,37 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { GlobalErrorHandler } from './crashed';
 import { ColorPickerComponent } from './generic/color-picker/color-picker.component';
+import { PopoverMenuComponent } from './presentationals/popover-menu/popover-menu.component';
+import { isPlatform } from '@ionic/core';
 
-const acuratePointing = window.matchMedia('@media (pointer: fine)').matches;
+
+@Injectable()
+export class DrantHammerConfig extends HammerGestureConfig {
+    overrides = <any>{
+        pan: { direction: 6 },
+        pinch: { enable: false },
+        rotate: { enable: false },
+    };
+
+    buildHammer(element: HTMLElement) {
+        const mc = new Hammer(element, {
+            touchAction: 'pan-y',
+        });
+
+        return mc;
+    }
+}
 
 @NgModule({
-    declarations: [AppComponent, ColorPickerComponent],
+    declarations: [AppComponent, ColorPickerComponent, PopoverMenuComponent],
     imports: [
         BrowserModule,
         HammerModule,
         IonicModule.forRoot({
             experimentalTransitionShadow: true,
-            scrollAssist: false,
+            scrollAssist: true,
             swipeBackEnabled: true,
-            mode: acuratePointing && navigator.platform === 'MacIntel' ? 'ios' : undefined,
+            mode: isPlatform('desktop') && navigator.platform === 'MacIntel' ? 'ios' : undefined,
             animated: !window.matchMedia('(prefers-reduced-motion: reduce)')
                 .matches,
         }),
@@ -43,6 +61,10 @@ const acuratePointing = window.matchMedia('@media (pointer: fine)').matches;
             }),
     ],
     providers: [
+        {
+            provide: HAMMER_GESTURE_CONFIG,
+            useClass: DrantHammerConfig,
+        },
         StatusBar,
         SplashScreen,
         { provide: ErrorHandler, useClass: GlobalErrorHandler },
