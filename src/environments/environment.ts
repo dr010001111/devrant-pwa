@@ -4,7 +4,7 @@
 
 export const environment = {
     production: false,
-    apiURL: 'https://devrant.com/api/',
+    apiURL: 'https://proxy.devrant.app/api/',
     loginURL: 'https://proxy.devrant.app/api/',
 };
 
