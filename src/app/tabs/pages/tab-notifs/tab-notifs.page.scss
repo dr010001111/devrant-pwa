@@ -11,6 +11,10 @@ app-tab-notifications {
         }
     }
 
+    .is-read {
+        opacity: 0.6;
+    }
+
     app-vote-bar {
         width: 56px;
     }

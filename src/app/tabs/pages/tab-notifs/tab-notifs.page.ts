@@ -7,6 +7,7 @@ import {
 import { DevRantService } from '@services/devrant.service';
 import { NotificationService } from 'src/services/notification.service';
 import { ConfigService } from '@services/config.service';
+import { AlertService } from '@services/alert.service';
 
 @Component({
     selector: 'app-tab-notifications',
@@ -20,6 +21,7 @@ export class TabNotifsPageComponent {
     constructor(
         private notifyService: NotificationService,
         readonly devrant: DevRantService,
+        readonly alert: AlertService,
         readonly config: ConfigService
     ) { }
 
@@ -39,6 +41,14 @@ export class TabNotifsPageComponent {
             this.hasErrors = true;
         } finally {
             target.complete();
+        }
+    }
+
+    clearNotifs() {
+        try {
+            this.devrant.clearNotifications()
+        } catch (err) {
+            this.alert.genericAlert('Error!', err.message);
         }
     }
 
