@@ -33,7 +33,11 @@
 
     <footer>
         <span class="rant-tags-container">
-            <ion-badge *ngFor="let tag of internalRant.tags">
+            <ion-badge
+                *ngFor="let tag of internalRant.tags"
+                routerLink="/search"
+                [queryParams]="{ term: tag }"
+            >
                 {{ tag }}
             </ion-badge>
         </span>

@@ -5,10 +5,12 @@ import { IonicModule } from '@ionic/angular';
 import { InlineProfileModule } from '../inline-profile/inline-profile.module';
 import { VoteBarModule } from '../vote-bar/vote-bar.module';
 import { RantComponent } from './rant.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
     declarations: [RantComponent],
     imports: [
+        RouterModule,
         IonicModule,
         CommonModule,
         VoteBarModule,
@@ -17,4 +19,4 @@ import { RantComponent } from './rant.component';
     ],
     exports: [RantComponent],
 })
-export class RantModule {}
+export class RantModule { }

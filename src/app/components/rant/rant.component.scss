@@ -6,6 +6,10 @@
 
     gap: 8px;
     padding: 10px 0;
+
+    &:focus {
+        --outline-type: none;
+    }
 }
 
 :host(.rant-small) {
@@ -57,6 +61,13 @@
         margin: 0 calc(var(--margin) * -1);
 
         > ion-badge {
+            padding: 0;
+
+            --background: transparent;
+            --color: currentColor;
+
+            text-decoration: underline;
+
             margin: var(--margin);
             border-radius: 3px;
         }
